@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit  } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Categorie } from 'src/app/entities/categorie';
@@ -26,10 +26,10 @@ export class AddEditProduitComponent implements OnInit {
   action: string;
   constructor(private produitService: ProduitService,private categorieService:  CategorieService , private _formBuilder: FormBuilder ,private route: ActivatedRoute ,private router: Router) { }
 
-  @ViewChild('categorie') private draggableElement: ElementRef;
+  
 
   ngOnInit(): void {
-  this.draggableElement.nativeElement.remove();
+  
     
     this.declareForms()
     this.getAllCategories()
@@ -192,9 +192,7 @@ updateProduit(){
    })
  }
 
- addCategorie(){
-  this.draggableElement.nativeElement.remove();
- }
+
  
 
 }
