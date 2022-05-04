@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>Edite Categorie</h1>
+<div mat-dialog-content>
+    <form [formGroup]="categorieForm">
+        <mat-form-field appearance="outline">
+          <mat-label>Nom Categorie</mat-label>
+          <input formControlName="nom_cat" matInput placeholder="Nom" type="text" required/>
+        </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions >
+    <div class="ms-auto">
+        <button class="btn btn-danger" mat-dialog-close>Fermer</button>
+        <button class="btn btn-success mx-2" (click)="editCategorie()" [disabled]="categorieForm.invalid">Editer</button>
+    </div>
+</div>

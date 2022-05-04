@@ -1,0 +1,212 @@
+
+
+
+<div mat-dialog-content>
+
+
+<div class=" bg-white" >
+    <form [formGroup]="clientForm" >
+      <div class="row">
+        <div class="col-4 " >
+          <div class="d-flex align-items-center flex-column mt-3 ">
+                
+            <img [src]="imageUrl" class="img-fluid">
+
+
+            <div class="mt-3">
+
+                <mat-form-field  appearance="outline" >
+                    <mat-label>Code client</mat-label>
+                    <input matInput   value="C-000{{id}}" readonly>
+                </mat-form-field>
+
+                <mat-form-field  appearance="outline">
+                    <mat-label>Nom / Raison Sociale</mat-label>
+                    <input matInput  formControlName="nom" readonly>
+                </mat-form-field>
+
+            </div>
+          </div>
+    
+        
+        </div>
+        <div class="col-8">
+          <div class="card text-center" >
+            <div class="card-header">
+                Les Informations generale
+            </div>
+            <div class="card-body card-prix">
+                
+                <div class="row ">
+                    <div class="col">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Site Web</mat-label>
+                            <input matInput   formControlName="site_web" readonly>
+                          </mat-form-field>
+                    </div>
+                    <div class="col">
+                    <mat-form-field  appearance="outline">
+                        <mat-label>ICE</mat-label>
+                        <input matInput  formControlName="ice" readonly>
+                      </mat-form-field>
+                    </div>
+                </div>
+
+              <div class="row">
+                <div class="col-6">
+
+                    <mat-form-field  appearance="outline">
+                        <mat-label>IF</mat-label>
+                        <input matInput  formControlName="ifi" readonly>
+                    </mat-form-field>
+
+                    <mat-form-field  appearance="outline">
+                        <mat-label>CNSS</mat-label>
+                        <input matInput  formControlName="cnss" readonly>
+                    </mat-form-field>
+                      
+                </div>
+                <div class="col-6">
+                    <mat-form-field  appearance="outline">
+                        <mat-label>TP</mat-label>
+                        <input matInput  formControlName="tp" readonly>
+                    </mat-form-field>
+
+                    
+                      <mat-form-field  appearance="outline">
+                        <mat-label>RC</mat-label>
+                        <input matInput  formControlName="rc" readonly>
+                      </mat-form-field>
+                  
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+      
+        <div class="card text-center mt-4">
+          <div class="card-header" >
+            Adresse 
+          </div>
+          <div class="card-body" >
+            <div class="row">
+              <div class="col-4">
+                <mat-form-field appearance="outline" >
+                    <mat-label>Ville</mat-label>
+                    <input matInput   formControlName="ville" readonly>
+                  </mat-form-field>
+              </div>
+              <div class="col-4">
+                <mat-form-field appearance="outline" >
+                    <mat-label>Adresse</mat-label>
+                    <input matInput   formControlName="adresse" readonly>
+                  </mat-form-field>
+              </div>
+              <div class="col-4">
+                <mat-form-field appearance="outline" >
+                    <mat-label>Code Postale</mat-label>
+                    <input matInput type="text"  formControlName="code_postale" readonly>
+                  </mat-form-field>
+              </div>
+            </div>
+            
+          </div>
+          
+        </div>
+        <div class="card text-center mt-4">
+            <div class="card-header" >
+                Contacts 
+            </div>
+            <div class="card-body" >
+              <div class="row">
+                <div class="col-4">
+                    <mat-form-field appearance="outline" >
+                        <mat-label>Email</mat-label>
+                        <input matInput type="email"  formControlName="email" readonly>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-4">
+                    <mat-form-field appearance="outline" >
+                        <mat-label class="label-phone">Telephone Portable</mat-label>
+                        <span matPrefix>+212 &nbsp;</span>
+                        <input matInput type="tel" class="input-phone"  formControlName="tele_portable" readonly>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-4">
+                    <mat-form-field appearance="outline" >
+                        <mat-label class="label-phone" >Telephone Fix</mat-label>
+                        <span matPrefix>+212 &nbsp;</span>
+                        <input matInput type="tel" class="input-phone"  formControlName="tele_fix" readonly>
+                        
+                    </mat-form-field>
+                </div>
+              </div>
+              
+            </div>
+            
+          </div>
+          <div class="card text-center mt-4">
+            <div class="card-header" >
+                les honoraires 
+            </div>
+            <div class="card-body" >
+              <div class="row">
+                <div class="col">
+                    <mat-form-field appearance="outline" >
+                        <mat-label>Bilan</mat-label>
+                        <input matInput type="number"  formControlName="bilan" readonly>
+                        <span matSuffix >DH</span>
+                      </mat-form-field>
+                </div>
+
+                <div class="col">
+                    <mat-form-field appearance="outline" >
+                        <mat-label>PV Bilan</mat-label>
+                        <input matInput type="number"  formControlName="pv_bilan" readonly>
+                        <span matSuffix >DH</span>
+                      </mat-form-field>
+                </div>
+
+                
+              </div>
+
+              <div class="row">
+                <div class="col">
+                    <mat-form-field appearance="outline" >
+                        <mat-label>Régime</mat-label>
+                        <input matInput type="text"  formControlName="regime" readonly>
+                    </mat-form-field>
+                </div>
+
+                <div class="col">
+                    <mat-form-field appearance="outline" >
+                        <mat-label>Tva</mat-label>
+                        <input matInput type="number"  formControlName="r_tva" readonly>
+                        <span matSuffix >DH</span>
+                      </mat-form-field>
+                </div>
+
+                <div class="col">
+                    <mat-form-field appearance="outline" >
+                        <mat-label>Cnss</mat-label>
+                        <input matInput type="number"  formControlName="r_cnss" readonly>
+                        <span matSuffix >DH</span>
+                      </mat-form-field>
+                </div>
+
+              </div>
+              
+            </div>
+            
+          </div>
+  
+    </form>
+
+    
+    </div>
+
+  </div>

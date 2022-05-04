@@ -1,0 +1,22 @@
+<mat-toolbar >
+    <mat-toolbar-row>
+        <button mat-icon-button (click)="toggleSideBar()">
+            <mat-icon>menu</mat-icon>
+        </button>
+
+        <span> Gestion Cabinet Comptable </span>
+
+        <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
+           
+                    <button mat-button [matMenuTriggerFor]="menu">
+                       <img src="https://scontent.frak3-1.fna.fbcdn.net/v/t1.6435-1/50342181_2279187745626776_4462049594057949184_n.jpg?stp=cp0_dst-jpg_p40x40&_nc_cat=108&ccb=1-5&_nc_sid=1eb0c7&_nc_ohc=9QxQr91U-W0AX868AVA&_nc_ht=scontent.frak3-1.fna&oh=00_AT_VKR2Sr9RFKkZtqmuqAJzB99YWqjj1v6cixWQaQyvytQ&oe=628262EB" > ESSADIK / BELLA
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item>
+                            <mat-icon>exit_to_app</mat-icon>
+                            Sign out
+                        </button>
+                    </mat-menu>
+        </div>
+    </mat-toolbar-row>
+</mat-toolbar> 

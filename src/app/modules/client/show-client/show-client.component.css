@@ -1,0 +1,39 @@
+
+
+.mat-dialog-content {
+    max-height: initial;
+}
+
+img{
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+mat-form-field{
+    width: 100%;
+}
+
+.card-prix{
+    margin-top:2%;
+   
+}
+  
+
+.label-phone{
+    margin-left: 40px;
+    padding-right: 5px;
+}
+
+span[matprefix] {
+    position: absolute;
+    top: -16px;
+}
+
+.input-phone{
+    padding-left: 40px;
+}
+
+  
+    

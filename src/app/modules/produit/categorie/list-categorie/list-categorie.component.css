@@ -1,0 +1,42 @@
+.demo-button-container {
+    padding-bottom: 16px;
+  }
+  
+  .demo-button + .demo-button {
+    margin-left: 8px;
+  }
+
+  table {
+    width: 100%;
+  }
+  
+  .filterField {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  .test1{
+    width: 95%;
+  }
+  .test2{
+    width: 5%;
+  }
+  
+.actions{
+  white-space: nowrap;
+
+}
+.filterField{
+ margin-left: 15%;
+ margin-right:15%;
+ width:70%;
+}
+
+mat-paginator{
+  border-radius: 0px 0px 8px 8px;
+}
+
+form mat-form-field{
+  width: 50%;
+}
+

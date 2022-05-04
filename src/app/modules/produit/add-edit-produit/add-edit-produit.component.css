@@ -1,0 +1,49 @@
+img{
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+input[type="file"] {
+    display: none;
+    size: 60;
+}
+
+.upload{
+    width: 35px;
+    height: 35px;
+    margin-top:-39px;
+    margin-right: -25%;
+    border-radius: 50%;
+}
+.icon{
+ font-size:25px;
+}
+mat-form-field{
+    width: 100%;
+}
+form{
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 90%;
+}
+.card-prix{
+    margin-top:5%;
+    margin-bottom:5%;
+}
+.add-categorie {
+    margin-top: -85px;
+    text-align: center;
+    margin-left: 94%;
+}
+.btnAdd {
+    width: 25px;
+    height: 25px;   
+}
+.mat-icon{
+    margin-top: -30px;
+}
+
+
+
+
