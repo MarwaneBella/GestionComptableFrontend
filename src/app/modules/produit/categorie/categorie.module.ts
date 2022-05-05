@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DeleteCategorieComponent } from './delete-categorie/delete-categorie.component';
 import { EditCategorieComponent } from './edit-categorie/edit-categorie.component';
+import { AddCategorieComponent } from './add-categorie/add-categorie.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { EditCategorieComponent } from './edit-categorie/edit-categorie.componen
     CategorieComponent,
     ListCategorieComponent,
     DeleteCategorieComponent,
-    EditCategorieComponent
+    EditCategorieComponent,
+    AddCategorieComponent
   ],
   imports: [
     CommonModule,

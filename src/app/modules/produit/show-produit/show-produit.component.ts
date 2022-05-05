@@ -21,8 +21,7 @@ export class ShowProduitComponent implements OnInit {
       reference: null,
       designation: null,
       tva :null,
-      // TODOquantitie_disponible: null,
-      //categorier :null,
+      categorier :null,
       marque :null,
       description:null,
       type:null,
@@ -36,10 +35,7 @@ export class ShowProduitComponent implements OnInit {
       prix_vente :null,
       prix_revient:null
   });
-  //this.productForm.get('reference')?.disable()
-  Object.keys(this.productForm.controls).forEach(ctrl => {
-    this.productForm.controls[ctrl].disable();
-  });
+
   if(this.reference){
     this.getProduitByRef();
    
@@ -54,6 +50,7 @@ export class ShowProduitComponent implements OnInit {
     this.productForm.controls['tva'].setValue(this.produit.tva) ;
     this.productForm.controls['marque'].setValue(this.produit.marque) ;
     this.productForm.controls['description'].setValue(this.produit.description) ;
+    this.productForm.controls['categorier'].setValue(this.produit.categorie.nom_cat) ;
     this.productForm.controls['type'].setValue(this.produit.type) ;
     this.productForm.controls['poids'].setValue(this.produit.poids) ;
     this.productForm.controls['volume'].setValue(this.produit.volume) ;

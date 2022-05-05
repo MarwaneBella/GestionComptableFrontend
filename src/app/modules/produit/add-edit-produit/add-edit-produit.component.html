@@ -87,15 +87,11 @@
                 </mat-form-field>
                 
                 <div class="add-categorie" >
-                 <button mat-fab color="warn" class="btnAdd" routerLink="/produit/categorie" >
-                  <mat-icon>add</mat-icon>
-                </button>
+                  <button mat-fab color="warn" class="btnAdd" (click)="openDialogAddCategorie()"  > <!-- routerLink="/produit/categorie" -->
+                    <mat-icon>add</mat-icon>
+                  </button>
                 </div>
-                 
-                <mat-form-field appearance="outline" style="display: none;">
-                  <mat-label>Ajouter Categorie</mat-label>
-                  <input formControlName="AddCategorie" matInput placeholder="Ajouter Categorie" type="text" [disabled]="true" />
-                </mat-form-field>
+
               </div>
               <div class="col-4">
                 <mat-form-field appearance="outline">

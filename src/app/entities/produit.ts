@@ -1,4 +1,5 @@
 import { Byte } from "@angular/compiler/src/util";
+import { Categorie } from "./categorie";
 
 export class Produit{
      reference            : string ;
@@ -17,5 +18,5 @@ export class Produit{
      prix_vente           : number ;
      prix_revient         : number ;
      tva                  : number ;
-     categorie            : Object ;
+     categorie            : Categorie ;
 }

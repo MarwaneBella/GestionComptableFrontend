@@ -1,8 +1,10 @@
 import { Component, OnInit  } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Categorie } from 'src/app/entities/categorie';
 import { Produit } from 'src/app/entities/produit';
+import { AddCategorieComponent } from '../categorie/add-categorie/add-categorie.component';
 import { CategorieService } from '../categorie/categorie.service';
 import { ProduitService } from '../produit.service';
 @Component({
@@ -24,7 +26,7 @@ export class AddEditProduitComponent implements OnInit {
   isAddMode: boolean;
   ref :string ;
   action: string;
-  constructor(private produitService: ProduitService,private categorieService:  CategorieService , private _formBuilder: FormBuilder ,private route: ActivatedRoute ,private router: Router) { }
+  constructor(private produitService: ProduitService,private categorieService:  CategorieService , private _formBuilder: FormBuilder ,private route: ActivatedRoute ,private router: Router ,public dialog: MatDialog) { }
 
   
 
@@ -133,12 +135,7 @@ addProduit(){
   console.log(this.productForm.controls['categorie'].value.nom_cat);
 
   this.produit = this.productForm.value ;
-  /*
-  let categorie : Categorie = new Categorie();
-  categorie.id_cat=1
-  categorie.nom_cat ="A"
-  this.produit.categorie =categorie
-  console.log(this.produit.categorie)*/
+
   
   this.produitService.addProduit(this.produit).subscribe((data : any) => {
     
@@ -190,6 +187,14 @@ updateProduit(){
    this.categorieService.getAllCategories().subscribe(data =>{
     this.categories = data ;
    })
+ }
+
+ openDialogAddCategorie(){
+  this.dialog.open(AddCategorieComponent,{
+    width:'30%'
+  }).afterClosed().subscribe(val =>{
+    this.getAllCategories() ;
+  });
  }
 
 
