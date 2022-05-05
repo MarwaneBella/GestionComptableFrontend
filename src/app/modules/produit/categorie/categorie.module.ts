@@ -10,8 +10,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DeleteCategorieComponent } from './delete-categorie/delete-categorie.component';
-import { EditCategorieComponent } from './edit-categorie/edit-categorie.component';
-import { AddCategorieComponent } from './add-categorie/add-categorie.component';
+import { AddEditCategorieComponent } from './add-edit-categorie/add-edit-categorie.component';
 
 
 @NgModule({
@@ -19,8 +18,7 @@ import { AddCategorieComponent } from './add-categorie/add-categorie.component';
     CategorieComponent,
     ListCategorieComponent,
     DeleteCategorieComponent,
-    EditCategorieComponent,
-    AddCategorieComponent
+    AddEditCategorieComponent
   ],
   imports: [
     CommonModule,

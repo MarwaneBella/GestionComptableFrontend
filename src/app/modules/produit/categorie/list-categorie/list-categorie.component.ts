@@ -5,9 +5,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Categorie } from 'src/app/entities/categorie';
+import { AddEditCategorieComponent } from '../add-edit-categorie/add-edit-categorie.component';
 import { CategorieService } from '../categorie.service';
 import { DeleteCategorieComponent } from '../delete-categorie/delete-categorie.component';
-import { EditCategorieComponent } from '../edit-categorie/edit-categorie.component';
 
 @Component({
   selector: 'app-list-categorie',
@@ -76,7 +76,7 @@ export class ListCategorieComponent implements AfterViewInit,OnInit {
   }
 
   openDialogEdit(row: any){
-    this.dialog.open(EditCategorieComponent,{
+    this.dialog.open(AddEditCategorieComponent,{
       width:'30%',
       data:row,
     }).afterClosed().subscribe(val =>{

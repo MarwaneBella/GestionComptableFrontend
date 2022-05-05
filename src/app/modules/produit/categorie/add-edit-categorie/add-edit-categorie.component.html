@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Edite Categorie</h1>
+<h1 mat-dialog-title>{{content}} Categorie</h1>
 <div mat-dialog-content>
     <form [formGroup]="categorieForm">
         <mat-form-field appearance="outline">
@@ -10,6 +10,6 @@
 <div mat-dialog-actions >
     <div class="ms-auto">
         <button class="btn btn-danger" mat-dialog-close>Fermer</button>
-        <button class="btn btn-success mx-2" (click)="editCategorie()" [disabled]="categorieForm.invalid">Editer</button>
+        <button class="btn btn-success mx-2" (click)="onSubmit()" [disabled]="categorieForm.invalid">{{content}}</button>
     </div>
 </div>

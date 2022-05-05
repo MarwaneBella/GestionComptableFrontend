@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Categorie } from 'src/app/entities/categorie';
 import { Produit } from 'src/app/entities/produit';
-import { AddCategorieComponent } from '../categorie/add-categorie/add-categorie.component';
+import { AddEditCategorieComponent } from '../categorie/add-edit-categorie/add-edit-categorie.component';
 import { CategorieService } from '../categorie/categorie.service';
 import { ProduitService } from '../produit.service';
 @Component({
@@ -190,7 +190,7 @@ updateProduit(){
  }
 
  openDialogAddCategorie(){
-  this.dialog.open(AddCategorieComponent,{
+  this.dialog.open(AddEditCategorieComponent,{
     width:'30%'
   }).afterClosed().subscribe(val =>{
     this.getAllCategories() ;

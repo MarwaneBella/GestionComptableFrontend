@@ -5,30 +5,37 @@ import { Categorie } from 'src/app/entities/categorie';
 import { CategorieService } from '../categorie.service';
 
 @Component({
-  selector: 'app-edit-categorie',
-  templateUrl: './edit-categorie.component.html',
-  styleUrls: ['./edit-categorie.component.css']
+  selector: 'app-add-edit-categorie',
+  templateUrl: './add-edit-categorie.component.html',
+  styleUrls: ['./add-edit-categorie.component.css']
 })
-export class EditCategorieComponent implements OnInit {
-  
+export class AddEditCategorieComponent implements OnInit {
+
   categorieForm: FormGroup;
   categorie: Categorie = new Categorie();
-  
+  isAddMode: boolean;
+  content: string;
   
   constructor(private categorieService: CategorieService ,private _formBuilder: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data :any ,private dialogRef : MatDialogRef<EditCategorieComponent>){}
+    @Inject(MAT_DIALOG_DATA) public data :any ,private dialogRef : MatDialogRef<AddEditCategorieComponent>){}
 
   ngOnInit(): void {
 
     this.declareForm();
 
-    if(this.data){
+    this.isAddMode =!this.data;
+
+    if(this.isAddMode){
+      this.content = "Ajoute";
+    }
+    else{
+      this.content = "Edite";
       this.categorie.id_cat = this.data.id_cat ;
       this.categorie.nom_cat = this.data.nom_cat ;
+      this.setFormValues();
     }
 
-    this.setFormValues();
-    console.log(this.categorie)
+    
   }
 
   declareForm(){
@@ -41,15 +48,34 @@ export class EditCategorieComponent implements OnInit {
     this.categorieForm.controls['nom_cat'].setValue(this.categorie.nom_cat);
   }
 
+  onSubmit(){
+    if(this.isAddMode){
+      this.AddCategorie();
+    }
+    else{
+      this.editCategorie();
+    }
+  }
+
+  AddCategorie(){
+
+    this.categorie.nom_cat = this.categorieForm.controls['nom_cat'].value;
+ 
+    this.categorieService.addCategorie(this.categorie).subscribe(data =>{
+     this.dialogRef.close();
+    });
+    
+  }
+
   editCategorie(){
 
    this.categorie.nom_cat = this.categorieForm.controls['nom_cat'].value;
-
    this.categorieService.updateCategorie(this.categorie.id_cat, this.categorie).subscribe(data =>{
     this.dialogRef.close();
    });
    
   }
 
-  
+
+
 }
