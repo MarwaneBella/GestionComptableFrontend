@@ -3,6 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './shared/home/home.component';
 
 const routes: Routes = [
+
+  {
+    path:'user',
+    loadChildren:() =>import('./modules/user/user.module').then(m => m.UserModule)
+  },
+
   {
     path:'',
     component: HomeComponent,
@@ -18,15 +24,14 @@ const routes: Routes = [
       {
         path :'fournisseur',
         loadChildren:() =>import('./modules/fournisseur/fournisseur.module').then(m => m.FournisseurModule)
+      },
+      {
+        path :'bon-achat',
+        loadChildren:() =>import('./modules/bon-achat/bon-achat.module').then(m => m.BonAchatModule)
       }
       
     ],
     
-  },
-
-  {
-    path:'user',
-    loadChildren:() =>import('./modules/user/user.module').then(m => m.UserModule)
   }
   
 ];

@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Formats } from 'src/app/entities/formats';
 import { Fournisseur } from 'src/app/entities/fournisseur';
 import { FournisseurService } from '../fournisseur.service';
 import { ShowFournisseurComponent } from '../show-fournisseur/show-fournisseur.component';
@@ -16,6 +17,7 @@ export class ListFournisseurComponent implements AfterViewInit {
   displayedColumns: string[] = ['id', 'nom', 'email', 'tele_portable', 'actions'];
   fournisseurs : Fournisseur[] ;
   fournisseur : Fournisseur = new Fournisseur();
+  formats : Formats = new Formats();
 
   dataSource: MatTableDataSource<Fournisseur>
 

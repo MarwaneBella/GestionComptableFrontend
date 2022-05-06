@@ -2,10 +2,12 @@ import {AfterViewInit, Component, Inject, OnInit, ViewChild} from '@angular/core
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import {MatDialog,MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+
 import { Client } from 'src/app/entities/client';
 import { ClientService } from '../client.service';
-import {MatDialog,MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { ShowClientComponent } from '../show-client/show-client.component';
+import { Formats } from 'src/app/entities/formats';
 
 @Component({
   selector: 'app-list-client',
@@ -18,8 +20,9 @@ import { ShowClientComponent } from '../show-client/show-client.component';
 export class ListClientComponent implements AfterViewInit{
 
   displayedColumns: string[] = ['id', 'nom', 'email', 'tele_portable', 'actions'];
-  clients: Client[];
+  clients: Client[] ;
   client : Client = new Client();
+  formats : Formats = new Formats();
   
   dataSource: MatTableDataSource<Client>;
 
@@ -33,12 +36,12 @@ export class ListClientComponent implements AfterViewInit{
 
   ngAfterViewInit() {
     this.getClients();
-    
   }
 
   getClients(){
     this.clientService.getClientList().subscribe(data =>{
       this.clients = data;
+
       this.dataSource = new MatTableDataSource(this.clients);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
@@ -48,15 +51,6 @@ export class ListClientComponent implements AfterViewInit{
     });
     
   }
-  /*
-
-  getClientById(id :number){
-    this.clientService.getClientById(id).subscribe(data => {
-      this.client = data
-      console.log(this.client);
-    });
-  }*/
-
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

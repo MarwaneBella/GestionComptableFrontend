@@ -1,14 +1,13 @@
 
-
 <div class="demo-button-container"  fxLayoutAlign="flex-end">
     <button type="button" class="btn btn-success" routerLink="addClient">
       <i class="fa fa-plus-circle fa-lg me-1" aria-hidden="true"></i>
-      Ajoute Client</button>
+      Ajoute Bon</button>
 </div>
 
 
   <mat-form-field appearance="outline">
-    <mat-label>Filtrer Client</mat-label>
+    <mat-label>Filtrer Bon</mat-label>
     <input  matInput (keyup)="applyFilter($event)" placeholder="Rechereche" #input>
   </mat-form-field>
 
@@ -16,27 +15,27 @@
     <table  mat-table [dataSource]="dataSource" matSort>
   
       <!-- ID Column -->
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Code client</th>
-        <td mat-cell *matCellDef="let row">{{ formats.codeClient(row.id) }}</td>
+      <ng-container matColumnDef="id_ba">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Bon numéro </th>
+        <td mat-cell *matCellDef="let row">{{ formats.codeBon(row.id_ba, row.date_ba)}}</td>
       </ng-container>
   
       <!-- Nom Column -->
-      <ng-container matColumnDef="nom">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom </th>
-        <td mat-cell *matCellDef="let row"> {{row.nom}} </td>
+      <ng-container matColumnDef="nom_f">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom Fournisseur </th>
+        <td mat-cell *matCellDef="let row"> {{row.fournisseur.nom}} </td>
       </ng-container>
   
       <!-- Email Column -->
-      <ng-container matColumnDef="email">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
-        <td mat-cell *matCellDef="let row"> {{row.email}} </td>
+      <ng-container matColumnDef="date_ba">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Date De Bon  </th>
+        <td mat-cell *matCellDef="let row"> {{row.date_ba}} </td>
       </ng-container>
   
       <!-- Tele Column -->
-      <ng-container matColumnDef="tele_portable">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Numéro De Téléphone </th>
-        <td mat-cell *matCellDef="let row"> {{row.tele_portable}} </td>
+      <ng-container matColumnDef="total_general">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Totale general </th>
+        <td mat-cell *matCellDef="let row"> {{row.total_general}} </td>
       </ng-container>
 
       <!-- Action column -->
@@ -44,9 +43,9 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
         <td mat-cell *matCellDef="let row">
           <div class="actions">
-            <button (click)="openDialogShow(row.id)" aria-label="b1" class="btn btn-outline-primary"><i class="fa fa-eye" aria-hidden="true"></i></button>
-            <button  aria-label="Name"  type="button" class="btn btn-outline-success mx-1" routerLink="editClient/{{row.id}}"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-            <button aria-label="b1"  (click)="openDialog(row)"   class="btn btn-outline-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
+            <button class="btn btn-outline-primary"><i class="fa fa-eye" aria-hidden="true"></i></button>
+            <button  aria-label="Name"  type="button" class="btn btn-outline-success mx-1" routerLink=""><i class="fa fa-pencil" aria-hidden="true"></i></button>
+            <button (click)="openDialogDelete(row)"  class="btn btn-outline-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
           
           </div>
 
@@ -64,6 +63,4 @@
   
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" ></mat-paginator>
   </div>
- 
-
  

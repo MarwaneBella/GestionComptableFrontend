@@ -16,7 +16,7 @@
       <!-- ID Column -->
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Code fornisseur</th>
-        <td mat-cell *matCellDef="let row"> F-000{{row.id}} </td>
+        <td mat-cell *matCellDef="let row"> {{ formats.codeFournisseur(row.id) }} </td>
       </ng-container>
   
       <!-- Nom Column -->

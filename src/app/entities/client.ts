@@ -23,4 +23,5 @@ export class Client {
     r_tva:number;
     r_cnss:number;
 
+
 }
