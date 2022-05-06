@@ -9,13 +9,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from 'src/app/material.module';
 import { DeleteBonAchatComponent } from './delete-bon-achat/delete-bon-achat.component';
+import { AddEditBonAchatComponent } from './add-edit-bon-achat/add-edit-bon-achat.component';
+import { ShowBonAchatComponent } from './show-bon-achat/show-bon-achat.component';
 
 
 @NgModule({
   declarations: [
     BonAchatComponent,
     ListBonAchatComponent,
-    DeleteBonAchatComponent
+    DeleteBonAchatComponent,
+    AddEditBonAchatComponent,
+    ShowBonAchatComponent
   ],
   imports: [
     CommonModule,

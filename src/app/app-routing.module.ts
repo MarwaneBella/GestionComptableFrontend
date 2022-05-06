@@ -26,7 +26,7 @@ const routes: Routes = [
         loadChildren:() =>import('./modules/fournisseur/fournisseur.module').then(m => m.FournisseurModule)
       },
       {
-        path :'bon-achat',
+        path :'bonAchat',
         loadChildren:() =>import('./modules/bon-achat/bon-achat.module').then(m => m.BonAchatModule)
       }
       

@@ -8,7 +8,7 @@ import { BonAchat } from 'src/app/entities/bon-achat';
 })
 export class BonAchatService {
 
-  private baseUrl ="http://localhost:8084/api/bon-achat";
+  private baseUrl ="http://localhost:8084/api/bonAchat";
 
   constructor(private httpClient: HttpClient) {}
  

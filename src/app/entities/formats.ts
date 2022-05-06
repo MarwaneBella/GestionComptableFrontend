@@ -43,11 +43,8 @@ export class Formats {
         newDate = newDate.substring(2);
         newDate = newDate.slice(0,-2);
         
-        return newDate+"-"+this.formatId(id)+id;
+        return "BA-"+newDate+"-"+this.formatId(id)+id;
     }
-
-
-
 
 
 }
