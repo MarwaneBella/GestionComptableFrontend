@@ -1,0 +1,19 @@
+
+  
+  <form [formGroup]="FormStagiaire" >
+  <mat-form-field  appearance="outline">
+    <mat-label>Nom Stager</mat-label>
+    <input matInput placeholder="Nom de Stager" formControlName="nom" >
+  </mat-form-field>
+
+  <button class="btn btn-primary" printSectionId="print-section" ngxPrint (keyup)="print()">print</button>
+
+  </form>
+
+
+
+
+
+<div id="print-section" style="display: none;"> 
+    <div class="text-center">Nom de Stager : {{nomStager}}</div>
+</div>

@@ -28,6 +28,10 @@ const routes: Routes = [
       {
         path :'bonAchat',
         loadChildren:() =>import('./modules/bon-achat/bon-achat.module').then(m => m.BonAchatModule)
+      },
+      {
+        path :'formulaire',
+        loadChildren:()=>import('./modules/formulaire/formulaire.module').then(m=>m.FormulaireModule)
       }
       
     ],
