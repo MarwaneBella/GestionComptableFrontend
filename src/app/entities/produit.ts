@@ -18,5 +18,6 @@ export class Produit{
      prix_vente           : number ;
      prix_revient         : number ;
      tva                  : number ;
+     quantitie_disponible : number ;
      categorie            : Categorie ;
 }
