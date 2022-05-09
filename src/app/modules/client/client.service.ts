@@ -41,5 +41,13 @@ export class ClientService {
   putImage(file: any):Observable<any>{
     return this.httpClient.put(`${this.imageUrl}`,file);
   }
+
+  printListClient():Observable<any>{
+    const httpOptions = {
+      //responseType: 'arraybuffer' as 'json'
+      responseType  : 'blob' as 'json'        //This also worked
+    };
+      return this.httpClient.get<any>(`http://localhost:8084/api/clients/report`,httpOptions)
+  }
   
 }

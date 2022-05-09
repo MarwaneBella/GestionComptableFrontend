@@ -8,7 +8,8 @@ import { Client } from 'src/app/entities/client';
 import { ClientService } from '../client.service';
 import { ShowClientComponent } from '../show-client/show-client.component';
 import { Formats } from 'src/app/entities/formats';
-
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 @Component({
   selector: 'app-list-client',
   templateUrl: './list-client.component.html',
@@ -78,6 +79,19 @@ export class ListClientComponent implements AfterViewInit{
     });
   }
 
+  public openPDF(): void {
+    let DATA: any = document.getElementById('htmlData');
+    html2canvas(DATA).then((canvas) => {
+      let fileWidth = 208;
+      let fileHeight = (canvas.height * fileWidth) / canvas.width;
+      const FILEURI = canvas.toDataURL('image/png');
+      let PDF = new jsPDF('p', 'mm', 'A4');
+      let position = 0;
+      PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
+      PDF.save('angular-demo.pdf');
+    });
+  }
+
 }
 
 @Component({
@@ -107,6 +121,7 @@ export class DeleteDialog implements OnInit {
       this.dialogRef.close();
     })
   }
+ 
  
     
 }
