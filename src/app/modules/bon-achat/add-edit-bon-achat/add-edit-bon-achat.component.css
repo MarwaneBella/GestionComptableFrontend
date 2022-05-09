@@ -8,12 +8,17 @@ button.example-custom-date-class {
 }
 
 .example-container {
-    height: 270px;
+    max-height: 400px;
     overflow: auto;
   }
   
   table {
     width: 100%;
+  }
+  
+  td, th {
+    width: 12.5%;
+    
   }
   
   tr.mat-footer-row {
