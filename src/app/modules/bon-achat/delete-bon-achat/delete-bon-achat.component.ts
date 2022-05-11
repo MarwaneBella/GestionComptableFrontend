@@ -21,12 +21,12 @@ export class DeleteBonAchatComponent implements OnInit {
 
   ngOnInit(): void {
    if(this.data){
-     this.bonAchat.id_ba = this.data.id_ba;
+     this.bonAchat.idBa = this.data.idBa;
    }
   }
 
   deleteBonAchatById(){
-    this.bonAchatService.deleteBonAchatById(this.bonAchat.id_ba).subscribe(data => {
+    this.bonAchatService.deleteBonAchatById(this.bonAchat.idBa).subscribe(data => {
       this.dialogRef.close();
     })
   }

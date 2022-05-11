@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Inject, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
@@ -8,8 +8,10 @@ import { Client } from 'src/app/entities/client';
 import { ClientService } from '../client.service';
 import { ShowClientComponent } from '../show-client/show-client.component';
 import { Formats } from 'src/app/entities/formats';
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf'
+//import * as autoTable from 'jspdf-autotable';
+import autoTable from 'jspdf-autotable'; 
+import 'jspdf-autotable';
 @Component({
   selector: 'app-list-client',
   templateUrl: './list-client.component.html',
@@ -20,7 +22,7 @@ import html2canvas from 'html2canvas';
 
 export class ListClientComponent implements AfterViewInit{
 
-  displayedColumns: string[] = ['id', 'nom', 'email', 'tele_portable', 'actions'];
+  displayedColumns: string[] = ['id', 'nom', 'email', 'telePortable', 'actions'];
   clients: Client[] ;
   client : Client = new Client();
   formats : Formats = new Formats();
@@ -30,12 +32,14 @@ export class ListClientComponent implements AfterViewInit{
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   
-
+  @ViewChild('content', { static: false }) el!: ElementRef;
+ 
   constructor(private clientService:ClientService , public dialog: MatDialog ) {}
   
   
 
   ngAfterViewInit() {
+    
     this.getClients();
   }
 
@@ -80,7 +84,8 @@ export class ListClientComponent implements AfterViewInit{
   }
 
   public openPDF(): void {
-    let DATA: any = document.getElementById('htmlData');
+   /*
+      let DATA: any = document.getElementById('htmlData');
     html2canvas(DATA).then((canvas) => {
       let fileWidth = 208;
       let fileHeight = (canvas.height * fileWidth) / canvas.width;
@@ -90,8 +95,42 @@ export class ListClientComponent implements AfterViewInit{
       PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
       PDF.save('angular-demo.pdf');
     });
-  }
+     ///
+     let DATA: any = document.getElementById('htmlData');
 
+    let pdf = new jsPDF()
+    pdf.html(DATA, {
+      callback: (pdf) => {
+        pdf.save("sample.pdf")
+      },
+    
+    })*/
+   
+    
+    const head = [['Code Client', 'Nom', 'Email', 'Numéro De Téléphone']]
+    let data = []
+    for(let i=0 ;i<this.clients.length ;i++){
+      data.push([this.formats.codeClient(this.clients[i].id), this.clients[i].nom, this.clients[i].email , this.clients[i].telePortable])
+    }
+    
+    const doc = new jsPDF()
+    doc.text('LIST CLIENTS',10,10,{align:'center'})
+    
+    
+
+    autoTable(doc, {
+      theme :'grid',
+      head: head,
+      body: data,
+      //styles: { fillColor: '#F7CCAC' },
+      //columnStyles: { 0: { halign: 'center', fillColor: '#2047dd' } }, // Cells in first column centered and green
+      tableWidth: 'auto',
+      
+      margin: { top: 20 }   
+    })
+    
+    doc.save('clients.pdf')
+  }
 }
 
 @Component({
@@ -99,6 +138,7 @@ export class ListClientComponent implements AfterViewInit{
   templateUrl: 'dialog-delete.html'
 
 })
+
 export class DeleteDialog implements OnInit {
   namClient : string;
   ID : number;

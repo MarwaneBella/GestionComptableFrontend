@@ -100,7 +100,7 @@ export class AddEditClientComponent implements OnInit {
   declareForms(){
     this.infosGeneralFormGroup = this._formBuilder.group({
       nom: ['', Validators.required],
-      site_web: null,
+      siteWeb: null,
       ifi : null,
       ice: null,
       tp: null,
@@ -112,28 +112,28 @@ export class AddEditClientComponent implements OnInit {
     this.adresseFormGroup = this._formBuilder.group({
       ville: null,
       adresse: null,
-      code_postale: null,
+      codePostale: null,
 
     });
     this.contactsFormGroup = this._formBuilder.group({
       email: null,
-      tele_portable: null,
-      tele_fix: null
+      telePortable: null,
+      teleFix: null
 
     });
 
     this.honorairesFormGroup = this._formBuilder.group({
       bilan: null,
-      pv_bilan: null,
+      pvBilan: null,
       regime: null,
-      r_tva: {value:null,disabled:true},
-      r_cnss: {value:null,disabled:true}
+      rTva: {value:null,disabled:true},
+      rCnss: {value:null,disabled:true}
     });
   }
 
   enableInputs(){
-    this.honorairesFormGroup.controls['r_tva'].enable();
-    this.honorairesFormGroup.controls['r_cnss'].enable();
+    this.honorairesFormGroup.controls['rTva'].enable();
+    this.honorairesFormGroup.controls['rCnss'].enable();
   }
 
   getClient(){
@@ -166,7 +166,7 @@ export class AddEditClientComponent implements OnInit {
     
     this.infosGeneralFormGroup.patchValue({
       nom: this.client.nom,
-      site_web: this.client.site_web,
+      siteWeb: this.client.siteWeb,
       ifi : this.client.ifi,
       ice: this.client.ice,
       tp: this.client.tp,
@@ -178,22 +178,22 @@ export class AddEditClientComponent implements OnInit {
     this.adresseFormGroup.patchValue({
       ville: this.client.ville,
       adresse: this.client.adresse,
-      code_postale: this.client.code_postale,
+      codePostale: this.client.codePostale,
 
     });
     this.contactsFormGroup.patchValue({
       email: this.client.email,
-      tele_portable: this.client.tele_portable,
-      tele_fix: this.client.tele_fix
+      telePortable: this.client.telePortable,
+      teleFix: this.client.teleFix
 
     });
 
     this.honorairesFormGroup.patchValue({
       bilan: this.client.bilan,
-      pv_bilan: this.client.pv_bilan,
+      pvBilan: this.client.pvBilan,
       regime: this.client.regime,
-      r_tva: this.client.r_tva,
-      r_cnss: this.client.r_cnss
+      rTva: this.client.rTva,
+      rCnss: this.client.rCnss
       
     });
     

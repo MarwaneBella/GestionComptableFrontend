@@ -14,7 +14,7 @@ import { ShowProduitComponent } from '../show-produit/show-produit.component';
 })
 export class ListProduitComponent implements AfterViewInit {
 
-  displayedColumns: string[] =['reference','nom','prix','quantitie_disponible','actions']
+  displayedColumns: string[] =['reference','nom','prix','quantitieDisponible','actions']
   produits : Produit[];
   produit : Produit = new Produit();
 
