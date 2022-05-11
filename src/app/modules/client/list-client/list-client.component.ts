@@ -7,7 +7,6 @@ import {MatDialog,MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog'
 import { Client } from 'src/app/entities/client';
 import { ClientService } from '../client.service';
 import { ShowClientComponent } from '../show-client/show-client.component';
-import { Formats } from 'src/app/entities/formats';
 import jsPDF from 'jspdf'
 //import * as autoTable from 'jspdf-autotable';
 import autoTable from 'jspdf-autotable'; 
@@ -24,9 +23,7 @@ export class ListClientComponent implements AfterViewInit{
 
   displayedColumns: string[] = ['id', 'nom', 'email', 'telePortable', 'actions'];
   clients: Client[] ;
-  client : Client = new Client();
-  formats : Formats = new Formats();
-  
+  client : Client = new Client();  
   dataSource: MatTableDataSource<Client>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -110,7 +107,7 @@ export class ListClientComponent implements AfterViewInit{
     const head = [['Code Client', 'Nom', 'Email', 'Numéro De Téléphone']]
     let data = []
     for(let i=0 ;i<this.clients.length ;i++){
-      data.push([this.formats.codeClient(this.clients[i].id), this.clients[i].nom, this.clients[i].email , this.clients[i].telePortable])
+      data.push([this.clients[i].codeC, this.clients[i].nom, this.clients[i].email , this.clients[i].telePortable])
     }
     
     const doc = new jsPDF()

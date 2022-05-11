@@ -1,7 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BonAchat } from 'src/app/entities/bon-achat';
-import { Formats } from 'src/app/entities/formats';
 import { BonAchatService } from '../bon-achat.service';
 
 @Component({
@@ -12,7 +11,6 @@ import { BonAchatService } from '../bon-achat.service';
 export class DeleteBonAchatComponent implements OnInit {
 
   bonAchat: BonAchat = new BonAchat();
-  formats: Formats = new Formats();
   
   constructor(private bonAchatService: BonAchatService,
     @Inject(MAT_DIALOG_DATA) public data :any ,
@@ -22,6 +20,8 @@ export class DeleteBonAchatComponent implements OnInit {
   ngOnInit(): void {
    if(this.data){
      this.bonAchat.idBa = this.data.idBa;
+     this.bonAchat.bonANum = this.data.bonANum;
+     
    }
   }
 

@@ -202,7 +202,7 @@
         </div>
     
         <div class="text-center mt-3">
-          <button class="btn btn-primary" [disabled]="formInfosBon.invalid || dataList.length == 0" ><i class="fa fa-floppy-o" aria-hidden="true"></i> Enregistrer</button>
+          <button class="btn btn-primary" (click)="test()" [disabled]="formInfosBon.invalid || dataList.length == 0" ><i class="fa fa-floppy-o" aria-hidden="true"></i> Enregistrer</button>
           <button class="btn btn-success ms-3" [disabled]="formInfosBon.invalid || dataList.length == 0" ><i class="fa fa-check" aria-hidden="true" ></i> Valider</button>
         </div>
 

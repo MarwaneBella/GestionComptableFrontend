@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatCalendarCellClassFunction } from '@angular/material/datepicker';
 import { MatTableDataSource } from '@angular/material/table';
+import { BonAchat } from 'src/app/entities/bon-achat';
 import { Fournisseur } from 'src/app/entities/fournisseur';
 import { Produit } from 'src/app/entities/produit';
 import { Calculate } from 'src/app/Facilities/calculate';
@@ -32,9 +33,10 @@ export class AddEditBonAchatComponent implements OnInit {
   fournisseurs : Fournisseur[] ;
   produits : Produit[];
   fournisseur: Fournisseur;
-  produit: Produit; 
+  produit: Produit;
+  bonAchat : BonAchat = new  BonAchat();
   calculate: Calculate = new Calculate();
-  dataSource : MatTableDataSource<DataList>
+  dataSource : MatTableDataSource<DataList>;
 
   totaleQuantite: number;
   totaleMontantHt: number;
@@ -152,6 +154,13 @@ export class AddEditBonAchatComponent implements OnInit {
 
   }
 
+  test(){
+
+    this.bonAchat = this.formInfosBon.value;
+    this.bonAchatService.addBonAchat(this.bonAchat).subscribe(data =>{
+
+    });
+  }
 
 
 }
