@@ -11,11 +11,11 @@ import { BonAchatService } from '../bon-achat.service';
 
 export interface DataList {
   produit: Produit;
-  prix_unitaire: number;
+  prixUnitaire: number;
   quantite: number;
-  montant_ht : number;
-  taux_tva:number;
-  montant_ttc:number;
+  montantHt : number;
+  tauxTva:number;
+  montantTtc:number;
 }
 
 @Component({
@@ -27,7 +27,7 @@ export class AddEditBonAchatComponent implements OnInit {
 
   formInfosBon: FormGroup;
   formLigneBon: FormGroup;
-  displayedColumns: string[] = ['reference','designation', 'prix_unitaire','quantite', 'montant_ht', 'taux_tva','montant_ttc','actions'];
+  displayedColumns: string[] = ['reference','designation', 'prixUnitaire','quantite', 'montantHt', 'tauxTva','montantTtc','actions'];
   dataList: Array<DataList> = [] ;
   fournisseurs : Fournisseur[] ;
   produits : Produit[];
@@ -37,9 +37,9 @@ export class AddEditBonAchatComponent implements OnInit {
   dataSource : MatTableDataSource<DataList>
 
   totaleQuantite: number;
-  totaleMontant_ht: number;
-  totaleTaux_tva: number;
-  totaleMontant_ttc: number;
+  totaleMontantHt: number;
+  totaleTauxTva: number;
+  totaleMontantTtc: number;
 
   constructor(private _formBuilder: FormBuilder, private bonAchatService : BonAchatService, private fournisseurService :FournisseurService, private produitService : ProduitService) { }
 
@@ -56,8 +56,8 @@ export class AddEditBonAchatComponent implements OnInit {
       fournisseur:['', Validators.required],
       id:['', Validators.required],
       // bon_num : ['', Validators.required],
-      num_fac:null,
-      date_ba: [new Date(), Validators.required]
+      facBonNum:null,
+      dateBa: [new Date(), Validators.required]
       });
 
   }
@@ -67,10 +67,10 @@ export class AddEditBonAchatComponent implements OnInit {
       produit: ['', Validators.required],
       quantite: [1, Validators.required],
       tva: ['', Validators.required],
-      prix_unitaire : ['', Validators.required],
-      montant_ht : null,
-      taux_tva:null,
-      montant_ttc : null,
+      prixUnitaire : ['', Validators.required],
+      montantHt : null,
+      tauxTva:null,
+      montantTtc : null,
     });
   }
 
@@ -105,16 +105,16 @@ export class AddEditBonAchatComponent implements OnInit {
   setProduit(){
     this.produit = this.formLigneBon.controls['produit'].value;
     this.formLigneBon.controls['tva'].setValue(this.produit.tva);
-    this.formLigneBon.controls['prix_unitaire'].setValue(this.produit.prixAchat);
+    this.formLigneBon.controls['prixUnitaire'].setValue(this.produit.prixAchat);
     this.calculateMontants();
   }
 
   calculateMontants(){
-    this.calculate.calculateMontants(this.formLigneBon.controls['prix_unitaire'].value,this.formLigneBon.controls['quantite'].value,this.formLigneBon.controls['tva'].value);
+    this.calculate.calculateMontants(this.formLigneBon.controls['prixUnitaire'].value,this.formLigneBon.controls['quantite'].value,this.formLigneBon.controls['tva'].value);
     this.formLigneBon.patchValue({
-      montant_ht : this.calculate.montant_ht,
-      taux_tva: this.calculate.taux_tva,
-      montant_ttc : this.calculate.montant_ttc
+      montantHt : this.calculate.montantHt,
+      tauxTva: this.calculate.tauxTva,
+      montantTtc : this.calculate.montantTtc
     });
   }
 
@@ -137,16 +137,16 @@ export class AddEditBonAchatComponent implements OnInit {
   totale(){
      
     this.totaleQuantite = 0;
-    this.totaleMontant_ht = 0;
-    this.totaleTaux_tva = 0;
-    this.totaleMontant_ttc = 0;
+    this.totaleMontantHt = 0;
+    this.totaleTauxTva = 0;
+    this.totaleMontantTtc = 0;
 
     this.dataList.forEach((currentValue, index) => {
 
       this.totaleQuantite +=  currentValue.quantite;
-      this.totaleMontant_ht += currentValue.montant_ht;
-      this.totaleTaux_tva += currentValue.taux_tva;
-      this.totaleMontant_ttc += currentValue.montant_ttc;
+      this.totaleMontantHt += currentValue.montantHt;
+      this.totaleTauxTva += currentValue.tauxTva;
+      this.totaleMontantTtc += currentValue.montantTtc;
 
     });
 

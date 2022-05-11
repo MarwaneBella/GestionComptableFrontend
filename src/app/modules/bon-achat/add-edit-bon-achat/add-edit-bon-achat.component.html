@@ -33,13 +33,13 @@
                   <div class="col ">
                     <mat-form-field  appearance="outline">
                       <mat-label>Numero Facture</mat-label>
-                      <input matInput formControlName ="num_fac" >
+                      <input matInput formControlName ="facBonNum" >
                   </mat-form-field>
                   </div>
                   <div class="col">
                       <mat-form-field class="example-full-width" appearance="outline">
                           <mat-label>Date de bon</mat-label>
-                          <input matInput [matDatepicker]="picker" formControlName ="date_ba">
+                          <input matInput [matDatepicker]="picker" formControlName ="dateBa">
                           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                           <mat-datepicker [dateClass]="dateClass" #picker></mat-datepicker>
                         </mat-form-field>
@@ -76,7 +76,7 @@
             <div class="col">
               <mat-form-field  appearance="outline">
                   <mat-label>Montant HT</mat-label>
-                  <input type="number" matInput formControlName ="montant_ht" readonly>
+                  <input type="number" matInput formControlName ="montantHt" readonly>
               </mat-form-field>
             </div>
           </div>
@@ -91,14 +91,14 @@
             <div class="col">
               <mat-form-field  appearance="outline">
                 <mat-label>Prix Unitaire Hors Taxe</mat-label>
-                <input type="number" matInput formControlName ="prix_unitaire" (keyup)="calculateMontants()">
+                <input type="number" matInput formControlName ="prixUnitaire" (keyup)="calculateMontants()">
               </mat-form-field>
             </div>
 
             <div class="col">
               <mat-form-field  appearance="outline">
                   <mat-label>Taux TVA</mat-label>
-                  <input type="number" matInput formControlName ="taux_tva"  readonly>
+                  <input type="number" matInput formControlName ="tauxTva"  readonly>
               </mat-form-field>
             </div>
           </div>
@@ -115,7 +115,7 @@
             <div class="col">
               <mat-form-field  appearance="outline">
                   <mat-label>Montant TTC</mat-label>
-                  <input type="number" matInput formControlName ="montant_ttc"  readonly>
+                  <input type="number" matInput formControlName ="montantTtc"  readonly>
               </mat-form-field>
             </div>
           </div>
@@ -149,10 +149,10 @@
               <td mat-footer-cell *matFooterCellDef></td>
             </ng-container>
           
-            <!-- prix_unitaire Column -->
-            <ng-container matColumnDef="prix_unitaire">
+            <!-- prixUnitaire Column -->
+            <ng-container matColumnDef="prixUnitaire">
               <th mat-header-cell *matHeaderCellDef> Prix_unitaire </th>
-              <td mat-cell *matCellDef="let row"> {{row.prix_unitaire}} </td>
+              <td mat-cell *matCellDef="let row"> {{row.prixUnitaire}} </td>
               <td mat-footer-cell *matFooterCellDef> Totale</td>
             </ng-container>
     
@@ -164,24 +164,24 @@
             </ng-container>
     
             <!-- montant_HT Column -->
-            <ng-container matColumnDef="montant_ht">
+            <ng-container matColumnDef="montantHt">
               <th mat-header-cell *matHeaderCellDef> Montant HT </th>
-              <td mat-cell *matCellDef="let row"> {{row.montant_ht}}   </td>
-              <td mat-footer-cell *matFooterCellDef> {{totaleMontant_ht}} </td>
+              <td mat-cell *matCellDef="let row"> {{row.montantHt}}   </td>
+              <td mat-footer-cell *matFooterCellDef> {{totaleMontantHt}} </td>
             </ng-container>
     
             <!-- taux_TVA Column -->
-            <ng-container matColumnDef="taux_tva">
+            <ng-container matColumnDef="tauxTva">
               <th mat-header-cell *matHeaderCellDef> Taux TVA </th>
-              <td mat-cell *matCellDef="let row"> {{row.taux_tva}}  </td>
-              <td mat-footer-cell *matFooterCellDef> {{totaleTaux_tva}} </td>
+              <td mat-cell *matCellDef="let row"> {{row.tauxTva}}  </td>
+              <td mat-footer-cell *matFooterCellDef> {{totaleTauxTva}} </td>
             </ng-container>
     
-            <!-- montant_ttc Column -->
-            <ng-container matColumnDef="montant_ttc">
+            <!-- montantTtc Column -->
+            <ng-container matColumnDef="montantTtc">
               <th mat-header-cell *matHeaderCellDef> Montant TTC </th>
-              <td mat-cell *matCellDef="let row"> {{row.montant_ttc}}  </td>
-              <td mat-footer-cell *matFooterCellDef> {{totaleMontant_ttc}} </td>
+              <td mat-cell *matCellDef="let row"> {{row.montantTtc}}  </td>
+              <td mat-footer-cell *matFooterCellDef> {{totaleMontantTtc}} </td>
             </ng-container>
             <ng-container matColumnDef="actions">
               <th mat-header-cell *matHeaderCellDef> Actions </th>
