@@ -30,8 +30,8 @@ export class AddEditCategorieComponent implements OnInit {
     }
     else{
       this.content = "Edite";
-      this.categorie.id_cat = this.data.id_cat ;
-      this.categorie.nom_cat = this.data.nom_cat ;
+      this.categorie.idCat = this.data.idCat ;
+      this.categorie.nomCat = this.data.nomCat ;
       this.setFormValues();
     }
 
@@ -40,12 +40,12 @@ export class AddEditCategorieComponent implements OnInit {
 
   declareForm(){
     this.categorieForm = this._formBuilder.group({
-      nom_cat: ['',Validators.required]
+      nomCat: ['',Validators.required]
     });
   }
 
   setFormValues(){
-    this.categorieForm.controls['nom_cat'].setValue(this.categorie.nom_cat);
+    this.categorieForm.controls['nomCat'].setValue(this.categorie.nomCat);
   }
 
   onSubmit(){
@@ -59,7 +59,7 @@ export class AddEditCategorieComponent implements OnInit {
 
   AddCategorie(){
 
-    this.categorie.nom_cat = this.categorieForm.controls['nom_cat'].value;
+    this.categorie.nomCat = this.categorieForm.controls['nomCat'].value;
  
     this.categorieService.addCategorie(this.categorie).subscribe(data =>{
      this.dialogRef.close();
@@ -69,8 +69,8 @@ export class AddEditCategorieComponent implements OnInit {
 
   editCategorie(){
 
-   this.categorie.nom_cat = this.categorieForm.controls['nom_cat'].value;
-   this.categorieService.updateCategorie(this.categorie.id_cat, this.categorie).subscribe(data =>{
+   this.categorie.nomCat = this.categorieForm.controls['nomCat'].value;
+   this.categorieService.updateCategorie(this.categorie.idCat, this.categorie).subscribe(data =>{
     this.dialogRef.close();
    });
    

@@ -5,23 +5,23 @@ export class Client {
     nom:string;
     image:string;
     email:string;
-    tele_portable:string;
-    tele_fix:string;
+    telePortable:string;
+    teleFix:string;
     ville:string;
     adresse:string;
-    code_postale:string;
-    site_web:string;
+    codePostale:string;
+    siteWeb:string;
     ifi : string;
     ice: string;
     tp: string;
     cnss: string;
     rc: string;
-    data_de_transaction:Date;
+    dateTransaction:Date;
     bilan:number;
-    pv_bilan:number;
+    pvBilan:number;
     regime:string;
-    r_tva:number;
-    r_cnss:number;
+    rTva:number;
+    rCnss:number;
 
 
 }

@@ -26,7 +26,7 @@ export class ShowFournisseurComponent implements OnInit {
     this.fournisseurForm = this._formBuilder.group({
       
       nom: null,
-      site_web: null,
+      siteWeb: null,
       ifi : null,
       ice: null,
       tp: null,
@@ -34,10 +34,10 @@ export class ShowFournisseurComponent implements OnInit {
       rc: null,
       ville: null,
       adresse: null,
-      code_postale: null,
+      codePostale: null,
       email: null,
-      tele_portable: null,
-      tele_fix: null
+      telePortable: null,
+      teleFix: null
     });
   }
 
@@ -59,7 +59,7 @@ export class ShowFournisseurComponent implements OnInit {
 
     this.fournisseurForm.patchValue({
       nom: this.fornisseur.nom,
-      site_web: this.fornisseur.site_web,
+      siteWeb: this.fornisseur.siteWeb,
       ifi : this.fornisseur.ifi,
       ice: this.fornisseur.ice,
       tp: this.fornisseur.tp,
@@ -67,10 +67,10 @@ export class ShowFournisseurComponent implements OnInit {
       rc: this.fornisseur.rc,
       ville: this.fornisseur.ville,
       adresse: this.fornisseur.adresse,
-      code_postale: this.fornisseur.code_postale,
+      codePostale: this.fornisseur.codePostale,
       email: this.fornisseur.email,
-      tele_portable: this.fornisseur.tele_portable,
-      tele_fix: this.fornisseur.tele_fix
+      telePortable: this.fornisseur.telePortable,
+      teleFix: this.fornisseur.teleFix
     });
   }
 

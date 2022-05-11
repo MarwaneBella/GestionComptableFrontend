@@ -100,7 +100,7 @@ export class AddEditFournisseurComponent implements OnInit {
   declareForms(){
     this.infosGeneralFormGroup = this._formBuilder.group({
       nom: ['', Validators.required],
-      site_web: null,
+      siteWeb: null,
       ifi : null,
       ice: null,
       tp: null,
@@ -112,13 +112,13 @@ export class AddEditFournisseurComponent implements OnInit {
     this.adresseFormGroup = this._formBuilder.group({
       ville: null,
       adresse: null,
-      code_postale: null,
+      codePostale: null,
 
     });
     this.contactsFormGroup = this._formBuilder.group({
       email: null,
-      tele_portable: null,
-      tele_fix: null
+      telePortable: null,
+      teleFix: null
 
     });
 
@@ -151,7 +151,7 @@ export class AddEditFournisseurComponent implements OnInit {
     
     this.infosGeneralFormGroup.patchValue({
       nom: this.fournisseur.nom,
-      site_web: this.fournisseur.site_web,
+      siteWeb: this.fournisseur.siteWeb,
       ifi : this.fournisseur.ifi,
       ice: this.fournisseur.ice,
       tp: this.fournisseur.tp,
@@ -162,13 +162,13 @@ export class AddEditFournisseurComponent implements OnInit {
     this.adresseFormGroup.patchValue({
       ville: this.fournisseur.ville,
       adresse: this.fournisseur.adresse,
-      code_postale: this.fournisseur.code_postale,
+      codePostale: this.fournisseur.codePostale,
 
     });
     this.contactsFormGroup.patchValue({
       email: this.fournisseur.email,
-      tele_portable: this.fournisseur.tele_portable,
-      tele_fix: this.fournisseur.tele_fix
+      telePortable: this.fournisseur.telePortable,
+      teleFix: this.fournisseur.teleFix
 
     });
 

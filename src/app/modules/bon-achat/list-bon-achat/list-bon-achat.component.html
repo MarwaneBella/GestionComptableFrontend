@@ -15,27 +15,27 @@
     <table  mat-table [dataSource]="dataSource" matSort>
   
       <!-- ID Column -->
-      <ng-container matColumnDef="id_ba">
+      <ng-container matColumnDef="idBa">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Bon numéro </th>
-        <td mat-cell *matCellDef="let row">{{ formats.codeBon(row.id_ba, row.date_ba)}}</td>
+        <td mat-cell *matCellDef="let row">{{ formats.codeBon(row.idBa, row.dateBa)}}</td>
       </ng-container>
   
       <!-- Nom Column -->
-      <ng-container matColumnDef="nom_f">
+      <ng-container matColumnDef="nomF">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom Fournisseur </th>
         <td mat-cell *matCellDef="let row"> {{row.fournisseur.nom}} </td>
       </ng-container>
   
       <!-- Email Column -->
-      <ng-container matColumnDef="date_ba">
+      <ng-container matColumnDef="dateBa">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Date De Bon  </th>
-        <td mat-cell *matCellDef="let row"> {{row.date_ba}} </td>
+        <td mat-cell *matCellDef="let row"> {{row.dateBa}} </td>
       </ng-container>
   
       <!-- Tele Column -->
-      <ng-container matColumnDef="total_general">
+      <ng-container matColumnDef="totalGeneral">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Totale general </th>
-        <td mat-cell *matCellDef="let row"> {{row.total_general}} </td>
+        <td mat-cell *matCellDef="let row"> {{row.totalGeneral}} </td>
       </ng-container>
 
       <!-- Action column -->

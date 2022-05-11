@@ -34,18 +34,18 @@
                 <div class="col-6">
                   <mat-form-field appearance="outline">
                     <mat-label>Prix d'achat HT</mat-label>
-                    <input formControlName="prix_achat" matInput placeholder="Prix d'achat HT" type="number" [(ngModel)]="prix_achat" />
+                    <input formControlName="prixAchat" matInput placeholder="Prix d'achat HT" type="number" [(ngModel)]="prixAchat" />
                   </mat-form-field>
                   
                   <mat-form-field appearance="outline">
                     <mat-label>Prix de vente HT</mat-label>
-                    <input formControlName="prix_vente" matInput placeholder="Prix de vente HT" type="number" [(ngModel)]="prix_vente" (keyup)="calculPrix_revient()" />
+                    <input formControlName="prixVente" matInput placeholder="Prix de vente HT" type="number" [(ngModel)]="prixVente" (keyup)="calculprixRevient()" />
                   </mat-form-field>
                 </div>
                 <div class="col-6">
                   <mat-form-field appearance="outline">
                     <mat-label>Prix de revient HT</mat-label>
-                    <input formControlName="prix_revient" matInput placeholder="Prix de revient HT" type="number" [(ngModel)]="prix_revient" (keyup)="calculPrix_vente()" />
+                    <input formControlName="prixRevient" matInput placeholder="Prix de revient HT" type="number" [(ngModel)]="prixRevient" (keyup)="calculprixVente()" />
                   </mat-form-field>
                   <mat-form-field appearance="outline">
                     <mat-label>TVA (%)</mat-label>
@@ -82,7 +82,7 @@
                 <mat-form-field appearance="outline" #categorie>
     
                   <mat-select formControlName="categorie" placeholder="categorier de produit" >
-                    <mat-option *ngFor="let categorie of categories" [value]="categorie" >{{categorie.nom_cat}}</mat-option>
+                    <mat-option *ngFor="let categorie of categories" [value]="categorie" >{{categorie.nomCat}}</mat-option>
                   </mat-select>
                 </mat-form-field>
                 

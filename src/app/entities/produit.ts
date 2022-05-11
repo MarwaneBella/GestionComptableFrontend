@@ -14,10 +14,10 @@ export class Produit{
      poids                : number ;
      surface              : number ;
      volume               : number ;
-     prix_achat           : number ;
-     prix_vente           : number ;
-     prix_revient         : number ;
+     prixAchat           : number ;
+     prixVente           : number ;
+     prixRevient         : number ;
      tva                  : number ;
-     quantitie_disponible : number ;
+     quantitieDisponible : number ;
      categorie            : Categorie ;
 }

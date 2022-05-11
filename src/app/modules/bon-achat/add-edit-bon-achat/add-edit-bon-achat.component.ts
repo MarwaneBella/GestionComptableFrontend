@@ -105,7 +105,7 @@ export class AddEditBonAchatComponent implements OnInit {
   setProduit(){
     this.produit = this.formLigneBon.controls['produit'].value;
     this.formLigneBon.controls['tva'].setValue(this.produit.tva);
-    this.formLigneBon.controls['prix_unitaire'].setValue(this.produit.prix_achat);
+    this.formLigneBon.controls['prix_unitaire'].setValue(this.produit.prixAchat);
     this.calculateMontants();
   }
 

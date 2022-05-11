@@ -29,7 +29,7 @@ export class ShowClientComponent implements OnInit {
     this.clientForm = this._formBuilder.group({
       
       nom: null,
-      site_web: null,
+      siteWeb: null,
       ifi : null,
       ice: null,
       tp: null,
@@ -37,15 +37,15 @@ export class ShowClientComponent implements OnInit {
       rc: null,
       ville: null,
       adresse: null,
-      code_postale: null,
+      codePostale: null,
       email: null,
-      tele_portable: null,
-      tele_fix: null,
+      telePortable: null,
+      teleFix: null,
       bilan: null,
-      pv_bilan: null,
+      pvBilan: null,
       regime: null,
-      r_tva: null,
-      r_cnss: null
+      rTva: null,
+      rCnss: null
     });
   }
 
@@ -67,7 +67,7 @@ export class ShowClientComponent implements OnInit {
 
     this.clientForm.patchValue({
       nom: this.client.nom,
-      site_web: this.client.site_web,
+      siteWeb: this.client.siteWeb,
       ifi : this.client.ifi,
       ice: this.client.ice,
       tp: this.client.tp,
@@ -75,15 +75,15 @@ export class ShowClientComponent implements OnInit {
       rc: this.client.rc,
       ville: this.client.ville,
       adresse: this.client.adresse,
-      code_postale: this.client.code_postale,
+      codePostale: this.client.codePostale,
       email: this.client.email,
-      tele_portable: this.client.tele_portable,
-      tele_fix: this.client.tele_fix,
+      telePortable: this.client.telePortable,
+      teleFix: this.client.teleFix,
       bilan: this.client.bilan,
-      pv_bilan: this.client.pv_bilan,
+      pvBilan: this.client.pvBilan,
       regime: this.client.regime,
-      r_tva: this.client.r_tva,
-      r_cnss: this.client.r_cnss
+      rTva: this.client.rTva,
+      rCnss: this.client.rCnss
     });
   }
 

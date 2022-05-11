@@ -14,7 +14,7 @@ import { ShowFournisseurComponent } from '../show-fournisseur/show-fournisseur.c
   styleUrls: ['./list-fournisseur.component.css']
 })
 export class ListFournisseurComponent implements AfterViewInit {
-  displayedColumns: string[] = ['id', 'nom', 'email', 'tele_portable', 'actions'];
+  displayedColumns: string[] = ['id', 'nom', 'email', 'telePortable', 'actions'];
   fournisseurs : Fournisseur[] ;
   fournisseur : Fournisseur = new Fournisseur();
   formats : Formats = new Formats();

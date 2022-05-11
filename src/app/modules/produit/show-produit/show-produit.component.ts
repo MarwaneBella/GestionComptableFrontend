@@ -31,9 +31,9 @@ export class ShowProduitComponent implements OnInit {
       longueur:null,
       largeur :null,
       hauteur :null,
-      prix_achat :null,
-      prix_vente :null,
-      prix_revient:null
+      prixAchat :null,
+      prixVente :null,
+      prixRevient:null
   });
 
   if(this.reference){
@@ -50,7 +50,7 @@ export class ShowProduitComponent implements OnInit {
     this.productForm.controls['tva'].setValue(this.produit.tva) ;
     this.productForm.controls['marque'].setValue(this.produit.marque) ;
     this.productForm.controls['description'].setValue(this.produit.description) ;
-    this.productForm.controls['categorier'].setValue(this.produit.categorie.nom_cat) ;
+    this.productForm.controls['categorier'].setValue(this.produit.categorie.nomCat) ;
     this.productForm.controls['type'].setValue(this.produit.type) ;
     this.productForm.controls['poids'].setValue(this.produit.poids) ;
     this.productForm.controls['volume'].setValue(this.produit.volume) ;
@@ -58,9 +58,9 @@ export class ShowProduitComponent implements OnInit {
     this.productForm.controls['longueur'].setValue(this.produit.longueur) ;
     this.productForm.controls['largeur'].setValue(this.produit.largeur) ;
     this.productForm.controls['hauteur'].setValue(this.produit.hauteur) ;
-    this.productForm.controls['prix_achat'].setValue(this.produit.prix_achat)
-    this.productForm.controls['prix_vente'].setValue(this.produit.prix_vente) ;
-    this.productForm.controls['prix_revient'].setValue(this.produit.prix_revient) ;
+    this.productForm.controls['prixAchat'].setValue(this.produit.prixAchat)
+    this.productForm.controls['prixVente'].setValue(this.produit.prixVente) ;
+    this.productForm.controls['prixRevient'].setValue(this.produit.prixRevient) ;
 
     if(this.produit.image != null){
        this.produitService.getImageById().subscribe(data => {

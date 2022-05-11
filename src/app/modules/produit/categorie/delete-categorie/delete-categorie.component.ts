@@ -19,13 +19,13 @@ export class DeleteCategorieComponent implements OnInit {
 
   ngOnInit(): void {
    if(this.data){
-     this.categorie.id_cat = this.data.id_cat ;
-     this.categorie.nom_cat = this.data.nom_cat ;
+     this.categorie.idCat = this.data.idCat ;
+     this.categorie.nomCat = this.data.nomCat ;
    }
   }
 
   deleteCategorieById(){
-    this.categorieService.deleteCategorieById(this.categorie.id_cat).subscribe(data => {
+    this.categorieService.deleteCategorieById(this.categorie.idCat).subscribe(data => {
       this.dialogRef.close();
     })
   }

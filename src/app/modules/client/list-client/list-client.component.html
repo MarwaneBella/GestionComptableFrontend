@@ -40,9 +40,9 @@
       </ng-container>
   
       <!-- Tele Column -->
-      <ng-container matColumnDef="tele_portable">
+      <ng-container matColumnDef="telePortable">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Numéro De Téléphone </th>
-        <td mat-cell *matCellDef="let row"> {{row.tele_portable}} </td>
+        <td mat-cell *matCellDef="let row"> {{row.telePortable}} </td>
       </ng-container>
 
       <!-- Action column -->
@@ -70,31 +70,3 @@
   
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" ></mat-paginator>
   </div>
-
-      <div  id="htmlData">
-        <div></div>
-      <div class="div"> 
-       <h1 class="text-center ">LIST CLIENTS</h1>
-      </div>
-      <table  class="table table-secondary table-striped ">
-        <thead>
-          <tr >
-            <th scope="col">Code Client</th>
-            <th scope="col">Nom</th>
-            <th scope="col">Email</th>
-            <th scope="col">Phone</th>
-          </tr>
-        </thead>
-        <tbody>
-           <tr *ngFor="let client of clients">
-            <th>{{formats.codeClient(client.id)}}</th>
-            <td>{{client.nom}}</td>
-            <td>{{client.email}}</td>
-            <td>{{client.tele_portable}}</td>
-          </tr>
-        </tbody>
-       
-      </table>
-   
-    </div>
- 
