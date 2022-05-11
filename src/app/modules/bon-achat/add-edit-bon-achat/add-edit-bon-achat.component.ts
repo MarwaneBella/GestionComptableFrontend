@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatCalendarCellClassFunction } from '@angular/material/datepicker';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { BonAchat } from 'src/app/entities/bon-achat';
 import { Fournisseur } from 'src/app/entities/fournisseur';
+import { LignBA } from 'src/app/entities/lign-ba';
 import { Produit } from 'src/app/entities/produit';
 import { Calculate } from 'src/app/Facilities/calculate';
 import { FournisseurService } from '../../fournisseur/fournisseur.service';
@@ -15,9 +17,9 @@ export interface DataList {
   prixUnitaire: number;
   quantite: number;
   montantHt : number;
-  tauxTva:number;
+  montantTva:number;
   montantTtc:number;
-}
+}  
 
 @Component({
   selector: 'app-add-edit-bon-achat',
@@ -28,7 +30,7 @@ export class AddEditBonAchatComponent implements OnInit {
 
   formInfosBon: FormGroup;
   formLigneBon: FormGroup;
-  displayedColumns: string[] = ['reference','designation', 'prixUnitaire','quantite', 'montantHt', 'tauxTva','montantTtc','actions'];
+  displayedColumns: string[] = ['reference','designation', 'prixUnitaire','quantite', 'montantHt', 'montantTva','montantTtc','actions'];
   dataList: Array<DataList> = [] ;
   fournisseurs : Fournisseur[] ;
   produits : Produit[];
@@ -37,16 +39,18 @@ export class AddEditBonAchatComponent implements OnInit {
   bonAchat : BonAchat = new  BonAchat();
   calculate: Calculate = new Calculate();
   dataSource : MatTableDataSource<DataList>;
+  lignBA : LignBA [];
 
   totaleQuantite: number;
   totaleMontantHt: number;
   totaleTauxTva: number;
   totaleMontantTtc: number;
 
-  constructor(private _formBuilder: FormBuilder, private bonAchatService : BonAchatService, private fournisseurService :FournisseurService, private produitService : ProduitService) { }
+  constructor(private _formBuilder: FormBuilder, private bonAchatService : BonAchatService, private fournisseurService :FournisseurService, private produitService : ProduitService, private router: Router) { }
 
   ngOnInit(): void {
     this.declareFormInfosBon();
+    this.setNextBonAchat();
     this.declareFormLigneBon();
     this.setControllers();
   }
@@ -56,8 +60,8 @@ export class AddEditBonAchatComponent implements OnInit {
   declareFormInfosBon() {
     this.formInfosBon = this._formBuilder.group({
       fournisseur:['', Validators.required],
-      id:['', Validators.required],
-      // bon_num : ['', Validators.required],
+      codeF:['', Validators.required],
+      bonANum : ['', Validators.required],
       facBonNum:null,
       dateBa: [new Date(), Validators.required]
       });
@@ -71,21 +75,28 @@ export class AddEditBonAchatComponent implements OnInit {
       tva: ['', Validators.required],
       prixUnitaire : ['', Validators.required],
       montantHt : null,
-      tauxTva:null,
+      montantTva:null,
       montantTtc : null,
     });
   }
 
   
   setControllers() {
+
     this.fournisseurService.getAllFournisseurs().subscribe( data =>{
       this.fournisseurs = data;
     });
+
     this.produitService.getProduits().subscribe( data =>{
       this.produits = data;
     });
   }
 
+  setNextBonAchat(){
+    this.bonAchatService.getNextBonANum(this.formInfosBon.controls['dateBa'].value).subscribe(data =>{
+      this.formInfosBon.controls['bonANum'].setValue(data);
+   });
+  }
   
 
   dateClass: MatCalendarCellClassFunction<Date> = (cellDate, view) => {
@@ -101,7 +112,7 @@ export class AddEditBonAchatComponent implements OnInit {
 
   setFornisseur(){
     this.fournisseur = this.formInfosBon.controls['fournisseur'].value;
-    this.formInfosBon.controls['id'].setValue(this.fournisseur.id);
+    this.formInfosBon.controls['codeF'].setValue(this.fournisseur.codeF);
   }
   
   setProduit(){
@@ -115,7 +126,7 @@ export class AddEditBonAchatComponent implements OnInit {
     this.calculate.calculateMontants(this.formLigneBon.controls['prixUnitaire'].value,this.formLigneBon.controls['quantite'].value,this.formLigneBon.controls['tva'].value);
     this.formLigneBon.patchValue({
       montantHt : this.calculate.montantHt,
-      tauxTva: this.calculate.tauxTva,
+      montantTva: this.calculate.montantTva,
       montantTtc : this.calculate.montantTtc
     });
   }
@@ -147,19 +158,21 @@ export class AddEditBonAchatComponent implements OnInit {
 
       this.totaleQuantite +=  currentValue.quantite;
       this.totaleMontantHt += currentValue.montantHt;
-      this.totaleTauxTva += currentValue.tauxTva;
+      this.totaleTauxTva += currentValue.montantTva;
       this.totaleMontantTtc += currentValue.montantTtc;
 
     });
 
   }
 
-  test(){
+  onEnregistre(){
 
     this.bonAchat = this.formInfosBon.value;
     this.bonAchatService.addBonAchat(this.bonAchat).subscribe(data =>{
 
+      this.router.navigateByUrl('bonAchat');
     });
+
   }
 
 

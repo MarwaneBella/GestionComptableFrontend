@@ -1,4 +1,5 @@
 import { Fournisseur } from "./fournisseur";
+import { LignBA } from "./lign-ba";
 
 export class BonAchat{
     
@@ -8,5 +9,6 @@ export class BonAchat{
     facBonNum          : string;
     totalGeneral       : number;
     fournisseur        : Fournisseur;
+    lignBA             : LignBA[];
 
 }

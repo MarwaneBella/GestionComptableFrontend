@@ -20,8 +20,7 @@
             "allowedCommonJsDependencies": [
               "core-js",
               "raf",
-              "xlsx",
-              "@babel/runtime"
+              "jspdf-autotable"
             ],
             "outputPath": "dist/gestion-comptable-frontend",
             "index": "src/index.html",

@@ -6,7 +6,6 @@ export class LignBA{
     quantite : number;
     montantTtc : number;
     prixUnitaire : number;
-
     bonAchat: BonAchat;
     produit: Produit;
      
