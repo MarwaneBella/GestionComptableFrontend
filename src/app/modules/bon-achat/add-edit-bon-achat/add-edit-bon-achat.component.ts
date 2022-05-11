@@ -8,6 +8,7 @@ import { Calculate } from 'src/app/Facilities/calculate';
 import { FournisseurService } from '../../fournisseur/fournisseur.service';
 import { ProduitService } from '../../produit/produit.service';
 import { BonAchatService } from '../bon-achat.service';
+
 export interface DataList {
   produit: Produit;
   prix_unitaire: number;
@@ -35,6 +36,11 @@ export class AddEditBonAchatComponent implements OnInit {
   calculate: Calculate = new Calculate();
   dataSource : MatTableDataSource<DataList>
 
+  totaleQuantite: number;
+  totaleMontant_ht: number;
+  totaleTaux_tva: number;
+  totaleMontant_ttc: number;
+
   constructor(private _formBuilder: FormBuilder, private bonAchatService : BonAchatService, private fournisseurService :FournisseurService, private produitService : ProduitService) { }
 
   ngOnInit(): void {
@@ -58,10 +64,10 @@ export class AddEditBonAchatComponent implements OnInit {
 
   declareFormLigneBon(){
     this.formLigneBon = this._formBuilder.group({
-      produit: null,
-      quantite: ['1', Validators.required],
-      tva: null,
-      prix_unitaire : null,
+      produit: ['', Validators.required],
+      quantite: [1, Validators.required],
+      tva: ['', Validators.required],
+      prix_unitaire : ['', Validators.required],
       montant_ht : null,
       taux_tva:null,
       montant_ttc : null,
@@ -113,16 +119,39 @@ export class AddEditBonAchatComponent implements OnInit {
   }
 
   addLigne(){
-    console.log(this.formLigneBon.value);
 
     this.dataList.push(this.formLigneBon.value);
-    
-    console.log(this.dataList);
     this.dataSource = new MatTableDataSource(this.dataList);
-
+    this.totale();
     this.declareFormLigneBon();
     
-    
   }
+
+  deleteLigne(index: number){
+    
+    this.dataList.splice(index,1);
+    this.dataSource = new MatTableDataSource(this.dataList);
+    this.totale();
+  }
+
+  totale(){
+     
+    this.totaleQuantite = 0;
+    this.totaleMontant_ht = 0;
+    this.totaleTaux_tva = 0;
+    this.totaleMontant_ttc = 0;
+
+    this.dataList.forEach((currentValue, index) => {
+
+      this.totaleQuantite +=  currentValue.quantite;
+      this.totaleMontant_ht += currentValue.montant_ht;
+      this.totaleTaux_tva += currentValue.taux_tva;
+      this.totaleMontant_ttc += currentValue.montant_ttc;
+
+    });
+
+  }
+
+
 
 }
