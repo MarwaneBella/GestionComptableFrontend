@@ -4,8 +4,9 @@ export class BonAchat{
     
     idBa               : number;
     dateBa             : Date;
-    numFac             : string ;
+    bonANum            : string;
+    facBonNum          : string;
     totalGeneral       : number;
-    fournisseur         : Fournisseur;
+    fournisseur        : Fournisseur;
 
 }

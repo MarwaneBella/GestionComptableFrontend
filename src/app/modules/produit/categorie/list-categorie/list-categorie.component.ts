@@ -37,7 +37,7 @@ export class ListCategorieComponent implements AfterViewInit,OnInit {
 
   declareForm(){
     this.categorieForm = this._formBuilder.group({
-      nom_cat: ['',Validators.required]
+      nomCat: ['',Validators.required]
     });
   }
 
