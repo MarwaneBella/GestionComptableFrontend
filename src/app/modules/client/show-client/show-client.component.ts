@@ -27,7 +27,7 @@ export class ShowClientComponent implements OnInit {
 
   declareForm(){
     this.clientForm = this._formBuilder.group({
-      
+      codeC:null,
       nom: null,
       siteWeb: null,
       ifi : null,
@@ -51,7 +51,6 @@ export class ShowClientComponent implements OnInit {
 
   getClientById(){
     this.clientService.getClientById(this.id).subscribe(data => {
-      console.log(data);
       this.client = data;
       this.fillForm();
   
@@ -66,6 +65,7 @@ export class ShowClientComponent implements OnInit {
   fillForm(){
 
     this.clientForm.patchValue({
+      codeC: this.client.codeC,
       nom: this.client.nom,
       siteWeb: this.client.siteWeb,
       ifi : this.client.ifi,

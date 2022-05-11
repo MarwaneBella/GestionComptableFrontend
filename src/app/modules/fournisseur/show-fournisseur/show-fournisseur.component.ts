@@ -24,7 +24,7 @@ export class ShowFournisseurComponent implements OnInit {
 
   declareForm(){
     this.fournisseurForm = this._formBuilder.group({
-      
+      codeF: null,
       nom: null,
       siteWeb: null,
       ifi : null,
@@ -58,6 +58,7 @@ export class ShowFournisseurComponent implements OnInit {
   fillForm(){
 
     this.fournisseurForm.patchValue({
+      codeF: this.fornisseur.codeF,
       nom: this.fornisseur.nom,
       siteWeb: this.fornisseur.siteWeb,
       ifi : this.fornisseur.ifi,

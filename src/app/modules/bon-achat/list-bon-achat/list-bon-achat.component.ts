@@ -5,7 +5,6 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatDialog} from '@angular/material/dialog';
 import { BonAchat } from 'src/app/entities/bon-achat';
 import { BonAchatService } from '../bon-achat.service';
-import { Formats } from 'src/app/entities/formats';
 import { DeleteBonAchatComponent } from '../delete-bon-achat/delete-bon-achat.component';
 
 @Component({
@@ -19,8 +18,6 @@ export class ListBonAchatComponent  implements AfterViewInit {
   dataSource: MatTableDataSource<BonAchat>;
   listBonAchat: BonAchat[];
   bonAchat : BonAchat = new BonAchat();
-  formats : Formats = new Formats();
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   

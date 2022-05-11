@@ -2,6 +2,7 @@
 export class Client {
     
     id:number;
+    codeC:string;
     nom:string;
     image:string;
     email:string;
