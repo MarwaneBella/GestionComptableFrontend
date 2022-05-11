@@ -114,7 +114,9 @@ export class ListClientComponent implements AfterViewInit{
     }
     
     const doc = new jsPDF()
-    doc.text('LIST CLIENTS',10,10,{align:'center'})
+    doc.setTextColor('#FF4C29')
+    doc.setFontSize(30);
+    doc.text('LIST CLIENTS',110,10,{align:'center'})
     
     
 
@@ -129,7 +131,8 @@ export class ListClientComponent implements AfterViewInit{
       margin: { top: 20 }   
     })
     
-    doc.save('clients.pdf')
+    //doc.save('clients.pdf')
+    window.open(URL.createObjectURL(doc.output("blob")))
   }
 }
 
