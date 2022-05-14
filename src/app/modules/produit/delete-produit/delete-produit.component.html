@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>Delete Produit</h1>
+<div mat-dialog-content>
+  Are you sure you want to delete this Produit  :{{reference}}
+</div>
+<div mat-dialog-actions >
+    <div class="ms-auto">
+  <button class="btn btn-danger " mat-dialog-close>Fermer</button>
+  <button class="btn btn-primary mx-2" (click)="deleteProduitByRef()" >Delete</button>
+    </div>
+</div>

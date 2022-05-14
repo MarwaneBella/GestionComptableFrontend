@@ -19,9 +19,7 @@ export class AddEditProduitComponent implements OnInit {
   produit :Produit = new Produit();
   categories :Categorie [] ;
   
-  prixAchat   :number 
-  prixVente   :number
-  prixRevient :number
+
 
   isAddMode: boolean;
   ref :string ;
@@ -71,6 +69,8 @@ export class AddEditProduitComponent implements OnInit {
   async getProduitByRef(){
     this.produitService.getProduitByRef(this.ref).subscribe(data => {
       this.produit =data;
+    
+
       this.fillFormGroup();
 
       if(this.produit.image != null){
@@ -86,8 +86,8 @@ export class AddEditProduitComponent implements OnInit {
 
       reference   : this.produit.reference,
       designation : this.produit.designation,
-      tva         : this.produit.tva,
-      categorie  : this.produit.categorie.nomCat,
+      tva         : this.produit.tva.toString(),
+      categorie  : this.produit.categorie,
       marque      : this.produit.marque  ,
       description  : this.produit.description  ,
       type         : this.produit.type  ,
@@ -99,7 +99,7 @@ export class AddEditProduitComponent implements OnInit {
       hauteur  : this.produit.hauteur  ,
       prixAchat  : this.produit.prixAchat  ,
       prixVente  : this.produit.prixVente  ,
-      prixRevient  : this.produit.prixRevient  ,
+      prixRevient  : this.produit.prixRevient  
     })
   }
 onSelectFile(event: any){
@@ -170,16 +170,17 @@ updateProduit(){
 
  // calcule   prixVente or prixRevient :
  calculprixRevient = () =>{
-   if(this.prixVente < this.prixAchat || this.prixVente == 0){
-    this.productForm.get('prixRevient')?.disable()
-    this.productForm.get('prixRevient')?.reset()
+   if(this.produit.prixVente < this.produit.prixAchat || this.produit.prixVente == 0){
+    //this.productForm.get('prixRevient')?.disable()
+    //this.productForm.get('prixRevient')?.reset()
    }else{
-     this.prixRevient = this.prixVente - this.prixAchat ;
-   }
+     this.produit.prixRevient = this.produit.prixVente - this.produit.prixAchat ;
+     this.productForm.controls['prixRevient'].setValue(this.produit.prixRevient)
+    }
    
  } 
 
- calculprixVente = () => this.prixVente = this.prixRevient + this.prixAchat ;
+ calculprixVente = () => this.produit.prixVente = this.produit.prixRevient + this.produit.prixAchat ;
  // get All Categories :
 
  getAllCategories(){
@@ -195,6 +196,9 @@ updateProduit(){
     this.getAllCategories() ;
   });
  }
+ compareCategoryObjects(object1: any, object2: any) {
+  return object1 && object2 && object1.idCat == object2.idCat;
+}
 
 
  

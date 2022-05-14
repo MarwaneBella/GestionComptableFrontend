@@ -12,6 +12,7 @@ import { MaterialModule } from 'src/app/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DeleteProduitComponent } from './delete-produit/delete-produit.component';
 
 
 
@@ -22,7 +23,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ProduitComponent,
     ListProduitComponent,
     ShowProduitComponent,
-    AddEditProduitComponent
+    AddEditProduitComponent,
+    DeleteProduitComponent
   ],
   imports: [
     CommonModule,

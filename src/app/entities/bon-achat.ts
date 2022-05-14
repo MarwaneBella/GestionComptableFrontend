@@ -9,6 +9,6 @@ export class BonAchat{
     facBonNum          : string;
     totalGeneral       : number;
     fournisseur        : Fournisseur;
-    lignBA             : LignBA[];
+    listLignBA         : LignBA[];
 
 }

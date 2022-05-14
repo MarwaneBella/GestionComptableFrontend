@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Fournisseur } from 'src/app/entities/fournisseur';
+import { DeleteFournisseurComponent } from '../delete-fournisseur/delete-fournisseur.component';
 import { FournisseurService } from '../fournisseur.service';
 import { ShowFournisseurComponent } from '../show-fournisseur/show-fournisseur.component';
 
@@ -57,9 +58,12 @@ export class ListFournisseurComponent implements AfterViewInit {
   }
 
   openDialog(row :any) {
-    
+    this.dialog.open(DeleteFournisseurComponent,{
+      width:'30%',
+      data:row,
+    }).afterClosed().subscribe(val =>{
+      this.getFournisseurs() ;
+    });
   }
-
-
-
 }
+

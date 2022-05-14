@@ -58,11 +58,28 @@
         <div class="card-body mx-5">
           <div class="row">
             <div class="col ">
+              
+
+              <!--<mat-form-field>
+                <mat-select formControlName="produit" placeholder="Bank" #singleSelect (ngModelChange)="setProduit()">
+                  <mat-option>
+                    <ngx-mat-select-search [formControl]="bankFilterCtrl"></ngx-mat-select-search>
+                  </mat-option>
+            
+                  <mat-option *ngFor="let produit of filteredBanks | async" [value]="produit">
+                    {{produit.designation}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>-->
+
+                <!---->
                 <mat-form-field  appearance="outline" >
                     <mat-select  placeholder="Select produit" formControlName ="produit" (ngModelChange)="setProduit()">
                         <mat-option *ngFor="let produit of produits" [value]="produit" >{{produit.reference+" -- "+produit.designation }}</mat-option> 
                     </mat-select>
                 </mat-form-field>
+                
+              
             </div>
 
             <div class="col">

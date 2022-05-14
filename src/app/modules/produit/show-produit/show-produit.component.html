@@ -1,6 +1,9 @@
 
 <div class=" bg-white" >
-<form [formGroup]="productForm" >
+  <div  class="close">
+    <button  type="reset" class="btn btn-outline-danger" mat-dialog-close><i class="fa fa-times" aria-hidden="true"></i></button>
+  </div>
+ <form [formGroup]="productForm" >
   <div class="row">
     <div class="col-4 " >
       <div class="d-flex align-items-center flex-column ">
@@ -162,8 +165,5 @@
   
   <!--                 -->
 
-  <div fxLayoutAlign="flex-end" class="mt-3">
-    <button  type="reset" class="btn btn-outline-danger me-3"><i class="fa fa-arrow-left me-2" aria-hidden="true"></i>Annuler</button>
-  </div>
-</form>
+ </form>
 </div>

@@ -4,6 +4,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Produit } from 'src/app/entities/produit';
+import { DeleteProduitComponent } from '../delete-produit/delete-produit.component';
+
 import { ProduitService } from '../produit.service';
 import { ShowProduitComponent } from '../show-produit/show-produit.component';
 
@@ -14,7 +16,7 @@ import { ShowProduitComponent } from '../show-produit/show-produit.component';
 })
 export class ListProduitComponent implements AfterViewInit {
 
-  displayedColumns: string[] =['reference','nom','prix','quantitieDisponible','actions']
+  displayedColumns: string[] =['reference','nom','prixVente','quantitieDisponible','actions']
   produits : Produit[];
   produit : Produit = new Produit();
 
@@ -65,7 +67,7 @@ export class ListProduitComponent implements AfterViewInit {
   }
   
   openDialogDelete(row :any){
-    this.dialog.open(DeleteDialog,{
+    this.dialog.open(DeleteProduitComponent,{
       width:'30%',
       data:row
     }).afterClosed().subscribe(val=>{
@@ -74,32 +76,4 @@ export class ListProduitComponent implements AfterViewInit {
   }
 
 }
-@Component({
-  selector: 'dialog-delete',
-  templateUrl: 'dialog-delete.html'
 
-})
-export class DeleteDialog implements OnInit {
-  designation :string
-  reference :string ;
-  constructor(private produitService:ProduitService,
-    @Inject(MAT_DIALOG_DATA) public editdata :any ,
-   private dialogRef : MatDialogRef<DeleteDialog>
-  )
-  {
-    
-  }
-  ngOnInit(): void {
-   if(this.editdata){
-    this.reference = this.editdata.reference
-    this.designation =this.editdata.designation
-   }
-  }
-  deleteProduitByRef(){
-    this.produitService.deleteProduitByRef(this.reference).subscribe(data => {
-      this.dialogRef.close()
-    })
-  }
-
-
-}

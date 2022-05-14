@@ -11,6 +11,7 @@ import { MaterialModule } from 'src/app/material.module';
 import { DeleteBonAchatComponent } from './delete-bon-achat/delete-bon-achat.component';
 import { AddEditBonAchatComponent } from './add-edit-bon-achat/add-edit-bon-achat.component';
 import { ShowBonAchatComponent } from './show-bon-achat/show-bon-achat.component';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { ShowBonAchatComponent } from './show-bon-achat/show-bon-achat.component
     MaterialModule,
     FlexLayoutModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxMatSelectSearchModule
   ]
 })
 export class BonAchatModule { }

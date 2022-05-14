@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatCalendarCellClassFunction } from '@angular/material/datepicker';
+import { MatSelect } from '@angular/material/select';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { map, Observable, ReplaySubject, startWith, Subject, take, takeUntil } from 'rxjs';
 import { BonAchat } from 'src/app/entities/bon-achat';
 import { Fournisseur } from 'src/app/entities/fournisseur';
 import { LignBA } from 'src/app/entities/lign-ba';
@@ -19,6 +21,7 @@ export interface DataList {
   montantHt : number;
   montantTva:number;
   montantTtc:number;
+
 }  
 
 @Component({
@@ -46,14 +49,26 @@ export class AddEditBonAchatComponent implements OnInit {
   totaleTauxTva: number;
   totaleMontantTtc: number;
 
-  constructor(private _formBuilder: FormBuilder, private bonAchatService : BonAchatService, private fournisseurService :FournisseurService, private produitService : ProduitService, private router: Router) { }
+  constructor(private _formBuilder: FormBuilder, private bonAchatService : BonAchatService, private fournisseurService :FournisseurService, private produitService : ProduitService, private router: Router) {
+    
+  }
+  
 
   ngOnInit(): void {
     this.declareFormInfosBon();
     this.setNextBonAchat();
     this.declareFormLigneBon();
     this.setControllers();
+
   }
+
+
+
+
+  
+
+  
+
   
   
 
@@ -167,7 +182,16 @@ export class AddEditBonAchatComponent implements OnInit {
 
   onEnregistre(){
 
+
     this.bonAchat = this.formInfosBon.value;
+    this.bonAchat.listLignBA  = this.dataList;
+
+    /*this.dataList.forEach((currentValue, index) => {
+      
+      this.bonAchat.listLignBA.push({quantite: currentValue.quantite, montantTtc: currentValue.montantTtc, prixUnitaire: currentValue.prixUnitaire, produit: currentValue.produit})
+    });*/
+    console.log(this.bonAchat);
+
     this.bonAchatService.addBonAchat(this.bonAchat).subscribe(data =>{
 
       this.router.navigateByUrl('bonAchat');

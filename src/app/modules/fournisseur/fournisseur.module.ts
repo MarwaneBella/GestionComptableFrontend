@@ -9,6 +9,7 @@ import { FournisseurComponent } from './fournisseur.component';
 import { AddEditFournisseurComponent } from './add-edit-fournisseur/add-edit-fournisseur.component';
 import { ListFournisseurComponent } from './list-fournisseur/list-fournisseur.component';
 import { ShowFournisseurComponent } from './show-fournisseur/show-fournisseur.component';
+import { DeleteFournisseurComponent } from './delete-fournisseur/delete-fournisseur.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { ShowFournisseurComponent } from './show-fournisseur/show-fournisseur.co
     FournisseurComponent,
     AddEditFournisseurComponent,
     ListFournisseurComponent,
-    ShowFournisseurComponent
+    ShowFournisseurComponent,
+    DeleteFournisseurComponent
   ],
   imports: [
     CommonModule,

@@ -28,6 +28,7 @@
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.5.23",
     "material-icons": "^1.10.9",
+    "ngx-mat-select-search": "^4.1.1",
     "ngx-print": "^1.2.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",

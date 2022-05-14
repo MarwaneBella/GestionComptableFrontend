@@ -11,6 +11,7 @@ import jsPDF from 'jspdf'
 //import * as autoTable from 'jspdf-autotable';
 import autoTable from 'jspdf-autotable'; 
 import 'jspdf-autotable';
+import { DeleteClientComponent } from '../delete-client/delete-client.component';
 @Component({
   selector: 'app-list-client',
   templateUrl: './list-client.component.html',
@@ -72,7 +73,7 @@ export class ListClientComponent implements AfterViewInit{
   }
 
   openDialog(row :any) {
-    this.dialog.open(DeleteDialog,{
+    this.dialog.open(DeleteClientComponent,{
       width:'30%',
       data:row,
     }).afterClosed().subscribe(val =>{
@@ -138,36 +139,4 @@ export class ListClientComponent implements AfterViewInit{
   }
 }
 
-@Component({
-  selector: 'dialog-delete',
-  templateUrl: 'dialog-delete.html'
-
-})
-
-export class DeleteDialog implements OnInit {
-  namClient : string;
-  ID : number;
-  constructor(private clientService:ClientService,
-    @Inject(MAT_DIALOG_DATA) public editdata :any ,
-   private dialogRef : MatDialogRef<DeleteDialog>
-  ){
-    
-  }
-
-  ngOnInit(): void {
-   if(this.editdata){
-     this.namClient = this.editdata.nom ;
-     this.ID= this.editdata.id ;
-   }
-  }
-
-  deleteClientById(){
-    this.clientService.deleteClientById(this.ID).subscribe(data => {
-      this.dialogRef.close();
-    })
-  }
- 
- 
-    
-}
 

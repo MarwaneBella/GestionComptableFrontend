@@ -13,3 +13,11 @@ mat-form-field{
     margin-top:5%;
     margin-bottom:5%;
 }
+.close{
+    margin-top: -20px;
+    margin-left: 98.7%;
+    margin-bottom: 20px;
+}
+.close button{
+    border-radius: 50%;
+}

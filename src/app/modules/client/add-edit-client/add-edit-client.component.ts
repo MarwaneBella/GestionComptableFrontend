@@ -257,7 +257,8 @@ export class AddEditClientComponent implements OnInit {
         const uploadImageData = new FormData();
         uploadImageData.append('file', this.selectedImage);
         this.clientService.putImage(uploadImageData).subscribe( (data: any)=> {
- 
+
+          
         });
         
       }
