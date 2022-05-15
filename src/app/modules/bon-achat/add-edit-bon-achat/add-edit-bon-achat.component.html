@@ -72,12 +72,24 @@
                 </mat-select>
               </mat-form-field>-->
 
-                <!---->
+              <mat-form-field class="example-full-width" appearance="outline">
+                <input matInput
+                       [matAutocomplete]="auto"
+                       placeholder="Select produit"
+                       formControlName="produit" (ngModelChange)="setProduit()">
+                <mat-autocomplete #auto="matAutocomplete" [displayWith]="getOptionText">
+                  <mat-option *ngFor="let p of filteredProduits  | async" [value]="p">
+                    {{p.reference+" -- "+p.designation }}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+
+                <!--
                 <mat-form-field  appearance="outline" >
                     <mat-select  placeholder="Select produit" formControlName ="produit" (ngModelChange)="setProduit()">
                         <mat-option *ngFor="let produit of produits" [value]="produit" >{{produit.reference+" -- "+produit.designation }}</mat-option> 
                     </mat-select>
-                </mat-form-field>
+                </mat-form-field>-->
                 
               
             </div>

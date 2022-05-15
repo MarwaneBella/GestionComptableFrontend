@@ -272,9 +272,10 @@ export class AddEditClientComponent implements OnInit {
 
 
     editClient(){
-    
+    let codeC = this.client.codeC;
+
     this.client = {...this.infosGeneralFormGroup.value , ...this.adresseFormGroup.value, ...this.contactsFormGroup.value, ...this.honorairesFormGroup.value};
-    
+    this.client.codeC = codeC;
 
     this.clientService.updateClient(this.id,this.client).subscribe( (data: any)=> {
       

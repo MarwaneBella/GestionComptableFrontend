@@ -9,14 +9,13 @@ import { BonAchat } from 'src/app/entities/bon-achat';
 export class BonAchatService {
 
   private baseUrl ="http://localhost:8084/api/bonAchat";
+  private lignBAUrl ="http://localhost:8084/api/lignBA";
 
   constructor(private httpClient: HttpClient) {}
 
   getNextBonANum(date: Date):Observable<any>{
     return this.httpClient.post(`${this.baseUrl+"/next"}`, date,{responseType: 'text'});
   }
-
- 
   getBonAchatList(): Observable<BonAchat[]>{
     return this.httpClient.get<BonAchat[]>(`${this.baseUrl}`);
   }
@@ -35,5 +34,11 @@ export class BonAchatService {
 
   deleteBonAchatById(id :number):Observable<BonAchat>{
    return this.httpClient.delete<BonAchat>(`${this.baseUrl}/${id}`);
+  }
+
+  //  Api ligne bon achat
+
+  addListLignBA(list: any): Observable<any> {
+    return this.httpClient.post(`${this.lignBAUrl+"/list"}`, list);
   }
 }

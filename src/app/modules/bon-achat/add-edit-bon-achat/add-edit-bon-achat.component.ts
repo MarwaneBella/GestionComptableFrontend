@@ -1,10 +1,11 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatCalendarCellClassFunction } from '@angular/material/datepicker';
-import { MatSelect } from '@angular/material/select';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { map, Observable, ReplaySubject, startWith, Subject, take, takeUntil } from 'rxjs';
+
 import { BonAchat } from 'src/app/entities/bon-achat';
 import { Fournisseur } from 'src/app/entities/fournisseur';
 import { LignBA } from 'src/app/entities/lign-ba';
@@ -34,7 +35,7 @@ export class AddEditBonAchatComponent implements OnInit {
   formInfosBon: FormGroup;
   formLigneBon: FormGroup;
   displayedColumns: string[] = ['reference','designation', 'prixUnitaire','quantite', 'montantHt', 'montantTva','montantTtc','actions'];
-  dataList: Array<DataList> = [] ;
+  dataList: Array<any> = [] ;
   fournisseurs : Fournisseur[] ;
   produits : Produit[];
   fournisseur: Fournisseur;
@@ -43,11 +44,14 @@ export class AddEditBonAchatComponent implements OnInit {
   calculate: Calculate = new Calculate();
   dataSource : MatTableDataSource<DataList>;
   lignBA : LignBA [];
+  
 
   totaleQuantite: number;
   totaleMontantHt: number;
   totaleTauxTva: number;
   totaleMontantTtc: number;
+  
+  filteredProduits: Observable<Produit[]>;
 
   constructor(private _formBuilder: FormBuilder, private bonAchatService : BonAchatService, private fournisseurService :FournisseurService, private produitService : ProduitService, private router: Router) {
     
@@ -60,15 +64,31 @@ export class AddEditBonAchatComponent implements OnInit {
     this.declareFormLigneBon();
     this.setControllers();
 
+    
+    
+
   }
 
 
+  private _filterProduits(value: string): Produit[] {
+    
+    if (typeof value === 'string'){
 
+    return this.produits.filter(p => (p.reference+p.designation).toLowerCase().includes(value.toLowerCase())) ;
 
+    }
+    return this.produits.filter(p => (p.reference+p.designation).toLowerCase().includes(value)) ;
+    
+  }
   
-
-  
-
+  getOptionText(p: any) {
+      if(p === ""){
+        return "";
+      }
+      else{
+        return p.reference+" -- "+p.designation ;
+      }
+  }
   
   
 
@@ -104,6 +124,12 @@ export class AddEditBonAchatComponent implements OnInit {
 
     this.produitService.getProduits().subscribe( data =>{
       this.produits = data;
+
+      this.filteredProduits = this.formLigneBon.controls['produit'].valueChanges.pipe(
+        startWith(''),
+        map(p => (p ? this._filterProduits(p) : this.produits.slice())),
+      );
+      
     });
   }
 
@@ -187,14 +213,12 @@ export class AddEditBonAchatComponent implements OnInit {
     this.bonAchat.listLignBA  = this.dataList;
 
     /*this.dataList.forEach((currentValue, index) => {
-      
-      this.bonAchat.listLignBA.push({quantite: currentValue.quantite, montantTtc: currentValue.montantTtc, prixUnitaire: currentValue.prixUnitaire, produit: currentValue.produit})
+      listLignBA.push({quantite: currentValue.quantite, montantTtc: currentValue.montantTtc, prixUnitaire: currentValue.prixUnitaire, produit: currentValue.produit, bonAchat: this.bonAchat });
     });*/
-    console.log(this.bonAchat);
-
     this.bonAchatService.addBonAchat(this.bonAchat).subscribe(data =>{
+      
 
-      this.router.navigateByUrl('bonAchat');
+      
     });
 
   }
