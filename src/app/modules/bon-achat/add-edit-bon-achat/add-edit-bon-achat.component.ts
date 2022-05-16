@@ -1,10 +1,14 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatCalendarCellClassFunction } from '@angular/material/datepicker';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
+import localeFr from '@angular/common/locales/fr';
+import { DecimalPipe, registerLocaleData } from '@angular/common';
+registerLocaleData(localeFr, 'fr');
+
 
 import { BonAchat } from 'src/app/entities/bon-achat';
 import { Fournisseur } from 'src/app/entities/fournisseur';
@@ -31,7 +35,7 @@ export interface DataList {
   styleUrls: ['./add-edit-bon-achat.component.css']
 })
 export class AddEditBonAchatComponent implements OnInit {
-
+  
   formInfosBon: FormGroup;
   formLigneBon: FormGroup;
   displayedColumns: string[] = ['reference','designation', 'prixUnitaire','quantite', 'montantHt', 'montantTva','montantTtc','actions'];
@@ -44,7 +48,9 @@ export class AddEditBonAchatComponent implements OnInit {
   calculate: Calculate = new Calculate();
   dataSource : MatTableDataSource<DataList>;
   lignBA : LignBA [];
-  
+  @Input()
+  r = '1.2-2'
+  panelOpenState = false;
 
   totaleQuantite: number;
   totaleMontantHt: number;
@@ -59,7 +65,14 @@ export class AddEditBonAchatComponent implements OnInit {
   isAddLigneMode: boolean = true;
   currentIndex : number ;
 
-  constructor(private _formBuilder: FormBuilder, private bonAchatService : BonAchatService, private fournisseurService :FournisseurService, private produitService : ProduitService, private router: Router,private route: ActivatedRoute) {
+  constructor(private decimalPipe : DecimalPipe,private _formBuilder: FormBuilder, private bonAchatService : BonAchatService, private fournisseurService :FournisseurService, private produitService : ProduitService, private router: Router,private route: ActivatedRoute) {
+    
+  }
+
+  getRoundNumber(num: number){
+    
+      console.log("2222222222222");
+    return this.decimalPipe.transform(num,this.r) ?? '0';
     
   }
   
@@ -77,6 +90,7 @@ export class AddEditBonAchatComponent implements OnInit {
     }else{
       this.getBonAchat();
     }
+
     
     
   }
@@ -100,6 +114,7 @@ export class AddEditBonAchatComponent implements OnInit {
         return p.reference+" -- "+p.designation ;
       }
   }
+  
   
   
 
@@ -142,8 +157,7 @@ export class AddEditBonAchatComponent implements OnInit {
   }
 
   resetFormLigneBA(){
-    this.declareFormLigneBon();
-    this.filterProduit();
+    this.isAddLigneMode = true;
   }
 
   setControllers() {
@@ -192,12 +206,18 @@ export class AddEditBonAchatComponent implements OnInit {
   }
 
   calculateMontants(){
+
     this.calculate.calculateMontants(this.formLigneBon.controls['prixUnitaire'].value,this.formLigneBon.controls['quantite'].value,this.formLigneBon.controls['tva'].value);
+      
     this.formLigneBon.patchValue({
-      montantHt : this.calculate.montantHt.toFixed(2),
-      montantTva: this.calculate.montantTva.toFixed(2),
-      montantTtc : this.calculate.montantTtc.toFixed(2)
-    });
+        montantHt : this.calculate.montantHt,
+        montantTva: this.calculate.montantTva,
+        montantTtc : this.calculate.montantTtc
+      });
+      console.log("11111111111111");
+     
+        
+    
   }
 
   addEditLigne(){

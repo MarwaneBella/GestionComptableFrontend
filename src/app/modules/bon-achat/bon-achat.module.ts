@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DecimalPipe } from '@angular/common';
 
 import { BonAchatRoutingModule } from './bon-achat-routing.module';
 import { BonAchatComponent } from './bon-achat.component';
@@ -31,6 +31,7 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
     FormsModule,
     ReactiveFormsModule,
     NgxMatSelectSearchModule
-  ]
+  ],
+  providers : [DecimalPipe]
 })
 export class BonAchatModule { }

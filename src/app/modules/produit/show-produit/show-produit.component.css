@@ -19,5 +19,7 @@ mat-form-field{
     margin-bottom: 20px;
 }
 .close button{
+    border: none;
     border-radius: 50%;
 }
+

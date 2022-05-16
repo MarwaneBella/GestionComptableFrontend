@@ -28,3 +28,19 @@ button.example-custom-date-class {
   .mat-table-sticky {
     border-top: 1px solid #e0e0e0;
   }
+
+  mat-expansion-panel-header{
+    background-color: rgba(0, 0, 0, 0.03);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    border-top: 1px 1px solid rgba(0, 0, 0, 0.125);
+  }
+  
+  
+
+  .mat-expansion-panel-header.mat-expanded,
+  .mat-expansion-panel-header.mat-expanded:hover,
+  .mat-expansion-panel-header.mat-expanded:focus {
+    background-color: rgba(0, 0, 0, 0.03);
+    border-bottom: 1px 1px solid rgba(0, 0, 0, 0.125);
+    border-top: 1px 1px solid rgba(0, 0, 0, 0.125);
+  }
