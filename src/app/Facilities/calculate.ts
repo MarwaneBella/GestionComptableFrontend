@@ -5,7 +5,8 @@ export class Calculate{
     montantTtc: number;
 
     calculateMontants(prixUnitaire: number, quantite: number,tva: number){
-        this.montantHt = prixUnitaire * quantite;
+        this.montantHt = (prixUnitaire * quantite);
+        
         this.montantTva =this.montantHt  * (tva/100);
         this.montantTtc = this.montantHt + this.montantTva;
     }

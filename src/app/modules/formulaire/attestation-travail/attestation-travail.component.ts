@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+import jspdf from 'jspdf';
 
 
 @Component({
@@ -16,18 +17,23 @@ export class AttestationTravailComponent implements OnInit {
   openPDF(){
     let DATA: any = document.getElementById('htmlData');
 
-    let pdf = new jsPDF('p', 'pt', 'a2');
-    // No difference
-    pdf.setFontSize(5);
-    // No difference
-   // pdf.setDisplayMode("fullwidth", "continuous","FullScreen");
-    
-    pdf.html(DATA, {
-      callback: (pdf) => {
+    html2canvas(DATA).then(canvas => {
+      
+      var imgWidth = 208;
+      var imgHeight = canvas.height * imgWidth / canvas.width;
+      const contentDataURL = canvas.toDataURL('image/png');
+      let pdf = new jspdf('p', 'mm', 'a4');
+      var position = 0;
+      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
+
+      pdf.setProperties({
+        title:'Facture'
         
-        pdf.save("sample.pdf")
-      }
-    }) 
+      });
+
+      window.open(URL.createObjectURL(pdf.output('blob' )));
+      
+    });
   }
 
 }

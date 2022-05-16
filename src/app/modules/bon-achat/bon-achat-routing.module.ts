@@ -13,7 +13,7 @@ const routes: Routes = [
     component:AddEditBonAchatComponent
   },
   {
-    path:'addBonAchat/:id',
+    path:'editBonAchat/:id',
     component:AddEditBonAchatComponent
   }
 ];
