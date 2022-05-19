@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Fournisseur } from 'src/app/entities/fournisseur';
 import { FournisseurService } from '../fournisseur.service';
+import { NotifierService } from 'angular-notifier';
 
 @Component({
   selector: 'app-add-edit-Fournisseur',
@@ -78,7 +79,7 @@ export class AddEditFournisseurComponent implements OnInit {
   isSelected : boolean;
 
 
-  constructor(private _formBuilder: FormBuilder, private fournisseurService: FournisseurService,private router: Router,private route: ActivatedRoute) {}
+  constructor(private _formBuilder: FormBuilder, private fournisseurService: FournisseurService,private router: Router,private route: ActivatedRoute ,private  notifierService: NotifierService) {}
 
   ngOnInit() {
     this.isSelected = false;
@@ -211,6 +212,10 @@ export class AddEditFournisseurComponent implements OnInit {
 
     if(this.isAddMode){
       this.createFournisseur();
+      this.notifierService.notify( 'success', `Client ${this.fournisseur.nom} est Ajoute en list ` );
+      setTimeout(() => {
+        this.router.navigateByUrl('fournisseur');
+      }, 1000);
     }
     else{
       this.editFournisseur();
@@ -234,7 +239,7 @@ export class AddEditFournisseurComponent implements OnInit {
         
       }
 
-      this.router.navigateByUrl('fournisseur');
+    //  this.router.navigateByUrl('fournisseur');
 
     });
   }

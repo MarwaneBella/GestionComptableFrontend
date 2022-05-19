@@ -13,8 +13,52 @@ import { AddEditClientComponent } from './add-edit-client/add-edit-client.compon
 import { ShowClientComponent } from './show-client/show-client.component';
 import { DeleteClientComponent } from './delete-client/delete-client.component';
 
+import { NotifierModule , NotifierOptions } from 'angular-notifier';
 
+/**
+ * Custom angular notifier options
+ */
 
+const customNotifierOptions: NotifierOptions = {
+  position: {
+		horizontal: {
+			position: 'right',
+			distance: 12
+		},
+		vertical: {
+			position: 'bottom',
+			distance: 12,
+			gap: 10
+		}
+	},
+  theme: 'material',
+  behaviour: {
+    autoHide: 5000,
+    onClick: 'hide',
+    onMouseover: 'pauseAutoHide',
+    showDismissButton: true,
+    stacking: 4
+  },
+  animations: {
+    enabled: true,
+    show: {
+      preset: 'slide',
+      speed: 300,
+      easing: 'ease'
+    },
+    hide: {
+      preset: 'fade',
+      speed: 300,
+      easing: 'ease',
+      offset: 50
+    },
+    shift: {
+      speed: 300,
+      easing: 'ease'
+    },
+    overlap: 150
+  }
+};
 @NgModule({
   declarations: [
     ClientComponent,
@@ -30,7 +74,8 @@ import { DeleteClientComponent } from './delete-client/delete-client.component';
     MaterialModule,
     FlexLayoutModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NotifierModule.withConfig(customNotifierOptions)
   ]
 })
 export class ClientModule { }

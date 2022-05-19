@@ -8,6 +8,8 @@ import { DeleteFournisseurComponent } from '../delete-fournisseur/delete-fournis
 import { FournisseurService } from '../fournisseur.service';
 import { ShowFournisseurComponent } from '../show-fournisseur/show-fournisseur.component';
 
+import { NotifierService } from 'angular-notifier';
+
 @Component({
   selector: 'app-list-fournisseur',
   templateUrl: './list-fournisseur.component.html',
@@ -22,7 +24,10 @@ export class ListFournisseurComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   
-  constructor(private fournisseurService :FournisseurService , public dialog: MatDialog) { }
+
+  constructor(private fournisseurService :FournisseurService , public dialog: MatDialog ) 
+  {
+   }
   
   ngAfterViewInit(){
     this.getFournisseurs()
@@ -57,7 +62,7 @@ export class ListFournisseurComponent implements AfterViewInit {
     })
   }
 
-  openDialog(row :any) {
+  openDialogDelete(row :any) {
     this.dialog.open(DeleteFournisseurComponent,{
       width:'30%',
       data:row,

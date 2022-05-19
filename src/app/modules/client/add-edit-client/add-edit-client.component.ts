@@ -5,6 +5,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Client } from 'src/app/entities/client';
 import { ClientService } from '../client.service';
 
+import { NotifierService } from 'angular-notifier';
+
+
 @Component({
   selector: 'app-add-edit-client',
   templateUrl: './add-edit-client.component.html',
@@ -79,7 +82,11 @@ export class AddEditClientComponent implements OnInit {
   isSelected : boolean;
 
 
-  constructor(private _formBuilder: FormBuilder, private clientService: ClientService,private router: Router,private route: ActivatedRoute) {}
+
+  constructor(private _formBuilder: FormBuilder, private clientService: ClientService,private router: Router,private route: ActivatedRoute ,private  notifierService: NotifierService){
+  }
+//test :
+//  this.notifier.notify( 'error', 'Good evening, you lovely person!');
 
   ngOnInit() {
     this.isSelected = false;
@@ -239,14 +246,23 @@ export class AddEditClientComponent implements OnInit {
 
     if(this.isAddMode){
       this.createClient();
+      this.notifierService.notify( 'success', `Client ${this.client.nom} a été ajouté ` );
+      setTimeout(() => {
+      this.router.navigateByUrl('client');
+      }, 1000);
     }
     else{
       this.editClient();
+      this.notifierService.notify( 'success', `Client ${this.client.codeC} a été modifiéx ` );
+      setTimeout(() => {
+      this.router.navigateByUrl('client');
+      }, 1000);
     }
 
   }
   
-   createClient(){
+   createClient()
+   {
 
     this.client = {...this.infosGeneralFormGroup.value , ...this.adresseFormGroup.value, ...this.contactsFormGroup.value, ...this.honorairesFormGroup.value};
     
@@ -262,10 +278,10 @@ export class AddEditClientComponent implements OnInit {
         });
         
       }
-
-      this.router.navigateByUrl('client');
-
+      //this.router.navigateByUrl('client');
+      
     });
+    //this.notifier.notify('success', 'You are awesome! I mean it!');
   }
 
   
@@ -290,7 +306,7 @@ export class AddEditClientComponent implements OnInit {
         });
       }
 
-      this.router.navigateByUrl('client');
+    //  this.router.navigateByUrl('client');
 
     });
 

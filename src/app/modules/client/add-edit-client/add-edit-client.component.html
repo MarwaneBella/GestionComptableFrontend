@@ -224,45 +224,16 @@
         
           <div class="mt-5" fxLayoutAlign="center end" >
             <button  matStepperPrevious class="btn btn-outline-danger me-3"><i class="fa fa-arrow-left me-2" aria-hidden="true"></i>Précédent</button>
-            <button (click)="onSubmit()" class="btn btn-outline-success " [disabled]="infosGeneralFormGroup.invalid" ><i class="fa fa-check me-1" aria-hidden="true"></i> {{nameBtn}}</button>
+            <button  (click)="onSubmit()" class="btn btn-outline-success " [disabled]="infosGeneralFormGroup.invalid" ><i class="fa fa-check me-1" aria-hidden="true"></i> {{nameBtn}}</button>
           </div>
-
-          
         </div>
-
       </form>
+      <div>
+        <notifier-container></notifier-container>
+      </div>
     </mat-step>
-
   </mat-horizontal-stepper>
 
 
 
-<!--
-
-  <div class="row ">
-    <mat-form-field appearance="outline" class="mx-auto">
-      
-    </mat-form-field>
-  </div>
-  
-  <div class="row ">
-    <mat-form-field appearance="outline" class="mx-auto">
-      
-
-    </mat-form-field>
-  </div>
-
-  <div class="row " >
-    <mat-form-field appearance="outline" class="mx-auto">
-      
-    </mat-form-field>
-  </div> 
-
-  <div class="mt-5" fxLayoutAlign="center end" >
-    <button  matStepperPrevious class="btn btn-outline-danger me-3"><i class="fa fa-arrow-left me-2 mx-auto" aria-hidden="true"></i>Back</button>
-    <button  matStepperNext class="btn btn-outline-primary ">Next<i class="fa fa-arrow-right ms-2 " aria-hidden="true"></i></button>
-  </div>
-
-
-  -->
   
