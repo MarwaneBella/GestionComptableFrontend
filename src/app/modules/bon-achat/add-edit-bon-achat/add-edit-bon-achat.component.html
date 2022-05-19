@@ -9,12 +9,24 @@
             <form  [formGroup] ="formInfosBon" >
               <div class="row">
                   <div class="col me-3">
+                    <mat-form-field class="example-full-width" appearance="outline">
+                      <input matInput
+                             [matAutocomplete]="autofournisseur"
+                             placeholder="Select Fournisseur"
+                             formControlName="fournisseur" (ngModelChange)="setFornisseur()">
+                      <mat-autocomplete #autofournisseur="matAutocomplete" [displayWith]="getOptionTextFournisseur">
+                        <mat-option *ngFor="let f of filteredFournisseurs  | async" [value]="f">
+                          {{f.nom}}
+                        </mat-option>
+                      </mat-autocomplete>
+                    </mat-form-field>
+                    <!--
                       <mat-form-field  appearance="outline" >
                           <mat-select  placeholder="Select Fournisseur" formControlName ="fournisseur" (ngModelChange)="setFornisseur()">
                               <mat-option *ngFor="let fournisseur of fournisseurs" [value]="fournisseur" >{{fournisseur.nom}}</mat-option>
                           </mat-select>
                       </mat-form-field>
-
+                    -->
                   </div>
                   <div class="col">
                       <mat-form-field  appearance="outline">
@@ -40,10 +52,12 @@
                   <div class="col">
                       <mat-form-field class="example-full-width" appearance="outline">
                           <mat-label>Date de bon</mat-label>
-                          <input matInput [matDatepicker]="picker" formControlName ="dateBa" (ngModelChange)="setNextBonAchat()">
+
+                          <input matInput [matDatepicker]="picker" formControlName ="dateBa" *ngIf="isAddMode" (ngModelChange)="setNextBonAchat()">
+                          <input matInput [matDatepicker]="picker" formControlName ="dateBa" *ngIf="!isAddMode" >
                           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                           <mat-datepicker [dateClass]="dateClass" #picker></mat-datepicker>
-                        </mat-form-field>
+                      </mat-form-field>
 
                   </div>
               </div>
@@ -54,7 +68,7 @@
       <!-- expansion-panel -->
     <mat-accordion >
       
-      <mat-expansion-panel  [disabled]="true" [expanded]="true" class="text-center" hideToggle="true" >
+      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"  [expanded]="isAddMode" [disabled]="isAddMode" class="text-center" hideToggle="true" #panel="matExpansionPanel">
         <mat-expansion-panel-header class="bg-light"  [collapsedHeight]="'40px'" [expandedHeight]="'40px'"  class="d-flex">
           
             <mat-panel-title class="d-flex w-100 justify-content-center" >
@@ -90,10 +104,10 @@
     
                   <mat-form-field class="example-full-width" appearance="outline">
                     <input matInput
-                           [matAutocomplete]="auto"
+                           [matAutocomplete]="autoProduit"
                            placeholder="Select produit"
                            formControlName="produit" (ngModelChange)="setProduit()">
-                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="getOptionText">
+                    <mat-autocomplete #autoProduit="matAutocomplete" [displayWith]="getOptionTextProduit">
                       <mat-option *ngFor="let p of filteredProduits  | async" [value]="p">
                         {{p.reference+" -- "+p.designation }}
                       </mat-option>

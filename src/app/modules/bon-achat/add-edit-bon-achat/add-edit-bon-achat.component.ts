@@ -18,6 +18,8 @@ import { Calculate } from 'src/app/Facilities/calculate';
 import { FournisseurService } from '../../fournisseur/fournisseur.service';
 import { ProduitService } from '../../produit/produit.service';
 import { BonAchatService } from '../bon-achat.service';
+import { MatExpansionPanel } from '@angular/material/expansion';
+import { Stock } from 'src/app/Facilities/stock';
 
 export interface DataList {
   produit: Produit;
@@ -56,23 +58,27 @@ export class AddEditBonAchatComponent implements OnInit {
   totaleMontantHt: number;
   totaleTauxTva: number;
   totaleMontantTtc: number;
+  stock : Stock = new Stock(this.produitService);
   
   filteredProduits: Observable<Produit[]>;
+  filteredFournisseurs: Observable<Fournisseur[]>;
   nameBtn: string;
   isAddMode: boolean;
   id : number;
   isSelected : boolean;
   isAddLigneMode: boolean = true;
   currentIndex : number ;
+  isValide : boolean = false;
+
+  @ViewChild('panel', {static: true, read: MatExpansionPanel}) panel: MatExpansionPanel;
 
   constructor(private decimalPipe : DecimalPipe,private _formBuilder: FormBuilder, private bonAchatService : BonAchatService, private fournisseurService :FournisseurService, private produitService : ProduitService, private router: Router,private route: ActivatedRoute) {
     
   }
+  
 
   getRoundNumber(num: number){
-    
-      console.log("2222222222222");
-    return this.decimalPipe.transform(num,this.r) ?? '0';
+        return this.decimalPipe.transform(num,this.r) ?? '0';
     
   }
   
@@ -85,38 +91,18 @@ export class AddEditBonAchatComponent implements OnInit {
     this.declareFormInfosBon();
     this.declareFormLigneBon();
     if(this.isAddMode){
+
       this.setNextBonAchat();
       this.setControllers();
-    }else{
+      
+    }
+    else{
+      this.setControllers();
       this.getBonAchat();
-    }
-
-    
-    
-  }
-
-  private _filterProduits(value: string): Produit[] {
-    
-    if (typeof value === 'string'){
-
-    return this.produits.filter(p => (p.reference+p.designation).toLowerCase().includes(value.toLowerCase())) ;
 
     }
-    return this.produits.filter(p => (p.reference+p.designation).toLowerCase().includes(value)) ;
     
   }
-  
-  getOptionText(p: any) {
-      if(p === ""){
-        return "";
-      }
-      else{
-        return p.reference+" -- "+p.designation ;
-      }
-  }
-  
-  
-  
 
   declareFormInfosBon() {
     this.formInfosBon = this._formBuilder.group({
@@ -141,20 +127,106 @@ export class AddEditBonAchatComponent implements OnInit {
     });
   }
 
-  
-
-  getBonAchat(){
-
-    this.bonAchatService.getBonAchatById(this.id).subscribe(data =>{
-    });
-  }
-
   filterProduit(){
     this.filteredProduits = this.formLigneBon.controls['produit'].valueChanges.pipe(
       startWith(''),
       map(p => (p ? this._filterProduits(p) : this.produits.slice())),
     );
   }
+
+  filterFournisseur(){
+    this.filteredFournisseurs = this.formInfosBon.controls['fournisseur'].valueChanges.pipe(
+      startWith(''),
+      map(f => (f ? this._filterFournisseur(f) : this.fournisseurs.slice())),
+    );
+  }
+
+  private _filterProduits(value: string): Produit[] {
+    
+    if (typeof value === 'string'){
+
+    return this.produits.filter(p => (p.reference+p.designation).toLowerCase().includes(value.toLowerCase())) ;
+
+    }
+    return this.produits.filter(p => (p.reference+p.designation).toLowerCase().includes(value)) ;
+    
+  }
+
+  private _filterFournisseur(value: string): Fournisseur[] {
+    
+    if (typeof value === 'string'){
+
+    return this.fournisseurs.filter(f => f.nom.toLowerCase().includes(value.toLowerCase())) ;
+
+    }
+    return this.fournisseurs.filter(f => f.nom.toLowerCase().includes(value)) ;
+    
+  }
+  
+  getOptionTextProduit(p: any) {
+      if(p === ""){
+        return "";
+      }
+      else{
+        return p.reference+" -- "+p.designation ;
+      }
+  }
+  
+  getOptionTextFournisseur(f: any) {
+    if(f === ""){
+      return "";
+    }
+    else{
+      return f.nom ;
+    }
+}
+  
+
+  getBonAchat(){
+    this.bonAchatService.getBonAchatById(this.id).subscribe(data =>{
+
+      this.bonAchat = data;
+      this.isValide = this.bonAchat.valide;
+      this.dataList = this.bonAchat.listLignBA;
+      
+      // delete from select search produit when produit exist in lignBonAchat
+      this.dataList.forEach(currentData => {
+        
+        this.produits.forEach((currentProduit,index) => {
+            if(currentProduit.designation == currentData.produit.designation){
+              this.produits.splice(index,1);
+            }
+          
+          });
+        
+      });
+
+      this.filterProduit()
+      console.log(this.produits)
+      
+      this.dataList.forEach(element => {
+        this.calculate.calculateMontants(element.prixUnitaire,element.quantite,element.produit.tva);
+        element.montantHt = this.calculate.montantHt;
+        element.montantTva = this.calculate.montantTva;
+      });
+
+
+      this.totale();
+      this.dataSource = new MatTableDataSource(this.dataList);
+      this.formInfosBon.patchValue({
+        fournisseur: this.bonAchat.fournisseur,
+        codeF: this.bonAchat.fournisseur.codeF,
+        bonANum: this.bonAchat.bonANum,
+        facBonNum:this.bonAchat.facBonNum,
+        dateBa: this.bonAchat.dateBa
+      })
+
+      
+      
+    });
+    
+  }
+
 
   resetFormLigneBA(){
     this.isAddLigneMode = true;
@@ -164,11 +236,11 @@ export class AddEditBonAchatComponent implements OnInit {
 
     this.fournisseurService.getAllFournisseurs().subscribe( data =>{
       this.fournisseurs = data;
+      this.filterFournisseur();
     });
 
-    this.produitService.getProduits().subscribe( data =>{
+    this.produitService.getAllProduits().subscribe( data =>{
       this.produits = data;
-
       this.filterProduit();
       
     });
@@ -214,8 +286,7 @@ export class AddEditBonAchatComponent implements OnInit {
         montantTva: this.calculate.montantTva,
         montantTtc : this.calculate.montantTtc
       });
-      console.log("11111111111111");
-     
+      
         
     
   }
@@ -223,6 +294,15 @@ export class AddEditBonAchatComponent implements OnInit {
   addEditLigne(){
     if(this.isAddLigneMode){
       this.dataList.push(this.formLigneBon.value);
+
+      this.produits.forEach((element,index) => {
+
+        if(element.designation == this.formLigneBon.controls['produit'].value.designation){
+          this.produits.splice(index,1);
+        }
+        
+      });
+      console.log(this.produits)
       this.dataSource = new MatTableDataSource(this.dataList);
       this.totale();
     }
@@ -242,14 +322,23 @@ export class AddEditBonAchatComponent implements OnInit {
 
   deleteLigne(index: number){
     
+    this.produits.push(this.dataList[index].produit);
+
+    this.filterProduit();
+    
     this.dataList.splice(index,1);
     this.dataSource = new MatTableDataSource(this.dataList);
     this.totale();
+
   }
 
   editLigne(index:number){
+    if(!this.isAddMode){
+      this.panel.open();
+    }
     this.isAddLigneMode = false;
     this.currentIndex = index;
+    
     this.formLigneBon.patchValue({
       produit: this.dataList[index].produit,
       quantite: this.dataList[index].quantite,
@@ -281,35 +370,105 @@ export class AddEditBonAchatComponent implements OnInit {
   }
 
   onEnregistre(){
+    //add bon achat
+    if(this.isAddMode){
+      this.bonAchat = this.formInfosBon.value;
+      this.bonAchat.listLignBA  = this.dataList;
+      this.bonAchat.valide = false;
 
+      this.bonAchatService.addBonAchat(this.bonAchat).subscribe(data =>{
+        this.router.navigateByUrl('bonAchat');
+        
+      });
 
-    this.bonAchat = this.formInfosBon.value;
-    this.bonAchat.listLignBA  = this.dataList;
+    }
+    // edit bon achat
+    else{
 
-    /*this.dataList.forEach((currentValue, index) => {
-      listLignBA.push({quantite: currentValue.quantite, montantTtc: currentValue.montantTtc, prixUnitaire: currentValue.prixUnitaire, produit: currentValue.produit, bonAchat: this.bonAchat });
-    });*/
-    this.bonAchatService.addBonAchat(this.bonAchat).subscribe(data =>{
-      this.router.navigateByUrl('bonAchat');
-    });
-    
+      if(this.bonAchat.valide){
+        this.stock.removeFromStock(this.bonAchat);
+      }
+
+      this.bonAchat = this.formInfosBon.value;
+      this.bonAchat.listLignBA  = this.dataList;
+      this.bonAchat.valide = false;
+
+      this.bonAchatService.updateBonAchat(this.id,this.bonAchat).subscribe(data =>{
+        this.router.navigateByUrl('bonAchat');
+      }, error =>{
+        alert("E")
+      });
+      
+      
+    }
 
   }
 
   onValide(){
+    //add bon achat
+    if(this.isAddMode){
+      this.bonAchat = this.formInfosBon.value;
+      this.bonAchat.listLignBA  = this.dataList;
+      this.bonAchat.valide = true;
+      
+      this.bonAchatService.addBonAchat(this.bonAchat).subscribe(data =>{
+        //add to stock
+        this.stock.addToStock(this.bonAchat);
+        this.router.navigateByUrl('bonAchat');
+      });
 
-    this.onEnregistre();
+    }
+    //edit bon achat
+    else{
 
-    this.bonAchat.listLignBA.forEach(currentValue => {
-      currentValue.produit.quantitieDisponible += currentValue.quantite;
+      if(this.bonAchat.valide){
+        //remove from stock
 
-      this.produitService.updateProduit(currentValue.produit.reference,currentValue.produit).subscribe(data => {
+        this.bonAchatService.getBonAchatById(this.id).subscribe(data =>{
+          this.bonAchat =data;
+          console.log(this.bonAchat)
+          this.stock.removeFromStock(this.bonAchat);
 
-      })
-    });
+          setTimeout(() => {
+            this.bonAchat = this.formInfosBon.value;
+          this.bonAchat.listLignBA  = this.dataList;
+          this.bonAchat.valide = true;
+          console.log(this.bonAchat)
 
-    this.router.navigateByUrl('bonAchat');
+          this.bonAchatService.updateBonAchat(this.id,this.bonAchat).subscribe(data =>{
+            //add to stock
+            this.stock.addToStock(this.bonAchat);
+            this.router.navigateByUrl('bonAchat');
+          }, error =>{
+            alert("V")
+          });
+            
+          }, 2000);
 
+          
+
+        })
+
+
+      }
+      else{
+        this.bonAchat = this.formInfosBon.value;
+        this.bonAchat.listLignBA  = this.dataList;
+        this.bonAchat.valide = true;
+
+        this.bonAchatService.updateBonAchat(this.id,this.bonAchat).subscribe(data =>{
+          //add to stock
+          this.stock.addToStock(this.bonAchat);
+          this.router.navigateByUrl('bonAchat');
+        }, error =>{
+          alert("V")
+        });
+
+      }
+      
+
+    }
+    
 
   }
 

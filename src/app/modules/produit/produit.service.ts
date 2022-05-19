@@ -13,7 +13,7 @@ export class ProduitService {
  
   constructor(private httpClient: HttpClient) { }
   
-  getProduits():Observable<Produit[]>{
+  getAllProduits():Observable<Produit[]>{
     return this.httpClient.get<Produit[]>(`${this.baseUrl}`)
   }
 

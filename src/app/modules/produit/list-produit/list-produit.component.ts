@@ -31,7 +31,7 @@ export class ListProduitComponent implements AfterViewInit {
   }
 
   getAllProduits(){
-    this.produitService.getProduits().subscribe(data => {
+    this.produitService.getAllProduits().subscribe(data => {
       this.produits = data;
       this.dataSource = new MatTableDataSource(this.produits);
       this.dataSource.paginator = this.paginator;
