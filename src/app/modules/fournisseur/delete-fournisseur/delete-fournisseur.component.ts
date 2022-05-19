@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { NotifierService } from 'angular-notifier';
 import { FournisseurService } from '../fournisseur.service';
 
 @Component({
@@ -11,11 +12,15 @@ export class DeleteFournisseurComponent implements OnInit {
 
   namFournisseur : string;
   ID : number;
+
+  private notifier: NotifierService;
+
   constructor(private fournisseurService:FournisseurService,
     @Inject(MAT_DIALOG_DATA) public editdata :any ,
-   private dialogRef : MatDialogRef<DeleteFournisseurComponent>
+   private dialogRef : MatDialogRef<DeleteFournisseurComponent>,
+   notifierService : NotifierService
   ){
-    
+    this.notifier = notifierService
   }
 
   ngOnInit(): void {
@@ -27,6 +32,7 @@ export class DeleteFournisseurComponent implements OnInit {
 
   deleteClientById(){
     this.fournisseurService.deleteFournisseurById(this.ID).subscribe(data => {
+      this.notifier.notify( 'error', `Fournisseur ${this.namFournisseur} est Delete en list ` );
       this.dialogRef.close();
     })
   }

@@ -44,7 +44,7 @@
           <div class="actions">
             <button (click)="openDialogShow(row.id)" aria-label="b1" class="btn btn-outline-primary"><i class="fa fa-eye" aria-hidden="true"></i></button>
             <button  aria-label="Name"  type="button" class="btn btn-outline-success mx-1" routerLink="editFournisseur/{{row.id}}"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-            <button aria-label="b1"  (click)="openDialog(row)"   class="btn btn-outline-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
+            <button aria-label="b1"  (click)="openDialogDelete(row)"   class="btn btn-outline-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
           
           </div>
 
@@ -61,5 +61,6 @@
     </table>
   
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" ></mat-paginator>
+    <notifier-container></notifier-container>
   </div>
  

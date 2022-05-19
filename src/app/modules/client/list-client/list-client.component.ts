@@ -12,6 +12,8 @@ import jsPDF from 'jspdf'
 import autoTable from 'jspdf-autotable'; 
 import 'jspdf-autotable';
 import { DeleteClientComponent } from '../delete-client/delete-client.component';
+
+
 @Component({
   selector: 'app-list-client',
   templateUrl: './list-client.component.html',
@@ -32,7 +34,10 @@ export class ListClientComponent implements AfterViewInit{
   
   @ViewChild('content', { static: false }) el!: ElementRef;
  
-  constructor(private clientService:ClientService , public dialog: MatDialog ) {}
+
+  constructor(private clientService:ClientService , public dialog: MatDialog )
+   {
+   }
   
   
 
@@ -78,9 +83,9 @@ export class ListClientComponent implements AfterViewInit{
       data:row,
     }).afterClosed().subscribe(val =>{
       this.getClients() ;
+
     });
   }
-
   public openPDF(): void {
    /*
       let DATA: any = document.getElementById('htmlData');
@@ -120,18 +125,15 @@ export class ListClientComponent implements AfterViewInit{
     doc.setFontSize(30);
     doc.text('LIST CLIENTS',110,20,{align:'center'})
     
-    
-
-    autoTable(doc, {
+     autoTable(doc, {
       theme :'grid',
       head: head,
       body: data,
-      //styles: { fillColor: '#F7CCAC' },
-      //columnStyles: { 0: { halign: 'center', fillColor: '#2047dd' } }, // Cells in first column centered and green
       tableWidth: 'auto',
-      
       margin: { top: 30 }   
     })
+
+
     
     
     //doc.save('clients.pdf')

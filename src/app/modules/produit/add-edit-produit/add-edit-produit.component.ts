@@ -2,6 +2,7 @@ import { Component, OnInit  } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NotifierService } from 'angular-notifier';
 import { Categorie } from 'src/app/entities/categorie';
 import { Produit } from 'src/app/entities/produit';
 import { AddEditCategorieComponent } from '../categorie/add-edit-categorie/add-edit-categorie.component';
@@ -24,7 +25,8 @@ export class AddEditProduitComponent implements OnInit {
   isAddMode: boolean;
   ref :string ;
   action: string;
-  constructor(private produitService: ProduitService,private categorieService:  CategorieService , private _formBuilder: FormBuilder ,private route: ActivatedRoute ,private router: Router ,public dialog: MatDialog) { }
+
+  constructor(private produitService: ProduitService,private categorieService:  CategorieService , private _formBuilder: FormBuilder ,private route: ActivatedRoute ,private router: Router ,public dialog: MatDialog , private  notifierService: NotifierService) { }
 
   
 
@@ -120,9 +122,17 @@ onSelectFile(event: any){
 onSubmit(){
   if(this.isAddMode){
     this.addProduit() ;
+    this.notifierService.notify( 'success', `Produit ${this.produit.reference} est Ajoute en list ` );
+    setTimeout(() => {
+        this.router.navigateByUrl('produit');
+    }, 1000);
   }
   else{
     this.updateProduit()
+    this.notifierService.notify( 'success', `Edit Produit ${this.produit.reference} ` );
+    setTimeout(() => {
+        this.router.navigateByUrl('produit');
+    }, 1000);
   }
  
 }
@@ -163,7 +173,6 @@ updateProduit(){
         
       });
     }
-    this.router.navigateByUrl('produit');
 
   })
 }
