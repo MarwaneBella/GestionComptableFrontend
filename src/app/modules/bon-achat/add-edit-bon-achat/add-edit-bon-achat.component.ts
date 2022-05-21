@@ -28,7 +28,6 @@ export interface DataList {
   montantHt : number;
   montantTva:number;
   montantTtc:number;
-
 }  
 
 @Component({

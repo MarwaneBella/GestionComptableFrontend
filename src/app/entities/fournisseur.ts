@@ -5,12 +5,12 @@ export class Fournisseur{
     nom                     :string;
     image                   :string;
     email                   :string;
-    telePortable           :string;
-    teleFix                :string;
+    telePortable            :string;
+    teleFix                 :string;
     ville                   :string;
     adresse                 :string;
-    codePostale            :string;
-    siteWeb                :string;
+    codePostale             :string;
+    siteWeb                 :string;
     ifi                     :string;
     ice                     :string;
     tp                      :string;

@@ -41,6 +41,10 @@ const routes: Routes = [
         path:'',
         redirectTo:'dashboard',
         pathMatch:'full'
+      },
+      {
+        path :'reglementFournisseur',
+        loadChildren:()=>import('./modules/reglement-fournisseur/reglement-fournisseur.module').then(m=>m.ReglementFournisseurModule)
       }
 
       

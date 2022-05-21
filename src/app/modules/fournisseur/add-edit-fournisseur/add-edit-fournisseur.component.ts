@@ -212,13 +212,17 @@ export class AddEditFournisseurComponent implements OnInit {
 
     if(this.isAddMode){
       this.createFournisseur();
-      this.notifierService.notify( 'success', `Client ${this.fournisseur.nom} est Ajoute en list ` );
+      this.notifierService.notify( 'success', `Fournisseur ${this.fournisseur.nom} a été ajouté  ` );
       setTimeout(() => {
         this.router.navigateByUrl('fournisseur');
       }, 1000);
     }
     else{
       this.editFournisseur();
+      this.notifierService.notify( 'success', `Client ${this.fournisseur.codeF} a été modifié ` );
+      setTimeout(() => {
+      this.router.navigateByUrl('client');
+      }, 1000);
     }
 
   }
