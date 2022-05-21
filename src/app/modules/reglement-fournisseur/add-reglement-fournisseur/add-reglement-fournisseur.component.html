@@ -102,45 +102,45 @@
               <!-- prixUnitaire Column -->
               <ng-container matColumnDef="Fournisseur">
                 <th mat-header-cell *matHeaderCellDef> Fournisseur </th>
-                <td mat-cell *matCellDef="let row">  </td>
+                <td mat-cell *matCellDef="let row"> {{fournisseurDto.nom}} </td>
               </ng-container>
       
               <!-- quantite Column -->
               <ng-container matColumnDef="Facture">
                 <th mat-header-cell *matHeaderCellDef> Facture </th>
-                <td mat-cell *matCellDef="let row">  jj </td>
+                <td mat-cell *matCellDef="let row">  {{row.facBonNum}} </td>
               </ng-container>
       
               <!-- montant_HT Column -->
               <ng-container matColumnDef="MontantTotal">
                 <th mat-header-cell *matHeaderCellDef> Montant Total </th>
-                <td mat-cell *matCellDef="let row">  jj </td>
+                <td mat-cell *matCellDef="let row">  {{row.totalGeneral}} </td>
               </ng-container>
       
               <!-- taux_TVA Column -->
               <ng-container matColumnDef="MontantPayer">
                 <th mat-header-cell *matHeaderCellDef> Montant Payer </th>
-                <td mat-cell *matCellDef="let row">  j </td>
+                <td mat-cell *matCellDef="let row">   </td>
               </ng-container>
       
               <ng-container matColumnDef="RestePayer">
                 <th mat-header-cell *matHeaderCellDef> Reste à payer </th>
-                <td mat-cell *matCellDef="let row"> j  </td>
+                <td mat-cell *matCellDef="let row">   </td>
               </ng-container>
 
               <ng-container matColumnDef="Avance">
                 <th mat-header-cell *matHeaderCellDef> Avance </th>
-                <td mat-cell *matCellDef="let row"> j  </td>
+                <td mat-cell *matCellDef="let row">   </td>
               </ng-container>
 
               <ng-container matColumnDef="Reste">
                 <th mat-header-cell *matHeaderCellDef> Reste </th>
-                <td mat-cell *matCellDef="let row">  h </td>
+                <td mat-cell *matCellDef="let row">   </td>
               </ng-container>
 
               <ng-container matColumnDef="Status">
                 <th mat-header-cell *matHeaderCellDef> Status </th>
-                <td mat-cell *matCellDef="let row">   j</td>
+                <td mat-cell *matCellDef="let row">   </td>
               </ng-container>
 
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

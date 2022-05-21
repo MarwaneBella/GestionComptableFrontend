@@ -40,13 +40,6 @@ bonAchats : BonAchatDto[]
   constructor(private _formBuilder: FormBuilder , private fournisseurService :FournisseurService , private reglementFournisseurService : ReglementFournisseurService) { }
 
   ngOnInit(): void {
-
-    
-    this.getFournisseurByCodF(1)
-      
-   
-
-
     this.declareFormInfosFournisseur();
     this.declareFormReglement();
     this.setControllers();
@@ -70,6 +63,7 @@ bonAchats : BonAchatDto[]
   setFornisseur(){
     this.fournisseur = this.formInfosFournisseur.controls['fournisseur'].value;
     this.formInfosFournisseur.controls['codeF'].setValue(this.fournisseur.codeF);
+    this.getFournisseurByCodF(this.fournisseur.id)
   }
 
   getOptionTextFournisseur(f: any) {
@@ -136,5 +130,7 @@ bonAchats : BonAchatDto[]
 
     })
   }
+
+  
 
 }
