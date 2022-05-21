@@ -42,7 +42,7 @@ bonAchats : BonAchatDto[]
   ngOnInit(): void {
 
     
-    this.getFournisseurByCodF(2)
+    this.getFournisseurByCodF(1)
       
    
 
