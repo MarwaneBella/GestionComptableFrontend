@@ -1,0 +1,135 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-5 col-xl-4">
+            <div class="card bg-c-blue order-card">
+                <div class="card-block">
+                    <h2 class="m-b-20">Clients</h2>
+                    <h2 class="f-right"><span>{{this.dataCounted.client}}</span></h2>
+                    <i class="fa fa-users f-left" aria-hidden="true"></i>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-5 col-xl-4">
+            <div class="card bg-c-blue order-card">
+                <div class="card-block">
+                    <h2 class="m-b-20">Fournisseurs</h2>
+                    <h2 class="f-right"><span>{{this.dataCounted.fournisseur}}</span></h2>
+                    <i class="fa fa-users f-left" aria-hidden="true"></i>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-5 col-xl-4">
+            <div class="card bg-c-pink order-card">
+                <div class="card-block">
+                    <h2 class="m-b-20">Catégories</h2>
+                    <h2 class="f-right"><span>{{this.dataCounted.categorie}}</span></h2>
+                    <i class="fa fa-list-alt f-left" aria-hidden="true"></i>
+                </div>
+            </div>
+        </div>
+	</div>
+    <div class="row">
+        <div class="col-md-5 col-xl-4">
+            <div class="card bg-c-pink order-card">
+                <div class="card-block">
+                    <h2 class="m-b-20">Produits</h2>
+                    <h2 class="f-right"><span>{{this.dataCounted.produit}}</span></h2>
+                    <i class="fa fa-cubes f-left" aria-hidden="true"></i>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-5 col-xl-4">
+            <div class="card bg-c-green order-card">
+                <div class="card-block">
+                    <h2 class="m-b-20">Bons d'achat</h2>
+                    <h2 class="f-right"><span>{{this.dataCounted.bonAchat}}</span></h2>
+                    <i class="fa fa-cart-arrow-down f-left" aria-hidden="true"></i>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-5 col-xl-4">
+            <div class="card bg-c-green order-card">
+                <div class="card-block">
+                    <h2 class="m-b-20">Bons d'honoraire</h2>
+                    <h2 class="f-right"><span>{{this.dataCounted.bonHonoraire}}</span></h2>
+                    <i class="fa fa-shopping-cart f-left" aria-hidden="true"></i>
+                </div>
+            </div>
+        </div>
+	</div>
+    <div class="row">
+        <div class="col-md-5 col-xl-4">
+            <div class="card bg-c-green order-card">
+                <div class="card-block">
+                    <h2 class="m-b-20">Factures</h2>
+                    <h2 class="f-right"><span>{{this.dataCounted.facture}}</span></h2>
+                    <i class="fa fa-files-o f-left" aria-hidden="true"></i>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-5 col-xl-4">
+            <div class="card bg-c-yellow order-card">
+                <div class="card-block">
+                    <h2 class="m-b-20">Règ. Fournisseurs</h2>
+                    <h2 class="f-right"><span>{{this.dataCounted.reglementFournisseur}}</span></h2>
+                    <i class="fa fa-money f-left" aria-hidden="true"></i>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-5 col-xl-4">
+            <div class="card bg-c-yellow order-card">
+                <div class="card-block">
+                    <h2 class="m-b-20">Règ. Clients</h2>
+                    <h2 class="f-right"><span>{{this.dataCounted.reglementClient}}</span></h2>
+                    <i class="fa fa-money f-left" aria-hidden="true"></i>
+                </div>
+            </div>
+        </div>
+	</div>
+    
+    <div>
+        <ngx-charts-bar-vertical-2d
+  [view]="view"
+  [scheme]="colorScheme"
+  [results]="multi"
+  [gradient]="gradient"
+  [xAxis]="showXAxis"
+  [yAxis]="showYAxis"
+  [legend]="showLegend"
+  [showXAxisLabel]="showXAxisLabel"
+  [showYAxisLabel]="showYAxisLabel"
+  [xAxisLabel]="xAxisLabel"
+  [yAxisLabel]="yAxisLabel"
+  [legendTitle]="legendTitle"
+  (select)="onSelect($event)"
+  (activate)="onActivate($event)"
+  (deactivate)="onDeactivate($event)">
+</ngx-charts-bar-vertical-2d>
+        
+
+
+    <!--    <ngx-charts-line-chart
+  [view]="view"
+  [scheme]="colorScheme"
+  [legend]="legend"
+  [showXAxisLabel]="showXAxisLabel"
+  [showYAxisLabel]="showYAxisLabel"
+  [xAxis]="xAxis"
+  [yAxis]="yAxis"
+  [xAxisLabel]="xAxisLabel"
+  [yAxisLabel]="yAxisLabel"
+  [timeline]="timeline"
+  [results]="multi"
+  (select)="onSelect($event)"
+  (activate)="onActivate($event)"
+  (deactivate)="onDeactivate($event)"
+  >
+</ngx-charts-line-chart>-->
+    </div>
+</div>

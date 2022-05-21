@@ -10,13 +10,12 @@ export class Stock{
 
 
     addToStock(bonAchat: BonAchat){
-
         bonAchat.listLignBA.forEach(currentValue => {
             
             currentValue.produit.quantitieDisponible += currentValue.quantite;
     
             this.produitService.updateProduit(currentValue.produit.reference,currentValue.produit).subscribe(data => {
-                console.log("add stock")
+            
             }, error =>{
                 alert("SA")
               });
@@ -25,15 +24,16 @@ export class Stock{
     }
 
     removeFromStock(bonAchat: BonAchat){
-
+        
         bonAchat.listLignBA.forEach(currentValue => {
+            
             currentValue.produit.quantitieDisponible -= currentValue.quantite;
-    
+
             this.produitService.updateProduit(currentValue.produit.reference,currentValue.produit).subscribe(data => {
-                console.log("remove stock")
+                
             }, error =>{
                 alert("SR")
-              });
+            });
 
           });
 

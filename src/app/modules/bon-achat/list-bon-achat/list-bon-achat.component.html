@@ -33,9 +33,9 @@
       </ng-container>
   
       <!-- Tele Column -->
-      <ng-container matColumnDef="totalGeneral">
+      <ng-container matColumnDef="montantTotal">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Totale general </th>
-        <td mat-cell *matCellDef="let row"> {{row.totalGeneral}} </td>
+        <td mat-cell *matCellDef="let row"> {{row.montantTotal | number :'1.2-2'}} </td>
       </ng-container>
 
       <!-- Action column -->

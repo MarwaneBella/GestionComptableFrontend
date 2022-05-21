@@ -20,7 +20,8 @@
             "allowedCommonJsDependencies": [
               "core-js",
               "raf",
-              "jspdf-autotable"
+              "jspdf-autotable",
+              "clone-deep"
             ],
             "outputPath": "dist/gestion-comptable-frontend",
             "index": "src/index.html",

@@ -8,7 +8,7 @@ export class BonAchat{
     bonANum            : string;
     facBonNum          : string;
     valide              : boolean;
-    totalGeneral       : number;
+    montantTotal       : number;
     fournisseur        : Fournisseur;
     listLignBA         : LignBA[];
 

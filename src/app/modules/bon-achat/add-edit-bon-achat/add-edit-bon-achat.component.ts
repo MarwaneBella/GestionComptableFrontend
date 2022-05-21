@@ -202,7 +202,6 @@ export class AddEditBonAchatComponent implements OnInit {
       });
 
       this.filterProduit()
-      console.log(this.produits)
       
       this.dataList.forEach(element => {
         this.calculate.calculateMontants(element.prixUnitaire,element.quantite,element.produit.tva);
@@ -248,6 +247,11 @@ export class AddEditBonAchatComponent implements OnInit {
 
   setNextBonAchat(){
     this.bonAchatService.getNextBonANum(this.formInfosBon.controls['dateBa'].value).subscribe(data =>{
+      this.formInfosBon.controls['bonANum'].setValue(data);
+   });
+  }
+  setCurrentBonAchat(){
+    this.bonAchatService.getCurrentBonANum(this.id,this.formInfosBon.controls['dateBa'].value).subscribe(data =>{
       this.formInfosBon.controls['bonANum'].setValue(data);
    });
   }
@@ -302,7 +306,7 @@ export class AddEditBonAchatComponent implements OnInit {
         }
         
       });
-      console.log(this.produits)
+      
       this.dataSource = new MatTableDataSource(this.dataList);
       this.totale();
     }
@@ -374,6 +378,7 @@ export class AddEditBonAchatComponent implements OnInit {
     if(this.isAddMode){
       this.bonAchat = this.formInfosBon.value;
       this.bonAchat.listLignBA  = this.dataList;
+      this.bonAchat.montantTotal = this.totaleMontantTtc;
       this.bonAchat.valide = false;
 
       this.bonAchatService.addBonAchat(this.bonAchat).subscribe(data =>{
@@ -391,7 +396,9 @@ export class AddEditBonAchatComponent implements OnInit {
 
       this.bonAchat = this.formInfosBon.value;
       this.bonAchat.listLignBA  = this.dataList;
+      this.bonAchat.montantTotal = this.totaleMontantTtc;
       this.bonAchat.valide = false;
+
 
       this.bonAchatService.updateBonAchat(this.id,this.bonAchat).subscribe(data =>{
         this.router.navigateByUrl('bonAchat');
@@ -409,6 +416,7 @@ export class AddEditBonAchatComponent implements OnInit {
     if(this.isAddMode){
       this.bonAchat = this.formInfosBon.value;
       this.bonAchat.listLignBA  = this.dataList;
+      this.bonAchat.montantTotal = this.totaleMontantTtc;
       this.bonAchat.valide = true;
       
       this.bonAchatService.addBonAchat(this.bonAchat).subscribe(data =>{
@@ -423,37 +431,42 @@ export class AddEditBonAchatComponent implements OnInit {
 
       if(this.bonAchat.valide){
         //remove from stock
-
+        
         this.bonAchatService.getBonAchatById(this.id).subscribe(data =>{
           this.bonAchat =data;
-          console.log(this.bonAchat)
+          
           this.stock.removeFromStock(this.bonAchat);
 
-          setTimeout(() => {
-            this.bonAchat = this.formInfosBon.value;
+          //
+          this.bonAchat = this.formInfosBon.value;
           this.bonAchat.listLignBA  = this.dataList;
+          this.bonAchat.montantTotal = this.totaleMontantTtc;
           this.bonAchat.valide = true;
-          console.log(this.bonAchat)
 
           this.bonAchatService.updateBonAchat(this.id,this.bonAchat).subscribe(data =>{
             //add to stock
+            this.bonAchat = data;
+            
+            
             this.stock.addToStock(this.bonAchat);
+            
+            
             this.router.navigateByUrl('bonAchat');
           }, error =>{
             alert("V")
           });
-            
-          }, 2000);
-
-          
 
         })
+        
+
+        
 
 
       }
       else{
         this.bonAchat = this.formInfosBon.value;
         this.bonAchat.listLignBA  = this.dataList;
+        this.bonAchat.montantTotal = this.totaleMontantTtc;
         this.bonAchat.valide = true;
 
         this.bonAchatService.updateBonAchat(this.id,this.bonAchat).subscribe(data =>{

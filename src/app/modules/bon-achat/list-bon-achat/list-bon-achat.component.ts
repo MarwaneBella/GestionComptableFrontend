@@ -14,7 +14,7 @@ import { DeleteBonAchatComponent } from '../delete-bon-achat/delete-bon-achat.co
 })
 export class ListBonAchatComponent  implements AfterViewInit {
 
-  displayedColumns: string[] = ['idBa', 'nomF', 'dateBa', 'totalGeneral', 'actions'];
+  displayedColumns: string[] = ['idBa', 'nomF', 'dateBa', 'montantTotal', 'actions'];
   dataSource: MatTableDataSource<BonAchat>;
   listBonAchat: BonAchat[];
   bonAchat : BonAchat = new BonAchat();

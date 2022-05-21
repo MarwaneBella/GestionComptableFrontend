@@ -16,6 +16,9 @@ export class BonAchatService {
   getNextBonANum(date: Date):Observable<any>{
     return this.httpClient.post(`${this.baseUrl+"/next"}`, date,{responseType: 'text'});
   }
+  getCurrentBonANum(id:number ,date: Date):Observable<any>{
+    return this.httpClient.post(`${this.baseUrl+"/current"}/${id}`, date,{responseType: 'text'});
+  }
   getBonAchatList(): Observable<BonAchat[]>{
     return this.httpClient.get<BonAchat[]>(`${this.baseUrl}`);
   }
