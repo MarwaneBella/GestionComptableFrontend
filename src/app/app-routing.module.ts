@@ -32,7 +32,12 @@ const routes: Routes = [
       {
         path :'formulaire',
         loadChildren:()=>import('./modules/formulaire/formulaire.module').then(m=>m.FormulaireModule)
+      },
+      {
+        path :'reglementFournisseur',
+        loadChildren:()=>import('./modules/reglement-fournisseur/reglement-fournisseur.module').then(m=>m.ReglementFournisseurModule)
       }
+
       
     ],
     

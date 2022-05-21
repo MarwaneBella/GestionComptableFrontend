@@ -34,7 +34,7 @@ export class DeleteClientComponent implements OnInit {
   deleteClientById(){
     this.clientService.deleteClientById(this.ID).subscribe(data => {
       this.dialogRef.close();
-      this.notifier.notify( 'success', `Client ${this.namClient} est Delete en list ` );
+      this.notifier.notify( 'error', `Client ${this.namClient} est Delete en list ` );
     })
   }
 

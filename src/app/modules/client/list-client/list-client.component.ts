@@ -51,6 +51,8 @@ export class ListClientComponent implements AfterViewInit{
       this.clients = data;
 
       this.dataSource = new MatTableDataSource(this.clients);
+      
+      console.log(this.dataSource)
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     },
@@ -120,7 +122,7 @@ export class ListClientComponent implements AfterViewInit{
     doc.setProperties({
       title: "LIST CLIENTS",
       
-  });
+    });
     doc.setTextColor('#0A043C')
     doc.setFontSize(30);
     doc.text('LIST CLIENTS',110,20,{align:'center'})

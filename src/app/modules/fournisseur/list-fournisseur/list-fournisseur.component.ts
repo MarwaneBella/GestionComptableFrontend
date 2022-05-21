@@ -10,6 +10,10 @@ import { ShowFournisseurComponent } from '../show-fournisseur/show-fournisseur.c
 
 import { NotifierService } from 'angular-notifier';
 
+import jsPDF from 'jspdf'
+//import * as autoTable from 'jspdf-autotable';
+import autoTable from 'jspdf-autotable'; 
+import 'jspdf-autotable';
 @Component({
   selector: 'app-list-fournisseur',
   templateUrl: './list-fournisseur.component.html',
@@ -70,5 +74,59 @@ export class ListFournisseurComponent implements AfterViewInit {
       this.getFournisseurs() ;
     });
   }
+
+  public openPDF(): void {
+    /*
+       let DATA: any = document.getElementById('htmlData');
+     html2canvas(DATA).then((canvas) => {
+       let fileWidth = 208;
+       let fileHeight = (canvas.height * fileWidth) / canvas.width;
+       const FILEURI = canvas.toDataURL('image/png');
+       let PDF = new jsPDF('p', 'mm', 'A4');
+       let position = 0;
+       PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
+       PDF.save('angular-demo.pdf');
+     });
+      ///
+      let DATA: any = document.getElementById('htmlData');
+ 
+     let pdf = new jsPDF()
+     pdf.html(DATA, {
+       callback: (pdf) => {
+         pdf.save("sample.pdf")
+       },
+     
+     })*/
+    
+     
+     const head = [['Code Fournisseur', 'Nom', 'Email', 'Numéro De Téléphone']]
+     let data = []
+     for(let i=0 ;i<this.fournisseurs.length ;i++){
+       data.push([this.fournisseurs[i].codeF, this.fournisseurs[i].nom, this.fournisseurs[i].email , this.fournisseurs[i].telePortable])
+     }
+     
+     const doc = new jsPDF()
+     doc.setProperties({
+       title: "LIST FOURNISSEURS",
+       
+     });
+     doc.setTextColor('#0A043C')
+     doc.setFontSize(30);
+     doc.text('LIST FOURNISSEURS',110,20,{align:'center'})
+     
+      autoTable(doc, {
+       theme :'grid',
+       head: head,
+       body: data,
+       tableWidth: 'auto',
+       margin: { top: 30 }   
+     })
+ 
+ 
+     
+     
+     //doc.save('clients.pdf')
+     window.open(URL.createObjectURL(doc.output("blob")))
+   }
 }
 
