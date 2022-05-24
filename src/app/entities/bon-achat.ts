@@ -7,8 +7,10 @@ export class BonAchat{
     dateBa             : Date;
     bonANum            : string;
     facBonNum          : string;
-    valide              : boolean;
+    valide             : boolean;
+    status             : boolean
     montantTotal       : number;
+    montantPayer       : number
     fournisseur        : Fournisseur;
     listLignBA         : LignBA[];
 
