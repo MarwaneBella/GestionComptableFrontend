@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BonAchat } from 'src/app/entities/bon-achat';
+import { Fournisseur } from 'src/app/entities/fournisseur';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ export class BonAchatService {
 
   private baseUrl ="http://localhost:8084/api/bonAchat";
   private lignBAUrl ="http://localhost:8084/api/lignBA";
+
 
   constructor(private httpClient: HttpClient) {}
 
@@ -35,6 +37,10 @@ export class BonAchatService {
     return this.httpClient.put<BonAchat>(`${this.baseUrl}/${id}`,bonAchat);
   }
 
+  updateBonAchatFromReglementFournisseur( id :number, bonAchat: BonAchat) :Observable<BonAchat>{
+    return this.httpClient.put<BonAchat>(`${this.baseUrl+"/regFournisseur"}/${id}`,bonAchat);
+  }
+
   deleteBonAchatById(id :number):Observable<BonAchat>{
    return this.httpClient.delete<BonAchat>(`${this.baseUrl}/${id}`);
   }
@@ -43,5 +49,10 @@ export class BonAchatService {
 
   addListLignBA(list: any): Observable<any> {
     return this.httpClient.post(`${this.lignBAUrl+"/list"}`, list);
+  }
+
+  //
+  getListBonAchatByFournisseur(fournisseur : Fournisseur):Observable<any>{
+    return this.httpClient.post<any>(`${this.baseUrl+"/fournisseur"}`,fournisseur)
   }
 }

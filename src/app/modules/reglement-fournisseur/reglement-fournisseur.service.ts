@@ -1,21 +1,28 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { FournisseurDto } from 'src/app/entities/dto/fournisseurDto';
+import { ReglementFournisseur } from 'src/app/entities/reglement-fournisseur';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReglementFournisseurService {
 
-  private baseUrl ="http://localhost:8084/api/fournisseurDto";
+  private baseUrl ="http://localhost:8084/api/reglementFournisseurs";
   
  
   constructor(private httpClient: HttpClient) { }
   
  
 
-  getFournisseurByCodF( id :number ):Observable<any> {
-    return this.httpClient.get<any>(`${this.baseUrl}/${id}`)
+  addReglementFournisseur( reglementFournisseur : ReglementFournisseur ):Observable<any> {
+    return this.httpClient.post(`${this.baseUrl}`,reglementFournisseur)
   }
+
+  getNextCodeRF( date : Date):Observable<any> {
+    return this.httpClient.post(`${this.baseUrl+"/next"}`, date,{responseType: 'text'});
+  }
+  
+
+ 
 }

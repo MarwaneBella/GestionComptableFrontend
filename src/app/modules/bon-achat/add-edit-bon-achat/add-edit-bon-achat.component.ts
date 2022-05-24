@@ -57,6 +57,7 @@ export class AddEditBonAchatComponent implements OnInit {
   totaleMontantHt: number;
   totaleTauxTva: number;
   totaleMontantTtc: number;
+  
   stock : Stock = new Stock(this.produitService);
   
   filteredProduits: Observable<Produit[]>;

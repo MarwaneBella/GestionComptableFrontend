@@ -17,7 +17,7 @@ button.example-custom-date-class {
   }
   
   td, th {
-    width: 10%;
+    width: 11%;
     
   }
   
@@ -43,4 +43,14 @@ button.example-custom-date-class {
     background-color: rgba(0, 0, 0, 0.03);
     border-bottom: 1px 1px solid rgba(0, 0, 0, 0.125);
     border-top: 1px 1px solid rgba(0, 0, 0, 0.125);
+  }
+  .input{
+    width: 70%;
+  }
+  .span-satus-true{
+    color: #198754;
+  }
+  
+  .span-satus-false{
+    color: #dc3545;
   }

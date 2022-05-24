@@ -4,5 +4,6 @@ export class BonAchatDto{
      facBonNum :string;
      dateBa :Date;
      valide :boolean;
-     totalGeneral :number;
+     montantTotal :number;
+     montantPayer : number ;
 }
