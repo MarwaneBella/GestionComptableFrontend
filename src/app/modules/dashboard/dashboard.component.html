@@ -1,6 +1,6 @@
-<div class="container">
+<div class="containe">
     <div class="row">
-        <div class="col-md-5 col-xl-4">
+        <div class="col-md-6 col-xl-4">
             <div class="card bg-c-blue order-card">
                 <div class="card-block">
                     <h2 class="m-b-20">Clients</h2>
@@ -10,7 +10,7 @@
             </div>
         </div>
         
-        <div class="col-md-5 col-xl-4">
+        <div class="col-md-6 col-xl-4">
             <div class="card bg-c-blue order-card">
                 <div class="card-block">
                     <h2 class="m-b-20">Fournisseurs</h2>
@@ -20,7 +20,7 @@
             </div>
         </div>
         
-        <div class="col-md-5 col-xl-4">
+        <div class="col-md-6 col-xl-4">
             <div class="card bg-c-pink order-card">
                 <div class="card-block">
                     <h2 class="m-b-20">Catégories</h2>
@@ -31,7 +31,7 @@
         </div>
 	</div>
     <div class="row">
-        <div class="col-md-5 col-xl-4">
+        <div class="col-md-6 col-xl-4">
             <div class="card bg-c-pink order-card">
                 <div class="card-block">
                     <h2 class="m-b-20">Produits</h2>
@@ -41,7 +41,7 @@
             </div>
         </div>
         
-        <div class="col-md-5 col-xl-4">
+        <div class="col-md-6 col-xl-4">
             <div class="card bg-c-green order-card">
                 <div class="card-block">
                     <h2 class="m-b-20">Bons d'achat</h2>
@@ -51,7 +51,7 @@
             </div>
         </div>
         
-        <div class="col-md-5 col-xl-4">
+        <div class="col-md-6 col-xl-4">
             <div class="card bg-c-green order-card">
                 <div class="card-block">
                     <h2 class="m-b-20">Bons d'honoraire</h2>
@@ -62,7 +62,7 @@
         </div>
 	</div>
     <div class="row">
-        <div class="col-md-5 col-xl-4">
+        <div class="col-md-6 col-xl-4">
             <div class="card bg-c-green order-card">
                 <div class="card-block">
                     <h2 class="m-b-20">Factures</h2>
@@ -72,7 +72,7 @@
             </div>
         </div>
         
-        <div class="col-md-5 col-xl-4">
+        <div class="col-md-6 col-xl-4">
             <div class="card bg-c-yellow order-card">
                 <div class="card-block">
                     <h2 class="m-b-20">Règ. Fournisseurs</h2>
@@ -93,43 +93,44 @@
         </div>
 	</div>
     
-    <div>
-        <ngx-charts-bar-vertical-2d
-  [view]="view"
-  [scheme]="colorScheme"
-  [results]="multi"
-  [gradient]="gradient"
-  [xAxis]="showXAxis"
-  [yAxis]="showYAxis"
-  [legend]="showLegend"
-  [showXAxisLabel]="showXAxisLabel"
-  [showYAxisLabel]="showYAxisLabel"
-  [xAxisLabel]="xAxisLabel"
-  [yAxisLabel]="yAxisLabel"
-  [legendTitle]="legendTitle"
-  (select)="onSelect($event)"
-  (activate)="onActivate($event)"
-  (deactivate)="onDeactivate($event)">
-</ngx-charts-bar-vertical-2d>
-        
+    <div class="row mt-5">
+        <div class="col-md-12 col-xl-6">
+            <div class="card bar-chart-card">
 
+                <app-grouped-vertical-bar-chart></app-grouped-vertical-bar-chart>
+                
+            </div>
+        </div>
 
-    <!--    <ngx-charts-line-chart
-  [view]="view"
-  [scheme]="colorScheme"
-  [legend]="legend"
-  [showXAxisLabel]="showXAxisLabel"
-  [showYAxisLabel]="showYAxisLabel"
-  [xAxis]="xAxis"
-  [yAxis]="yAxis"
-  [xAxisLabel]="xAxisLabel"
-  [yAxisLabel]="yAxisLabel"
-  [timeline]="timeline"
-  [results]="multi"
-  (select)="onSelect($event)"
-  (activate)="onActivate($event)"
-  (deactivate)="onDeactivate($event)"
-  >
-</ngx-charts-line-chart>-->
+        <div class="col-md-12  col-xl-6">
+            <div class="card line-chart-card">
+
+                <app-line-chart></app-line-chart>
+
+            </div>
+        </div>
+    
     </div>
+
+
+    <div class="row mt-2">
+        <div class="col-md-12 col-xl-6">
+            <div class="card pie-chart-card">
+
+                <app-pie-chart></app-pie-chart>
+                
+            </div>
+        </div>
+
+        <div class="col-md-12  col-xl-6">
+            <div class="card doughnut-chart-card">
+
+                <app-doughnut-chart></app-doughnut-chart>
+
+            </div>
+        </div>
+    
+    </div>
+
 </div>
+

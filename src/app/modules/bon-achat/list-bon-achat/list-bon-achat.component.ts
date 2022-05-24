@@ -6,6 +6,9 @@ import {MatDialog} from '@angular/material/dialog';
 import { BonAchat } from 'src/app/entities/bon-achat';
 import { BonAchatService } from '../bon-achat.service';
 import { DeleteBonAchatComponent } from '../delete-bon-achat/delete-bon-achat.component';
+import { ShowBonAchatComponent } from '../show-bon-achat/show-bon-achat.component';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-list-bon-achat',
@@ -14,7 +17,7 @@ import { DeleteBonAchatComponent } from '../delete-bon-achat/delete-bon-achat.co
 })
 export class ListBonAchatComponent  implements AfterViewInit {
 
-  displayedColumns: string[] = ['idBa', 'nomF', 'dateBa', 'montantTotal', 'actions'];
+  displayedColumns: string[] = ['bonANum', 'nomF', 'dateBa', 'montantTotal', 'montantPayer', 'status', 'valide', 'actions'];
   dataSource: MatTableDataSource<BonAchat>;
   listBonAchat: BonAchat[];
   bonAchat : BonAchat = new BonAchat();
@@ -54,22 +57,27 @@ export class ListBonAchatComponent  implements AfterViewInit {
     }
   }
 
-  /*
+  
   openDialogShow(row :any){
     this.dialog.open(ShowBonAchatComponent,{
       width:'95%',
       height:'90%',
       data:row
     })
-  }*/
+  }
+
+
 
   openDialogDelete(row :any) {
+    
     this.dialog.open(DeleteBonAchatComponent,{
       width:'30%',
       data:row,
     }).afterClosed().subscribe(val =>{
       this.getAllBonAchat() ;
     });
+
+   
   }
 
 }

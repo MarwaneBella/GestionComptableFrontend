@@ -15,5 +15,6 @@ mat-drawer-container {
 
 mat-drawer-content {
   padding: 20px;
+  background-color: #F5F7FA;
 }
 

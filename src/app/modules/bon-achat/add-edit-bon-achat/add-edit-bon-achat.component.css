@@ -10,24 +10,24 @@ button.example-custom-date-class {
 .example-container {
     max-height: 400px;
     overflow: auto;
-  }
+}
   
-  table {
-    width: 100%;
-  }
+table {
+  width: 100%;
+}
+
+td, th {
+  width: 12.5%;
   
-  td, th {
-    width: 12.5%;
-    
-  }
+}
+
+tr.mat-footer-row {
+  font-weight: bold;
+}
   
-  tr.mat-footer-row {
-    font-weight: bold;
-  }
-  
-  .mat-table-sticky {
-    border-top: 1px solid #e0e0e0;
-  }
+.mat-table-sticky {
+  border-top: 1px solid #e0e0e0;
+}
 
   mat-expansion-panel-header{
     background-color: rgba(0, 0, 0, 0.03);
