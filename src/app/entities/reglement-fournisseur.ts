@@ -4,6 +4,7 @@ export class ReglementFournisseur{
      idRegF : number;
      codeRF : string ;
      modePaymant : string ;
+     status : boolean;
      avance : number;
      reste  : number;
      datePayment : Date
