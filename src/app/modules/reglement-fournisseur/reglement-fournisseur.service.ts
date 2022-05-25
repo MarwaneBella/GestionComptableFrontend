@@ -22,6 +22,10 @@ export class ReglementFournisseurService {
   getNextCodeRF( date : Date):Observable<any> {
     return this.httpClient.post(`${this.baseUrl+"/next"}`, date,{responseType: 'text'});
   }
+
+  getAllReglementFournisseur():Observable<any>{
+    return this.httpClient.get(`${this.baseUrl}`)
+  }
   
 
  
