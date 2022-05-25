@@ -4,8 +4,6 @@ import { MatCalendarCellClassFunction } from '@angular/material/datepicker';
 import { MatTableDataSource } from '@angular/material/table';
 import { map, Observable, startWith } from 'rxjs';
 import { BonAchat } from 'src/app/entities/bon-achat';
-import { BonAchatDto } from 'src/app/entities/dto/bonAchatDto';
-import { FournisseurDto } from 'src/app/entities/dto/fournisseurDto';
 import { Fournisseur } from 'src/app/entities/fournisseur';
 import { ReglementFournisseur } from 'src/app/entities/reglement-fournisseur';
 import { BonAchatService } from '../../bon-achat/bon-achat.service';
@@ -248,6 +246,10 @@ export class AddReglementFournisseurComponent implements OnInit {
 
   }
 
+  onSubmit(){
+    this.updateAllBonAchats();
+  }
+
 
   updateAllBonAchats(){
     this.bonAchats.forEach((currentValue, index) =>{
@@ -258,7 +260,7 @@ export class AddReglementFournisseurComponent implements OnInit {
            currentValue.montantPayer += this.avances[index]
            this.bonAchatService.updateBonAchatFromReglementFournisseur(currentValue.idBa,currentValue).subscribe(data =>{
              this.bonAchat =data
-             this.addReglementFournisseur(this.bonAchats[index],index)
+             this.addReglementFournisseur(this.bonAchat,index)
           })
        }
     })
@@ -275,16 +277,14 @@ export class AddReglementFournisseurComponent implements OnInit {
     this.reglementFournisseur.bonAchat = bonAchat
     this.reglementFournisseur.avance = this.avances[index]
     this.reglementFournisseur.reste = this.restes[index]
+    this.reglementFournisseur.status = this.status[index];
     this.reglementFournisseur.datePayment = this.formInfosFournisseur.controls['datePayment'].value
     this.reglementFournisseur.modePaymant = this.formInfosReglement.controls['mode_reglement'].value
 
-    this.reglementFournisseurService.getNextCodeRF(this.reglementFournisseur.datePayment).subscribe( data =>{
-      this.reglementFournisseur.codeRF = data 
-      this.reglementFournisseurService.addReglementFournisseur(this.reglementFournisseur).subscribe(data =>{
-
-      })
+    this.reglementFournisseurService.addReglementFournisseur(this.reglementFournisseur).subscribe(data =>{
+      
     })
-    
+
   }
   
 
