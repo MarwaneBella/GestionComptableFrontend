@@ -13,59 +13,50 @@
     <table  mat-table [dataSource]="dataSource" matSort>
   
       <!-- ID Column -->
-      <ng-container matColumnDef="nomF">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Bon numéro </th>
-        <td mat-cell *matCellDef="let row">{{ row.bonANum }}</td>
+      <ng-container matColumnDef="bonANum">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nom Fournisseur </th>
+        <td mat-cell *matCellDef="let row">{{row.bonAchat.fournisseur.nom   }}</td>
       </ng-container>
   
       <!-- Nom Column -->
-      <ng-container matColumnDef="bonANum">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom Fournisseur </th>
-        <td mat-cell *matCellDef="let row"> {{row.fournisseur.nom}} </td>
+      <ng-container matColumnDef="nomF">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Bon numéro  </th>
+        <td mat-cell *matCellDef="let row"> {{ row.bonAchat.bonANum}} </td>
       </ng-container>
   
  
   
       <!-- Tele Column -->
       <ng-container matColumnDef="codeRF">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Montant Total </th>
-        <td mat-cell *matCellDef="let row"> {{row.montantTotal | number :'1.2-2'}} </td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Code RF </th>
+        <td mat-cell *matCellDef="let row"> {{row.codeRF}} </td>
       </ng-container>
 
       <ng-container matColumnDef="datePayment">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Montant Payer </th>
-        <td mat-cell *matCellDef="let row"> {{row.montantPayer | number :'1.2-2'}} </td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Date Payment </th>
+        <td mat-cell *matCellDef="let row"> {{row.datePayment}} </td>
       </ng-container>
 
       <ng-container matColumnDef="modePayment">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
-        <td mat-cell *matCellDef="let row">
-          <span *ngIf="row.status" class="span-satus-true" >R</span>
-          <span *ngIf="!row.status" class="span-satus-false" >NR</span>
-        </td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Mode de Réglement </th>
+        <td mat-cell *matCellDef="let row"> {{row.modePaymant}} </td>
       </ng-container>
 
       <ng-container matColumnDef="avance">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Valider </th>
-        <td mat-cell *matCellDef="let row">
-          <i *ngIf="row.valide" class="fa fa-check-circle-o fa-lg"  aria-hidden="true"></i>
-          <i *ngIf="!row.valide" class="fa fa-times-circle-o fa-lg"  aria-hidden="true"></i>
-        </td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Avance </th>
+        <td mat-cell *matCellDef="let row">{{row.avance}}</td>
       </ng-container>
 
       <ng-container matColumnDef="reste">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Valider </th>
-        <td mat-cell *matCellDef="let row">
-          <i *ngIf="row.valide" class="fa fa-check-circle-o fa-lg"  aria-hidden="true"></i>
-          <i *ngIf="!row.valide" class="fa fa-times-circle-o fa-lg"  aria-hidden="true"></i>
-        </td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Reste </th>
+        <td mat-cell *matCellDef="let row">{{row.reste}}</td>
       </ng-container>
 
       <ng-container matColumnDef="status">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Valider </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
         <td mat-cell *matCellDef="let row">
-          <i *ngIf="row.valide" class="fa fa-check-circle-o fa-lg"  aria-hidden="true"></i>
-          <i *ngIf="!row.valide" class="fa fa-times-circle-o fa-lg"  aria-hidden="true"></i>
+            <span *ngIf="row.status" class="span-satus-true" >R</span>
+            <span *ngIf="!row.status" class="span-satus-false" >NR</span>
         </td>
       </ng-container>
 
@@ -74,12 +65,8 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
         <td mat-cell *matCellDef="let row">
           <div class="actions">
-            <button  class="btn btn-outline-primary"><i class="fa fa-eye" aria-hidden="true"></i></button>
-            <button  aria-label="Name"  type="button" class="btn btn-outline-success mx-1" routerLink="editBonAchat/{{row.idBa}}"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-            <button   class="btn btn-outline-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
-          
+            <button  (click)="openDialog(row)" class="btn btn-outline-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
           </div>
-
         </td>
       </ng-container>
   
@@ -93,4 +80,5 @@
     </table>
   
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" ></mat-paginator>
-  </div>
+    <notifier-container></notifier-container>
+</div>

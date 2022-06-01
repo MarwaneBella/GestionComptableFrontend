@@ -259,16 +259,16 @@ export class AddReglementFournisseurComponent implements OnInit {
            currentValue.status = this.status[index]
           }
            currentValue.montantPayer += this.avances[index]
-           
-
+           console.log(index)
             this.bonAchatService.updateBonAchatFromReglementFournisseur(currentValue.idBa,currentValue).subscribe(data =>{
-              this.bonAchat =data
-              this.addReglementFournisseur(this.bonAchat,index);
-              
-           })
              
-           
-           
+            console.log(this.bonAchats[index].bonANum)
+            this.addReglementFournisseur(this.bonAchats[index],index)
+            })
+            
+            
+            
+            
        }
     })
 
@@ -281,6 +281,7 @@ export class AddReglementFournisseurComponent implements OnInit {
   // add reglement fournisseur :
   addReglementFournisseur(bonAchat : BonAchat , index : number){
 
+    console.log("addReglement")
     this.reglementFournisseur.bonAchat = bonAchat
     this.reglementFournisseur.avance = this.avances[index]
     this.reglementFournisseur.reste = this.restes[index]
@@ -295,12 +296,5 @@ export class AddReglementFournisseurComponent implements OnInit {
     
 
   }
-  
-
-
-
-  
-
-  
-
+ 
 }
