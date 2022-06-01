@@ -6,7 +6,14 @@ import { Client } from 'src/app/entities/client';
 import { ClientService } from '../client.service';
 
 import { NotifierService } from 'angular-notifier';
-
+import Swal from 'sweetalert2';
+const swalWithBootstrapButtons = Swal.mixin({
+  customClass: {
+    confirmButton: 'btn btn-success ',
+    cancelButton: 'btn btn-danger me-2'
+  },
+  buttonsStyling: false
+})
 
 @Component({
   selector: 'app-add-edit-client',
@@ -15,58 +22,8 @@ import { NotifierService } from 'angular-notifier';
 })
 export class AddEditClientComponent implements OnInit {
 
-  villes: string[] = [
-    'Alabama',
-    'Alaska',
-    'Arizona',
-    'Arkansas',
-    'California',
-    'Colorado',
-    'Connecticut',
-    'Delaware',
-    'Florida',
-    'Georgia',
-    'Hawaii',
-    'Idaho',
-    'Illinois',
-    'Indiana',
-    'Iowa',
-    'Kansas',
-    'Kentucky',
-    'Louisiana',
-    'Maine',
-    'Maryland',
-    'Massachusetts',
-    'Michigan',
-    'Minnesota',
-    'Mississippi',
-    'Missouri',
-    'Montana',
-    'Nebraska',
-    'Nevada',
-    'New Hampshire',
-    'New Jersey',
-    'New Mexico',
-    'New York',
-    'North Carolina',
-    'North Dakota',
-    'Ohio',
-    'Oklahoma',
-    'Oregon',
-    'Pennsylvania',
-    'Rhode Island',
-    'South Carolina',
-    'South Dakota',
-    'Tennessee',
-    'Texas',
-    'Utah',
-    'Vermont',
-    'Virginia',
-    'Washington',
-    'West Virginia',
-    'Wisconsin',
-    'Wyoming',
-  ];
+  villes: Array<any> = new Array();
+  
   
   
   infosGeneralFormGroup: FormGroup;
@@ -94,13 +51,25 @@ export class AddEditClientComponent implements OnInit {
     this.isAddMode = !this.id;
 
     this.declareForms();
+    this.loadVillesJson();
 
     if(this.isAddMode){
+
+
       this.nameBtn = "Ajoute"
     }else{
       this.nameBtn ="Edite"
       this.getClient();
     }
+
+  }
+
+  loadVillesJson(){
+
+    fetch('./assets/jsons/villes.json').then(res => res.json())
+    .then(jsonData => {
+      this.villes = jsonData;
+    });
 
   }
 

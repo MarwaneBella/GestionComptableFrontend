@@ -1,15 +1,41 @@
 
+
+
 <div class="wrapper">
+	
 	<div class="container mx-auto">
-		<h1>Welcome</h1>
 		
-		<form class="form" (ngSubmit)="onSubmit()">
-            
-			<input type="text" placeholder="Username" id="username" name="username" [(ngModel)]="user.username">
-			<input type="password" placeholder="Password" id="password" name="password" [(ngModel)]="user.password" >
-			<button type="submit" id="login-button">Login</button>
-			
-		</form>
+
+		<div id="card">
+			<div id="card-content">
+			  <div id="card-title">
+				<h1>L'authentification</h1>
+
+				
+				
+			  </div>
+			  	
+					<form class="form" (ngSubmit)="onSubmit()">
+						<h3 [hidden]="isCorrect" class="text-danger">E-mail ou mot de passe incorrecte.</h3>
+						<input type="text" placeholder="Nom d'utilisateur" id="username" name="username" [(ngModel)]="user.userName">
+						<input  type="password" placeholder="Mot de passe" id="password" name="password" [(ngModel)]="user.userPassword" >
+						<div class="test mt-3">
+							<label class="toggle-control">
+								<input type="checkbox" name="checkbox"  [(ngModel)]="isChecked" (change)="CheckBox()">
+								<span class="control"></span>
+								
+							</label>
+							<p style="font-size: 17px; margin-left: 55px;"> Rester connecté</p>
+
+						
+						</div>
+						<button class ="mt-4" type="submit" id="login-button">S'identifier</button>
+								
+				</form>
+			</div>
+		</div>
+		
+		
 	</div>
 	
 	<ul class="bg-bubbles">

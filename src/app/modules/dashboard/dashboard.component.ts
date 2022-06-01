@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { Color, ScaleType } from '@swimlane/ngx-charts';
+
 import { StatistiqueService } from './statistique.service';
 
 export interface DataCouted{

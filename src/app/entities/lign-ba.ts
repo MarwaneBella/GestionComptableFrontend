@@ -8,4 +8,5 @@ export class LignBA{
     prixUnitaire : number;
     produit: Produit;
     bonAchat: BonAchat; 
+    
 }

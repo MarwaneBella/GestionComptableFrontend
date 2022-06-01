@@ -7,7 +7,6 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { GroupedVerticalBarChartComponent } from './grouped-vertical-bar-chart/grouped-vertical-bar-chart.component';
 import { LineChartComponent } from './line-chart/line-chart.component';
 import { PieChartComponent } from './pie-chart/pie-chart.component';
-import { AdvancedPieChartComponent } from './advanced-pie-chart/advanced-pie-chart.component';
 import { DoughnutChartComponent } from './doughnut-chart/doughnut-chart.component';
 
 
@@ -18,7 +17,6 @@ import { DoughnutChartComponent } from './doughnut-chart/doughnut-chart.componen
     GroupedVerticalBarChartComponent,
     LineChartComponent,
     PieChartComponent,
-    AdvancedPieChartComponent,
     DoughnutChartComponent
   ],
   imports: [

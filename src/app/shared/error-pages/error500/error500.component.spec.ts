@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AdvancedPieChartComponent } from './advanced-pie-chart.component';
+import { Error500Component } from './error500.component';
 
-describe('AdvancedPieChartComponent', () => {
-  let component: AdvancedPieChartComponent;
-  let fixture: ComponentFixture<AdvancedPieChartComponent>;
+describe('Error500Component', () => {
+  let component: Error500Component;
+  let fixture: ComponentFixture<Error500Component>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AdvancedPieChartComponent ]
+      declarations: [ Error500Component ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AdvancedPieChartComponent);
+    fixture = TestBed.createComponent(Error500Component);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

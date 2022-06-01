@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserAuthService } from 'src/app/modules/user/user-auth.service';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +11,9 @@ export class HomeComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    
+  }
 
 
   sideBarToggler() {

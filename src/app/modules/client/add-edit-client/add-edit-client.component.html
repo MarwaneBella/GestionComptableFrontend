@@ -101,7 +101,7 @@
               <mat-label>Ville</mat-label>
               <mat-select formControlName="ville">
                 <mat-option>None</mat-option>
-                <mat-option *ngFor="let ville of villes" [value]="ville">{{ville}}</mat-option>
+                <mat-option *ngFor="let v of villes" [value]="v">{{v}}</mat-option>
               </mat-select>
             </mat-form-field>
           </div>
@@ -233,7 +233,5 @@
       </div>
     </mat-step>
   </mat-horizontal-stepper>
-
-
 
   

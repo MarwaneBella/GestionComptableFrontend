@@ -9,14 +9,28 @@
         <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
            
                     <button mat-button [matMenuTriggerFor]="menu">
-                       <img src="https://scontent.frak3-1.fna.fbcdn.net/v/t1.6435-1/50342181_2279187745626776_4462049594057949184_n.jpg?stp=cp0_dst-jpg_p40x40&_nc_cat=108&ccb=1-5&_nc_sid=1eb0c7&_nc_ohc=9QxQr91U-W0AX868AVA&_nc_ht=scontent.frak3-1.fna&oh=00_AT_VKR2Sr9RFKkZtqmuqAJzB99YWqjj1v6cixWQaQyvytQ&oe=628262EB" > ESSADIK / BELLA
+                        <i class="fa fa-user-circle me-2" aria-hidden="true"></i>
+                        {{userAuthService.getUserName()}}
                     </button>
-                    <mat-menu #menu="matMenu">
-                        <button mat-menu-item>
-                            <mat-icon>exit_to_app</mat-icon>
-                            Sign out
-                        </button>
+                    
+                    <mat-menu #menu="matMenu" xPosition="before">
+                        
+                            <li  mat-menu-item>
+                                <i class="fa fa-user me-2" aria-hidden="true"></i>
+                            profile
+                            </li>
+                            <li  mat-menu-item>
+                                <i class="fa fa-users me-2" aria-hidden="true"></i>
+                                Gestion des comptes
+                            </li>
+                            <li (click)="logOut()" mat-menu-item>
+                                <i class="fa fa-sign-out me-2" aria-hidden="true"></i>
+                                Se déconnecter
+                            </li>
+                        
                     </mat-menu>
+
+
         </div>
     </mat-toolbar-row>
 </mat-toolbar> 

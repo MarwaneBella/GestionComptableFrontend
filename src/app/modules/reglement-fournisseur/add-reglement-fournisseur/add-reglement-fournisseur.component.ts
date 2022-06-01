@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatCalendarCellClassFunction } from '@angular/material/datepicker';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { map, Observable, startWith } from 'rxjs';
 import { BonAchat } from 'src/app/entities/bon-achat';
 import { Fournisseur } from 'src/app/entities/fournisseur';
@@ -55,7 +56,7 @@ export class AddReglementFournisseurComponent implements OnInit {
   totaleAvances      : number = 0
   totaleRestes       : number
 
-  constructor(private _formBuilder: FormBuilder , private fournisseurService :FournisseurService ,private bonAchatService : BonAchatService, private reglementFournisseurService : ReglementFournisseurService) { }
+  constructor(private _formBuilder: FormBuilder , private fournisseurService :FournisseurService ,private bonAchatService : BonAchatService, private reglementFournisseurService : ReglementFournisseurService,private router: Router) { }
 
   ngOnInit(): void {
     this.declareFormInfosFournisseur();
@@ -258,14 +259,20 @@ export class AddReglementFournisseurComponent implements OnInit {
            currentValue.status = this.status[index]
           }
            currentValue.montantPayer += this.avances[index]
-           this.bonAchatService.updateBonAchatFromReglementFournisseur(currentValue.idBa,currentValue).subscribe(data =>{
-             this.bonAchat =data
-             this.addReglementFournisseur(this.bonAchat,index)
-          })
+           
+
+            this.bonAchatService.updateBonAchatFromReglementFournisseur(currentValue.idBa,currentValue).subscribe(data =>{
+              this.bonAchat =data
+              this.addReglementFournisseur(this.bonAchat,index);
+              
+           })
+             
+           
+           
        }
     })
-        
-  
+
+    //this.router.navigateByUrl('reglementFournisseur');
 
   //  this.getListBonAchatByFournisseur(this.fournisseur)
 
@@ -284,6 +291,8 @@ export class AddReglementFournisseurComponent implements OnInit {
     this.reglementFournisseurService.addReglementFournisseur(this.reglementFournisseur).subscribe(data =>{
       
     })
+
+    
 
   }
   

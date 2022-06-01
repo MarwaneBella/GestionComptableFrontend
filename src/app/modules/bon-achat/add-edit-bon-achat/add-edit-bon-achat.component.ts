@@ -354,6 +354,7 @@ export class AddEditBonAchatComponent implements OnInit {
     });
     
   }
+  
 
   totale(){
      

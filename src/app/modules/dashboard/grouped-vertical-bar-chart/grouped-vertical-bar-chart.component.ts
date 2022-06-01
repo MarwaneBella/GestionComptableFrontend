@@ -33,11 +33,11 @@ export class GroupedVerticalBarChartComponent implements OnInit {
   };
 
   constructor(private statistiqueService: StatistiqueService) {
-    this.setDataBarChart();
+    
    }
 
   ngOnInit(): void {
-    
+    this.setDataBarChart();
   }
 
   setDataBarChart(){
