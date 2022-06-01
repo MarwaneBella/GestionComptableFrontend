@@ -1,0 +1,74 @@
+.demo-button-container {
+    padding-bottom: 16px;
+  }
+  
+  .demo-button + .demo-button {
+    margin-left: 8px;
+  }
+  
+  table {
+    width: 100%;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  td, th {
+    width: 12.5%;
+  }
+  
+  .actions{
+  white-space: nowrap;
+  }
+  .mat-form-field{
+  margin-left: 15%;
+  margin-right:15%;
+  width:70%;
+  }
+  
+  mat-paginator{
+  border-radius: 0px 0px 8px 8px;
+  }
+  
+  
+  .fa-check-circle-o, .span-satus-true{
+  color: #198754;
+  }
+  
+  .fa-times-circle-o, .span-satus-false{
+  color: #dc3545;
+  }
+  
+  
+  mat-form-field{
+    width: 100%;
+  }
+  
+  button.example-custom-date-class {
+    background: orange;
+    border-radius: 100%;
+  }
+  
+  .example-container {
+    max-height: 400px;
+    overflow: auto;
+  }
+  
+  table {
+    width: 100%;
+  }
+  
+  td, th {
+    width: 11.11%;
+    
+  }
+  
+  tr.mat-footer-row {
+    font-weight: bold;
+  }
+  
+  .mat-table-sticky {
+    border-top: 1px solid #e0e0e0;
+  }

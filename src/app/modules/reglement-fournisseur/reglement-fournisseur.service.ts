@@ -26,6 +26,11 @@ export class ReglementFournisseurService {
   getAllReglementFournisseur():Observable<any>{
     return this.httpClient.get(`${this.baseUrl}`)
   }
+
+  deleteReglementFournisseurById(id : number):Observable<ReglementFournisseur>{
+    return this.httpClient.delete<ReglementFournisseur>(`${this.baseUrl}/${id}`)
+  }
+  
   
 
  

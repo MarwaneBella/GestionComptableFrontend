@@ -10,8 +10,7 @@ export class BonAchat{
     valide             : boolean;
     status             : boolean;
     montantTotal       : number;
-    montantPayer       :number;
+    montantPayer       : number;
     fournisseur        : Fournisseur;
     listLignBA         : LignBA[];
-
 }

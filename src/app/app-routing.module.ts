@@ -30,6 +30,22 @@ const routes: Routes = [
         loadChildren:() =>import('./modules/bon-achat/bon-achat.module').then(m => m.BonAchatModule)
       },
       {
+        path :'reglementFournisseur',
+        loadChildren:()=>import('./modules/reglement-fournisseur/reglement-fournisseur.module').then(m=>m.ReglementFournisseurModule)
+      },
+      {
+        path:'bonHonoraire',
+        loadChildren:()=>import('./modules/bon-honoraire/bon-honoraire.module').then(m =>m.BonHonoraireModule)
+      },
+      {
+        path :'reglementClient',
+        loadChildren:()=>import('./modules/reglement-client/reglement-client.module').then(m=>m.ReglementClientModule)
+      },
+      {
+        path :'facture',
+        loadChildren:()=>import('./modules/facture/facture.module').then(m => m.FactureModule)
+      },
+      {
         path :'formulaire',
         loadChildren:()=>import('./modules/formulaire/formulaire.module').then(m=>m.FormulaireModule)
       },
@@ -42,10 +58,7 @@ const routes: Routes = [
         redirectTo:'dashboard',
         pathMatch:'full'
       },
-      {
-        path :'reglementFournisseur',
-        loadChildren:()=>import('./modules/reglement-fournisseur/reglement-fournisseur.module').then(m=>m.ReglementFournisseurModule)
-      }
+     
 
       
     ],

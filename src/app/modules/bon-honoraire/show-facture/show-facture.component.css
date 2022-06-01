@@ -1,0 +1,74 @@
+:root {
+    --body-bg: rgb(204, 204, 204);
+    --white: #ffffff;
+    --darkWhite: #ccc;
+    --black: #000000;
+    --dark: #615c60;
+    --themeColor: #22b8d1;
+    --pageShadow: 0 0 0.5cm rgba(0, 0, 0, 0.5);
+}
+
+/* Font Include */
+
+body {
+    background-color: var(--body-bg);
+}
+
+.page {
+    background: var(--white);
+    display: block;
+    margin: 0 auto;
+    position: relative;
+    box-shadow: var(--pageShadow);
+}
+
+.page[size="A4"] {
+    width: 24cm;
+    height: 34cm;
+    overflow: hidden;
+}
+
+
+
+
+/* Product Section */
+thead {
+    color: var(--white);
+    background: var(--themeColor);
+    border: 2px solid #000000;
+}
+thead td{
+    border: 2px solid #000000;
+}
+.table tbody td{
+    border-left: 2px solid #000000;
+    border-right: 2px solid #000000;
+    
+
+}
+
+.table {
+    height: 800px;
+}
+
+.table td
+ {
+    text-align: left;    
+}
+.t{
+    border: 2px solid #000000;
+}
+ .last-ling{
+    height: 450px;
+    border: 2px solid #000000;
+    border-top: none;
+}
+.last-ling td{
+    border: 2px solid #000000;
+}
+
+
+td{
+    border-top: none;
+    border-bottom: none;
+}

@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ReglementFournisseur } from 'src/app/entities/reglement-fournisseur';
+import { DeleteReglementFournisseurComponent } from '../delete-reglement-fournisseur/delete-reglement-fournisseur.component';
 import { ReglementFournisseurService } from '../reglement-fournisseur.service';
 
 @Component({
@@ -21,7 +23,7 @@ export class ListReglementFournisseurComponent implements OnInit {
 
   dataSource: MatTableDataSource<ReglementFournisseur>;
 
-  constructor(private reglementFournisseurService : ReglementFournisseurService) { }
+  constructor(private reglementFournisseurService : ReglementFournisseurService , public dialog: MatDialog ) { }
 
   ngOnInit(): void {
     this.getAllReglementFournisseur()
@@ -30,8 +32,10 @@ export class ListReglementFournisseurComponent implements OnInit {
     this.reglementFournisseurService.getAllReglementFournisseur().subscribe(data =>{
       this.listReglementFournisseur= data;
       this.dataSource = new MatTableDataSource(this.listReglementFournisseur);
+     
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      console.log(this.dataSource.paginator ,'   ',this.dataSource.sort)
     },
     error => {
       alert("Error");
@@ -47,6 +51,17 @@ export class ListReglementFournisseurComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  // dialog delete :
+  openDialog(row :any) {
+    this.dialog.open(DeleteReglementFournisseurComponent,{
+      width:'30%',
+      data:row,
+    }).afterClosed().subscribe(val =>{
+      this.getAllReglementFournisseur() ;
+
+    });
   }
 
 }

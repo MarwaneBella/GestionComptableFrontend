@@ -89,19 +89,6 @@
               <div class="row">
                 <div class="col ">
                   
-    
-                  <!--<mat-form-field>
-                    <mat-select formControlName="produit" placeholder="Bank" #singleSelect (ngModelChange)="setProduit()">
-                      <mat-option>
-                        <ngx-mat-select-search [formControl]="bankFilterCtrl"></ngx-mat-select-search>
-                      </mat-option>
-                
-                      <mat-option *ngFor="let produit of filteredBanks | async" [value]="produit">
-                        {{produit.designation}}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>-->
-    
                   <mat-form-field class="example-full-width" appearance="outline">
                     <input matInput
                            [matAutocomplete]="autoProduit"
@@ -113,21 +100,12 @@
                       </mat-option>
                     </mat-autocomplete>
                   </mat-form-field>
-    
-                    <!--
-                    <mat-form-field  appearance="outline" >
-                        <mat-select  placeholder="Select produit" formControlName ="produit" (ngModelChange)="setProduit()">
-                            <mat-option *ngFor="let produit of produits" [value]="produit" >{{produit.reference+" -- "+produit.designation }}</mat-option> 
-                        </mat-select>
-                    </mat-form-field>-->
-                    
-                  
                 </div>
     
                 <div class="col">
                     <mat-form-field  appearance="outline">
                         <mat-label>Quantite</mat-label>
-                        <input  type="number" matInput formControlName ="quantite" (keyup)="calculateMontants()">
+                        <input  type="number"  matInput formControlName ="quantite" (keyup)="calculateMontants()">
                     </mat-form-field>
     
                 </div>
@@ -182,7 +160,7 @@
     
               <div>
                 <button class="btn btn-warning" (click)="resetFormLigneBA()" type="reset"><i class="fa fa-refresh" aria-hidden="true"></i> Réinitialiser</button>
-                <button class="btn btn-success ms-3" (click)="addEditLigne()" [disabled]="formLigneBon.invalid">
+                <button class="btn btn-success ms-3" (click)="addEditLigne()" [disabled]="formLigneBon.invalid || formLigneBon.controls['quantite'].value == 0">
                   <span *ngIf="isAddLigneMode; else editMode"> <i class="fa fa-plus me-1" aria-hidden="true"></i>Ajoute ligne</span> 
                 </button>
               </div>

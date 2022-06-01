@@ -28,7 +28,7 @@ export class DeleteBonAchatComponent implements OnInit {
 
   deleteBonAchatById(){
     if(this.bonAchat.valide){
-      this.stoke.removeFromStock(this.bonAchat);
+      this.stoke.removeFromStockByBonAchat(this.bonAchat);
     }
     this.bonAchatService.deleteBonAchatById(this.bonAchat.idBa).subscribe(data => {
       this.dialogRef.close();

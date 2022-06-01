@@ -41,19 +41,3 @@ input[type="file"] {
 
 
 
-
-.label-phone{
-    margin-left: 40px;
-    padding-left: 15px;
-}
-
-span[matprefix] {
-    
-    
-    position: absolute;
-    top: -16px;
-}
-
-.input-phone{
-    padding-left: 40px;
-}

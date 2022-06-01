@@ -1,12 +1,12 @@
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {  Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatCalendarCellClassFunction } from '@angular/material/datepicker';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import localeFr from '@angular/common/locales/fr';
-import { DecimalPipe, registerLocaleData } from '@angular/common';
+import {  registerLocaleData } from '@angular/common';
 registerLocaleData(localeFr, 'fr');
 
 
@@ -49,8 +49,7 @@ export class AddEditBonAchatComponent implements OnInit {
   calculate: Calculate = new Calculate();
   dataSource : MatTableDataSource<DataList>;
   lignBA : LignBA [];
-  @Input()
-  r = '1.2-2'
+
   panelOpenState = false;
 
   totaleQuantite: number;
@@ -72,15 +71,12 @@ export class AddEditBonAchatComponent implements OnInit {
 
   @ViewChild('panel', {static: true, read: MatExpansionPanel}) panel: MatExpansionPanel;
 
-  constructor(private decimalPipe : DecimalPipe,private _formBuilder: FormBuilder, private bonAchatService : BonAchatService, private fournisseurService :FournisseurService, private produitService : ProduitService, private router: Router,private route: ActivatedRoute) {
+  constructor(private _formBuilder: FormBuilder, private bonAchatService : BonAchatService, private fournisseurService :FournisseurService, private produitService : ProduitService, private router: Router,private route: ActivatedRoute) {
     
   }
   
 
-  getRoundNumber(num: number){
-        return this.decimalPipe.transform(num,this.r) ?? '0';
-    
-  }
+  
   
 
   ngOnInit(): void {
@@ -282,6 +278,9 @@ export class AddEditBonAchatComponent implements OnInit {
   }
 
   calculateMontants(){
+    if( this.formLigneBon.controls['quantite'].value < 0){
+      this.formLigneBon.controls['quantite'].setValue(1)
+     }
 
     this.calculate.calculateMontants(this.formLigneBon.controls['prixUnitaire'].value,this.formLigneBon.controls['quantite'].value,this.formLigneBon.controls['tva'].value);
       
@@ -298,7 +297,7 @@ export class AddEditBonAchatComponent implements OnInit {
   addEditLigne(){
     if(this.isAddLigneMode){
       this.dataList.push(this.formLigneBon.value);
-
+      console.log( this.dataList)
       this.produits.forEach((element,index) => {
 
         if(element.designation == this.formLigneBon.controls['produit'].value.designation){
@@ -391,7 +390,7 @@ export class AddEditBonAchatComponent implements OnInit {
     else{
 
       if(this.bonAchat.valide){
-        this.stock.removeFromStock(this.bonAchat);
+        this.stock.removeFromStockByBonAchat(this.bonAchat);
       }
 
       this.bonAchat = this.formInfosBon.value;
@@ -416,12 +415,21 @@ export class AddEditBonAchatComponent implements OnInit {
     if(this.isAddMode){
       this.bonAchat = this.formInfosBon.value;
       this.bonAchat.listLignBA  = this.dataList;
+      
+      console.log("bonAchat.listLignBA  :\n")
+
+      console.log(this.bonAchat.listLignBA )
+
+      console.log("type of dataList :: "+typeof (this.dataList))
+      console.log("type of listLignBh :: "+typeof (this.bonAchat.listLignBA))
+ 
+      
       this.bonAchat.montantTotal = this.totaleMontantTtc;
       this.bonAchat.valide = true;
       
       this.bonAchatService.addBonAchat(this.bonAchat).subscribe(data =>{
         //add to stock
-        this.stock.addToStock(this.bonAchat);
+        this.stock.addToStockFromBonAchat(this.bonAchat);
         this.router.navigateByUrl('bonAchat');
       });
 
@@ -435,7 +443,7 @@ export class AddEditBonAchatComponent implements OnInit {
         this.bonAchatService.getBonAchatById(this.id).subscribe(data =>{
           this.bonAchat =data;
           
-          this.stock.removeFromStock(this.bonAchat);
+          this.stock.removeFromStockByBonAchat(this.bonAchat);
 
           //
           this.bonAchat = this.formInfosBon.value;
@@ -448,7 +456,7 @@ export class AddEditBonAchatComponent implements OnInit {
             this.bonAchat = data;
             
             
-            this.stock.addToStock(this.bonAchat);
+            this.stock.addToStockFromBonAchat(this.bonAchat);
             
             
             this.router.navigateByUrl('bonAchat');
@@ -471,7 +479,7 @@ export class AddEditBonAchatComponent implements OnInit {
 
         this.bonAchatService.updateBonAchat(this.id,this.bonAchat).subscribe(data =>{
           //add to stock
-          this.stock.addToStock(this.bonAchat);
+          this.stock.addToStockFromBonAchat(this.bonAchat);
           this.router.navigateByUrl('bonAchat');
         }, error =>{
           alert("V")
