@@ -1,5 +1,7 @@
 import { BonAchat } from "../entities/bon-achat";
 import { BonHonoraire } from "../entities/bon-honoraire";
+import { LignBA } from "../entities/lign-ba";
+import { LignBH } from "../entities/lign-bh";
 import { Produit } from "../entities/produit";
 import { ProduitService } from "../modules/produit/produit.service";
 
@@ -13,41 +15,39 @@ export class Stock{
 
     // Bon Achat  :
 
-    addToStockFromBonAchat(bonAchat: BonAchat){
-        console.log("//////////////////////////")
-        console.log("add")
-        console.log(bonAchat);
-
-        bonAchat.listLignBA.forEach(currentValue => {
+    addToStockFromBonAchat(listLignBA: LignBA[]):any{
+        
+        listLignBA.forEach(currentValue => {
             currentValue.produit.quantitieDisponible += currentValue.quantite;
     
             this.produitService.updateProduit(currentValue.produit.reference,currentValue.produit).subscribe(data => {
                 console.log(data)
+                
             }, error =>{
                 alert("SA")
               });
           });
-          console.log("//////////////////////////")
+          return true;
+
     }
 
-    removeFromStockByBonAchat(bonAchat: BonAchat){
-        console.log("//////////////////////////")
-        console.log("remove")
-        console.log(bonAchat);
+    removeFromStockByBonAchat(listLignBA: LignBA[]): any{ 
         
-        bonAchat.listLignBA.forEach(currentValue => {
+        listLignBA.forEach(currentValue => {
             
             currentValue.produit.quantitieDisponible -= currentValue.quantite;
 
             this.produitService.updateProduit(currentValue.produit.reference,currentValue.produit).subscribe(data => {
                 console.log(data)
+                
             }, error =>{
                 alert("SR")
             });
 
           });
 
-          console.log("//////////////////////////")
+        return true;
+
     }
 
     
@@ -55,8 +55,8 @@ export class Stock{
     // Bon Honoraire :
 
     
-    addToStockFromHonoraire(bonhonoraire: BonHonoraire){
-        bonhonoraire.listLignBH.forEach(currentValue => {
+    addToStockFromHonoraire(listLignBH: LignBH[]) : any{
+        listLignBH.forEach(currentValue => {
             
             currentValue.produit.quantitieDisponible += currentValue.quantite;
     
@@ -67,11 +67,12 @@ export class Stock{
               });
           });
 
+          return true;
     }
 
-    removeFromStockByHonoraire(bonhonoraire: BonHonoraire){
+    removeFromStockByHonoraire(listLignBH: LignBH[]) :any {
         
-        bonhonoraire.listLignBH.forEach(currentValue => {
+        listLignBH.forEach(currentValue => {
             
             currentValue.produit.quantitieDisponible -= currentValue.quantite;
 
@@ -83,7 +84,7 @@ export class Stock{
 
           });
 
-
+          return true;
     }
 
     

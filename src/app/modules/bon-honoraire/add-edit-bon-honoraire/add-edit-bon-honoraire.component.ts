@@ -369,7 +369,7 @@ export class AddEditBonHonoraireComponent implements OnInit {
 
   }
 
-  onEnregistre(){
+  async onEnregistre(){
     //add bon achat
     if(this.isAddMode){
       this.bonHonoraire = this.formInfosBon.value;
@@ -387,7 +387,7 @@ export class AddEditBonHonoraireComponent implements OnInit {
     else{
 
       if(this.bonHonoraire.valide){
-        this.stock.removeFromStockByHonoraire(this.bonHonoraire);
+        let wait =<boolean> await this.stock.addToStockFromHonoraire(this.bonHonoraire.listLignBH);
       }
 
       this.bonHonoraire = this.formInfosBon.value;
@@ -413,33 +413,13 @@ export class AddEditBonHonoraireComponent implements OnInit {
      this.bonHonoraire = this.formInfosBon.value;
       this.bonHonoraire.listLignBH  = (this.dataList as [] );
 
-
-      console.log("this dataList  :\n")
-      console.log(this.dataList)
-      console.log("bonHonoraire.listLignBH \n"+this.bonHonoraire.listLignBH)
-      //this.bonHonoraire.listLignBH[0].produit =this.dataList[0].produit
-
-     // console.log("test ::: "+this.bonHonoraire.listLignBH[0].produit)
-
-      console.log("bonHonoraire.listLignBH \n"+JSON.stringify (this.bonHonoraire.listLignBH))
-
-
-
-
-     console.log("type of dataList :: "+typeof (this.dataList))
-     console.log("type of listLignBh :: "+typeof (this.bonHonoraire.listLignBH))
-
-      console.log("==========")
-      this.bonHonoraire.listLignBH.forEach((vv)=>{
-        console.log(vv)
-      })
      
       this.bonHonoraire.montantTotal = this.totaleMontantTtc;
       this.bonHonoraire.valide = true;
       
-      this.bonHonoraireService.addBonHonoraire(this.bonHonoraire).subscribe(data =>{
+      this.bonHonoraireService.addBonHonoraire(this.bonHonoraire).subscribe(async data =>{
         //add to stock
-        this.stock.removeFromStockByHonoraire(this.bonHonoraire);
+        let wait = <boolean> await this.stock.removeFromStockByHonoraire(this.bonHonoraire.listLignBH);
         this.router.navigateByUrl('bonHonoraire');
       });
 
@@ -450,10 +430,10 @@ export class AddEditBonHonoraireComponent implements OnInit {
       if(this.bonHonoraire.valide){
         //remove from stock
         
-        this.bonHonoraireService.getBonHonoraireById(this.id).subscribe(data =>{
+        this.bonHonoraireService.getBonHonoraireById(this.id).subscribe(async data =>{
           this.bonHonoraire =data;
           
-          this.stock.removeFromStockByHonoraire(this.bonHonoraire);
+          let wait =<boolean> await this.stock.addToStockFromHonoraire(this.bonHonoraire.listLignBH);
 
           //
           this.bonHonoraire = this.formInfosBon.value;
@@ -461,12 +441,12 @@ export class AddEditBonHonoraireComponent implements OnInit {
           this.bonHonoraire.montantTotal = this.totaleMontantTtc;
           this.bonHonoraire.valide = true;
 
-          this.bonHonoraireService.updateBonHonoraire(this.id,this.bonHonoraire).subscribe(data =>{
+          this.bonHonoraireService.updateBonHonoraire(this.id,this.bonHonoraire).subscribe(async data =>{
             //add to stock
             this.bonHonoraire = data;
             
             
-            this.stock.removeFromStockByHonoraire(this.bonHonoraire);
+            let wait =<boolean> await this.stock.removeFromStockByHonoraire(this.bonHonoraire.listLignBH);
             
             
             this.router.navigateByUrl('bonHonoraire');
@@ -487,9 +467,9 @@ export class AddEditBonHonoraireComponent implements OnInit {
         this.bonHonoraire.montantTotal = this.totaleMontantTtc;
         this.bonHonoraire.valide = true;
 
-        this.bonHonoraireService.updateBonHonoraire(this.id,this.bonHonoraire).subscribe(data =>{
+        this.bonHonoraireService.updateBonHonoraire(this.id,this.bonHonoraire).subscribe(async data =>{
           //add to stock
-          this.stock.removeFromStockByHonoraire(this.bonHonoraire);
+          let wait =<boolean> await this.stock.removeFromStockByHonoraire(this.bonHonoraire.listLignBH);
           this.router.navigateByUrl('bonHonoraire');
         }, error =>{
           alert("V")

@@ -28,7 +28,7 @@ export class DeleteBonHonoraireComponent implements OnInit {
 
   deleteBonHonoraireById(){
     if(this.bonHonoraire.valide){
-      this.stoke.addToStockFromHonoraire(this.bonHonoraire);
+      this.stoke.addToStockFromHonoraire(this.bonHonoraire.listLignBH);
     }
     this.bonHonoraireService.deleteBonHonoraireById(this.bonHonoraire.idBh).subscribe(data => {
       this.dialogRef.close();

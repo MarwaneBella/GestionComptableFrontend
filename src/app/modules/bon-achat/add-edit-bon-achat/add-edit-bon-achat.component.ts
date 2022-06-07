@@ -373,7 +373,7 @@ export class AddEditBonAchatComponent implements OnInit {
 
   }
 
-  onEnregistre(){
+  async onEnregistre(){
     //add bon achat
     if(this.isAddMode){
       this.bonAchat = this.formInfosBon.value;
@@ -391,7 +391,7 @@ export class AddEditBonAchatComponent implements OnInit {
     else{
 
       if(this.bonAchat.valide){
-        this.stock.removeFromStockByBonAchat(this.bonAchat);
+        let wait =<boolean> await this.stock.removeFromStockByBonAchat(this.bonAchat.listLignBA);
       }
 
       this.bonAchat = this.formInfosBon.value;
@@ -411,26 +411,19 @@ export class AddEditBonAchatComponent implements OnInit {
 
   }
 
-  onValide(){
+  async onValide(){
     //add bon achat
     if(this.isAddMode){
       this.bonAchat = this.formInfosBon.value;
       this.bonAchat.listLignBA  = this.dataList;
       
-      console.log("bonAchat.listLignBA  :\n")
-
-      console.log(this.bonAchat.listLignBA )
-
-      console.log("type of dataList :: "+typeof (this.dataList))
-      console.log("type of listLignBh :: "+typeof (this.bonAchat.listLignBA))
- 
       
       this.bonAchat.montantTotal = this.totaleMontantTtc;
       this.bonAchat.valide = true;
       
-      this.bonAchatService.addBonAchat(this.bonAchat).subscribe(data =>{
+      this.bonAchatService.addBonAchat(this.bonAchat).subscribe(async data =>{
         //add to stock
-        this.stock.addToStockFromBonAchat(this.bonAchat);
+        let wait = <boolean> await this.stock.addToStockFromBonAchat(this.bonAchat.listLignBA);
         this.router.navigateByUrl('bonAchat');
       });
 
@@ -441,10 +434,10 @@ export class AddEditBonAchatComponent implements OnInit {
       if(this.bonAchat.valide){
         //remove from stock
         
-        this.bonAchatService.getBonAchatById(this.id).subscribe(data =>{
+        this.bonAchatService.getBonAchatById(this.id).subscribe(async data =>{
           this.bonAchat =data;
           
-          this.stock.removeFromStockByBonAchat(this.bonAchat);
+          let wait =<boolean> await this.stock.removeFromStockByBonAchat(this.bonAchat.listLignBA);
 
           //
           this.bonAchat = this.formInfosBon.value;
@@ -452,12 +445,12 @@ export class AddEditBonAchatComponent implements OnInit {
           this.bonAchat.montantTotal = this.totaleMontantTtc;
           this.bonAchat.valide = true;
 
-          this.bonAchatService.updateBonAchat(this.id,this.bonAchat).subscribe(data =>{
+          this.bonAchatService.updateBonAchat(this.id,this.bonAchat).subscribe(async data =>{
             //add to stock
             this.bonAchat = data;
             
             
-            this.stock.addToStockFromBonAchat(this.bonAchat);
+            let wait =<boolean> await this.stock.addToStockFromBonAchat(this.bonAchat.listLignBA);
             
             
             this.router.navigateByUrl('bonAchat');
@@ -478,9 +471,9 @@ export class AddEditBonAchatComponent implements OnInit {
         this.bonAchat.montantTotal = this.totaleMontantTtc;
         this.bonAchat.valide = true;
 
-        this.bonAchatService.updateBonAchat(this.id,this.bonAchat).subscribe(data =>{
+        this.bonAchatService.updateBonAchat(this.id,this.bonAchat).subscribe(async data =>{
           //add to stock
-          this.stock.addToStockFromBonAchat(this.bonAchat);
+          let wait =<boolean> await this.stock.addToStockFromBonAchat(this.bonAchat.listLignBA);
           this.router.navigateByUrl('bonAchat');
         }, error =>{
           alert("V")

@@ -417,7 +417,7 @@ export class AddFactureComponent implements OnInit {
         //add to stock
         this.bonHonoraire = data
         console.log("BonHonoraire data: "+this.bonHonoraire)
-        this.stock.removeFromStockByHonoraire(this.bonHonoraire);
+        this.stock.removeFromStockByHonoraire(this.bonHonoraire.listLignBH);
         this.facture.bonHonoraire=this.bonHonoraire
         this.factureService.addFacture(this.facture).subscribe(data =>{
       
@@ -444,7 +444,7 @@ export class AddFactureComponent implements OnInit {
         this.bonHonoraireService.getBonHonoraireById(this.id).subscribe(data =>{
           this.bonHonoraire =data;
           
-          this.stock.removeFromStockByHonoraire(this.bonHonoraire);
+          this.stock.removeFromStockByHonoraire(this.bonHonoraire.listLignBH);
 
           //
           this.bonHonoraire = this.formInfosBon.value;
@@ -457,7 +457,7 @@ export class AddFactureComponent implements OnInit {
             this.bonHonoraire = data;
             
             
-            this.stock.removeFromStockByHonoraire(this.bonHonoraire);
+            this.stock.removeFromStockByHonoraire(this.bonHonoraire.listLignBH);
             
             
             this.router.navigateByUrl('bonHonoraire');
@@ -480,7 +480,7 @@ export class AddFactureComponent implements OnInit {
 
         this.bonHonoraireService.updateBonHonoraire(this.id,this.bonHonoraire).subscribe(data =>{
           //add to stock
-          this.stock.removeFromStockByHonoraire(this.bonHonoraire);
+          this.stock.removeFromStockByHonoraire(this.bonHonoraire.listLignBH);
           this.router.navigateByUrl('bonHonoraire');
         }, error =>{
           alert("V")
