@@ -24,7 +24,8 @@
               "core-js",
               "raf",
               "jspdf-autotable",
-              "clone-deep"
+              "clone-deep",
+              "crypto-js"
             ],
             "outputPath": "dist/gestion-comptable-frontend",
             "index": "src/index.html",

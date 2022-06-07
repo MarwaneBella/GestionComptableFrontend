@@ -7,7 +7,7 @@ import { BonHonoraire } from 'src/app/entities/bon-honoraire';
 import { Facture } from 'src/app/entities/facture';
 import { LignBH } from 'src/app/entities/lign-bh';
 import { Produit } from 'src/app/entities/produit';
-import { Calculate } from 'src/app/Facilities/calculate';
+import { Calculate } from 'src/app/Utils/calculate';
 import { FactureService } from '../../facture/facture.service';
 import { BonHonoraireService } from '../bon-honoraire.service';
 
