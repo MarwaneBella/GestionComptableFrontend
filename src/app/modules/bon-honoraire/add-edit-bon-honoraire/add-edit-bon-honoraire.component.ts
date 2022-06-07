@@ -395,7 +395,6 @@ export class AddEditBonHonoraireComponent implements OnInit {
       this.bonHonoraire.montantTotal = this.totaleMontantTtc;
       this.bonHonoraire.valide = false;
 
-
       this.bonHonoraireService.updateBonHonoraire(this.id,this.bonHonoraire).subscribe(data =>{
         this.router.navigateByUrl('bonHonoraire');
       }, error =>{
