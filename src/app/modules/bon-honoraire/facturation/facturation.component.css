@@ -17,7 +17,7 @@ table {
 }
 
 td, th {
-  width: 12.5%;
+  width: 14.28%;
   
 }
 
@@ -35,6 +35,8 @@ tr.mat-footer-row {
     border-top: 1px 1px solid rgba(0, 0, 0, 0.125);
   }
   
+  
+
   .mat-expansion-panel-header.mat-expanded,
   .mat-expansion-panel-header.mat-expanded:hover,
   .mat-expansion-panel-header.mat-expanded:focus {

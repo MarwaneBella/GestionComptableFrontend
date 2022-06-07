@@ -54,7 +54,7 @@ export class ShowBonHonoraireComponent implements OnInit {
       window.open(URL.createObjectURL(pdf.output("blob")))
       },
       x:(pageWidth - widthcontenu)/2,
-      y: 80
+      y: 20
     })
 
     //window.open(URL.createObjectURL(pdf.output("blob")),"_blank","top=100,left=200,width=1000,height=500")

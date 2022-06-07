@@ -416,15 +416,23 @@ export class AddFactureComponent implements OnInit {
       this.bonHonoraireService.addBonHonoraire(this.bonHonoraire).subscribe(data =>{
         //add to stock
         this.bonHonoraire = data
+        console.log("BonHonoraire data: "+this.bonHonoraire)
         this.stock.removeFromStockByHonoraire(this.bonHonoraire);
+        this.facture.bonHonoraire=this.bonHonoraire
+        this.factureService.addFacture(this.facture).subscribe(data =>{
+      
+        })
+
         this.router.navigateByUrl('facture');
+
       });
 
-      this.facture.bonHonoraire=this.bonHonoraire
-      // add facture : 
-     this.factureService.addFacture(this.facture).subscribe(data =>{
       
-      })
+
+      console.log("BonHonoraire : "+this.bonHonoraire)
+      console.log("Facture : "+this.facture)
+      // add facture : 
+     
 
     }
     //edit bon achat

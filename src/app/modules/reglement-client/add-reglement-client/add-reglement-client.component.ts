@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatCalendarCellClassFunction } from '@angular/material/datepicker';
 import { MatTableDataSource } from '@angular/material/table';
+import { ActivatedRoute, Router } from '@angular/router';
 import { map, Observable, startWith } from 'rxjs';
 import { BonHonoraire } from 'src/app/entities/bon-honoraire';
 import { Client } from 'src/app/entities/client';
@@ -53,7 +54,7 @@ export class AddReglementClientComponent implements OnInit {
   totaleAvances      : number = 0
   totaleRestes       : number
 
-  constructor(private _formBuilder: FormBuilder , private clientService :ClientService ,private bonHonoraireService : BonHonoraireService, private reglementClientService : ReglementClientService) { }
+  constructor(private _formBuilder: FormBuilder , private clientService :ClientService ,private bonHonoraireService : BonHonoraireService, private reglementClientService : ReglementClientService,private router: Router,private route: ActivatedRoute ) { }
 
   ngOnInit(): void {
     this.declareFormInfosClient();
@@ -246,6 +247,7 @@ export class AddReglementClientComponent implements OnInit {
 
   onSubmit(){
     this.updateAllBonHonoraires();
+    this.router.navigateByUrl('reglementClient')
   }
 
 
@@ -256,10 +258,8 @@ export class AddReglementClientComponent implements OnInit {
            currentValue.status = this.status[index]
           }
            currentValue.montantPayer += this.avances[index]
-           console.log(index)
             this.bonHonoraireService.updateBonHonoraireFromReglementClient(currentValue.idBh,currentValue).subscribe(data =>{
              
-            console.log(this.bonBonHonoraires[index].bonHNum)
             this.addReglementClient(this.bonBonHonoraires[index],index)
             })
             

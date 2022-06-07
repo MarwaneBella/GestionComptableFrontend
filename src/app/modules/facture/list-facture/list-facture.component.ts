@@ -21,7 +21,7 @@ export class ListFactureComponent implements AfterViewInit{
   dataSource: MatTableDataSource<Facture>;
   
   listFacture: Facture[];
-  bonHonoraire : Facture = new Facture();
+  facture : Facture = new Facture();
   
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;

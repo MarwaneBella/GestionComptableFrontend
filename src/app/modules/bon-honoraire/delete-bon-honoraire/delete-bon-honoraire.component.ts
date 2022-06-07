@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { BonHonoraire } from 'src/app/entities/bon-honoraire';
+import { Stock } from 'src/app/Facilities/stock';
+import { ProduitService } from '../../produit/produit.service';
+import { BonHonoraireService } from '../bon-honoraire.service';
 
 @Component({
   selector: 'app-delete-bon-honoraire',
@@ -7,9 +12,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DeleteBonHonoraireComponent implements OnInit {
 
-  constructor() { }
+  bonHonoraire: BonHonoraire = new BonHonoraire();
+  stoke: Stock = new Stock(this.produitService);
+  
+  constructor(private bonHonoraireService: BonHonoraireService, private produitService: ProduitService,
+    @Inject(MAT_DIALOG_DATA) public data :any ,
+   private dialogRef : MatDialogRef<DeleteBonHonoraireComponent>
+  ){}
 
   ngOnInit(): void {
+   if(this.data){
+     this.bonHonoraire = this.data;
+   }
+  }
+
+  deleteBonHonoraireById(){
+    if(this.bonHonoraire.valide){
+      this.stoke.addToStockFromHonoraire(this.bonHonoraire);
+    }
+    this.bonHonoraireService.deleteBonHonoraireById(this.bonHonoraire.idBh).subscribe(data => {
+      this.dialogRef.close();
+    });
+
   }
 
 }
