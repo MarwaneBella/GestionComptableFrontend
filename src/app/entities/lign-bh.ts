@@ -9,6 +9,4 @@ export class LignBH{
     prixUnitaire : number
     produit : Produit
     bonHonoraire : BonHonoraire
- 
-    
 }

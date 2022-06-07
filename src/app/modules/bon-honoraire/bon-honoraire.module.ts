@@ -12,7 +12,7 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { ShowFactureComponent } from './show-facture/show-facture.component';
+import { FacturationComponent } from './facturation/facturation.component';
 
 
 
@@ -23,7 +23,8 @@ import { ShowFactureComponent } from './show-facture/show-facture.component';
     DeleteBonHonoraireComponent,
     ListBonHonoraireComponent,
     ShowBonHonoraireComponent,
-    ShowFactureComponent
+    FacturationComponent
+    
   ],
   imports: [
     CommonModule,

@@ -4,7 +4,6 @@ import { Observable, retry } from 'rxjs';
 import { User } from 'src/app/entities/user';
 import { UserAuthService } from './user-auth.service';
 
-
 @Injectable({
   providedIn: 'root'
 })

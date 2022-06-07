@@ -14,13 +14,13 @@
   
       <!-- ID Column -->
       <ng-container matColumnDef="bonANum">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nom Fournisseur </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Fournisseur </th>
         <td mat-cell *matCellDef="let row">{{row.bonAchat.fournisseur.nom   }}</td>
       </ng-container>
   
       <!-- Nom Column -->
       <ng-container matColumnDef="nomF">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Bon numéro  </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> N° Bon  </th>
         <td mat-cell *matCellDef="let row"> {{ row.bonAchat.bonANum}} </td>
       </ng-container>
   
@@ -33,7 +33,7 @@
       </ng-container>
 
       <ng-container matColumnDef="datePayment">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Date Payment </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Date Paiement </th>
         <td mat-cell *matCellDef="let row"> {{row.datePayment}} </td>
       </ng-container>
 

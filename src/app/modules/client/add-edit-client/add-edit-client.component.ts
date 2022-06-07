@@ -1,12 +1,22 @@
 import { Byte } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Client } from 'src/app/entities/client';
 import { ClientService } from '../client.service';
 
 import { NotifierService } from 'angular-notifier';
 import Swal from 'sweetalert2';
+import {ErrorStateMatcher} from '@angular/material/core';
+
+/** Error when invalid control is dirty, touched, or submitted. */
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
+
 const swalWithBootstrapButtons = Swal.mixin({
   customClass: {
     confirmButton: 'btn btn-success ',
@@ -38,6 +48,7 @@ export class AddEditClientComponent implements OnInit {
   nameBtn:string;
   isSelected : boolean;
 
+  matcher = new MyErrorStateMatcher();
 
 
   constructor(private _formBuilder: FormBuilder, private clientService: ClientService,private router: Router,private route: ActivatedRoute ,private  notifierService: NotifierService){
@@ -92,7 +103,7 @@ export class AddEditClientComponent implements OnInit {
 
     });
     this.contactsFormGroup = this._formBuilder.group({
-      email: null,
+      email: ['', Validators.email],
       telePortable: null,
       teleFix: null
 
