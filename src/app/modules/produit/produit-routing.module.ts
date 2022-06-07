@@ -21,6 +21,7 @@ const routes: Routes = [
   {
     path :'categorie',
     loadChildren:() =>import('./categorie/categorie.module').then(m => m.CategorieModule)
+    
   }
 
 ];

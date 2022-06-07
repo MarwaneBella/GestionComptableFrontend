@@ -44,7 +44,8 @@
             "scripts": [
               "./node_modules/jquery/dist/jquery.min.js",
               "./node_modules/jspdf-autotable/dist/jspdf.plugin.autotable.js",
-              "./node_modules/boxicons/dist/boxicons.js"
+              "./node_modules/boxicons/dist/boxicons.js",
+              "./node_modules/crypto-js/crypto-js.js"
               
             ]
           },

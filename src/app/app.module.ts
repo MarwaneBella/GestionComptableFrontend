@@ -17,6 +17,7 @@ import { Error500Component } from './shared/error-pages/error500/error500.compon
 import { AuthGuard } from './auth/auth.guard';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { UserService } from './modules/user/user.service';
+import { PermissionGuard } from './auth/permission.guard';
 
 
 @NgModule({

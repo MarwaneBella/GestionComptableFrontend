@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BonAchat } from 'src/app/entities/bon-achat';
-import { Stock } from 'src/app/Facilities/stock';
+import { Stock } from 'src/app/Utils/stock';
 import { ProduitService } from '../../produit/produit.service';
 import { BonAchatService } from '../bon-achat.service';
 

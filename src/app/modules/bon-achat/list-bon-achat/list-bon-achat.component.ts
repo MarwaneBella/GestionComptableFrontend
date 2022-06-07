@@ -81,10 +81,9 @@ export class ListBonAchatComponent  implements AfterViewInit {
       width:'30%',
       data:row,
     }).afterClosed().subscribe(val =>{
-      this.getAllBonAchat() ;
+      this.getAllBonAchat();
     });
-
-   
+    
   }
 
   swal(){
@@ -96,9 +95,6 @@ export class ListBonAchatComponent  implements AfterViewInit {
       scrollbarPadding: false,
       heightAuto: false
     })
-
-
-    
     
     swalWithBootstrapButtons.fire({
       title: 'Are you sure?',

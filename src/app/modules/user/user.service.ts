@@ -21,23 +21,47 @@ export class UserService {
   }
 
   roleMatch(allowedRoles : any) {
-    let isMatch = false;
+    
     const userRoles: any = this.userAuthService.getRoles();
 
+
     if (userRoles != null && userRoles) {
+
       for (let i = 0; i < userRoles.length; i++) {
+
         for (let j = 0; j < allowedRoles.length; j++) {
           if (userRoles[i].roleName === allowedRoles[j]) {
-            isMatch = true;
-            return isMatch;
-          } else {
-            return isMatch;
+            
+            return true;
           }
+
         }
+
       }
+
+    }
+    return false;
+  }
+
+  permissionMatch(allowedPermissions : any ){
+
+    const userPermissions: any = this.userAuthService.getPermissions();
+
+    if (userPermissions != null && userPermissions) {
+
+      for (let i = 0; i < userPermissions.length; i++) {
+
+        for (let j = 0; j < allowedPermissions.length; j++) {
+          if (userPermissions[i].namePermission === allowedPermissions[j]) {
+            return true;
+          }
+
+        }
+
+      }
+
     }
 
     return false;
-    
   }
 }

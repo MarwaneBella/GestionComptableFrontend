@@ -14,34 +14,40 @@ export class Stock{
     // Bon Achat  :
 
     addToStockFromBonAchat(bonAchat: BonAchat){
+        console.log("//////////////////////////")
+        console.log("add")
+        console.log(bonAchat);
+
         bonAchat.listLignBA.forEach(currentValue => {
-            
             currentValue.produit.quantitieDisponible += currentValue.quantite;
     
             this.produitService.updateProduit(currentValue.produit.reference,currentValue.produit).subscribe(data => {
-            
+                console.log(data)
             }, error =>{
                 alert("SA")
               });
           });
-
+          console.log("//////////////////////////")
     }
 
     removeFromStockByBonAchat(bonAchat: BonAchat){
+        console.log("//////////////////////////")
+        console.log("remove")
+        console.log(bonAchat);
         
         bonAchat.listLignBA.forEach(currentValue => {
             
             currentValue.produit.quantitieDisponible -= currentValue.quantite;
 
             this.produitService.updateProduit(currentValue.produit.reference,currentValue.produit).subscribe(data => {
-                
+                console.log(data)
             }, error =>{
                 alert("SR")
             });
 
           });
 
-
+          console.log("//////////////////////////")
     }
 
     // Bon Honoraire :

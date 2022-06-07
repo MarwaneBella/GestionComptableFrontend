@@ -14,7 +14,8 @@ export class LoginComponent implements OnInit {
   user : User = new User();
   isLoggedIn:boolean = false;
   isCorrect:boolean = true;
-  isChecked :boolean = false ;
+  stayLogged :boolean = false ; 
+  etat:boolean = true;
   constructor(private userService: UserService,
     private userAuthService:  UserAuthService,
     private router: Router) { }
@@ -24,34 +25,51 @@ export class LoginComponent implements OnInit {
     
     
   }
-  CheckBox(){
-    console.log(this.isChecked)
-  }
+  
 
   onSubmit(){
     
     this.userService.loging(this.user).subscribe((response :any)=>{
 
-      this.userAuthService.setRoles(response.user.role);
-      this.userAuthService.setToken(response.jwtToken);
-      this.userAuthService.setUserName(response.user.userName);
-
+      if(response.user.etat == false){
+        this.isCorrect = true;
+        this.etat = response.user.etat;
+        
+      }
+      else{
+        this.userAuthService.setRoles(response.user.role);
+        this.userAuthService.setPermissions(response.user.pagePermissions);
+        this.userAuthService.setToken(response.jwtToken);
+        this.userAuthService.setUserName(response.user.userName);
+        this.SetTokenStayLogged();
         const role = response.user.role[0].roleName;
-        if (role === 'Admin') {
+        if (role === 'Admin' ) {
           this.router.navigateByUrl('');
         } else {
           this.router.navigateByUrl('');
         }
+
+        
+      }
+
+      
     },
     error =>{
       if(error.status == 0){
         this.router.navigateByUrl('/error500');
       }
       if(error.status == 401){
+        this.etat = true;
         this.isCorrect = false;
       }
     });
 
+  }
+
+  SetTokenStayLogged(){
+    if(this.stayLogged == false){
+      localStorage.setItem('stay','0');
+    }
   }
 
   

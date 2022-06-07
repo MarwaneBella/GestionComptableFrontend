@@ -14,15 +14,16 @@
                     </button>
                     
                     <mat-menu #menu="matMenu" xPosition="before">
-                        
-                            <li  mat-menu-item>
-                                <i class="fa fa-user me-2" aria-hidden="true"></i>
-                            profile
-                            </li>
-                            <li  mat-menu-item>
-                                <i class="fa fa-users me-2" aria-hidden="true"></i>
-                                Gestion des comptes
-                            </li>
+                            <div *ngIf="userService.roleMatch(['Admin'])">
+                                <li routerLink="/admin/profile" mat-menu-item >
+                                    <i class="fa fa-user me-2" aria-hidden="true"></i>
+                                profile
+                                </li>
+                                <li routerLink="/admin/gestionComptes"  mat-menu-item>
+                                    <i class="fa fa-users me-2" aria-hidden="true"></i>
+                                    Gestion des comptes
+                                </li>
+                            </div>
                             <li (click)="logOut()" mat-menu-item>
                                 <i class="fa fa-sign-out me-2" aria-hidden="true"></i>
                                 Se déconnecter

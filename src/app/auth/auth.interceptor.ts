@@ -32,17 +32,17 @@ export class AuthInterceptor implements HttpInterceptor {
         catchError(
             (err:HttpErrorResponse) => {
                 if(err.status === 401) {
-                    this.router.navigateByUrl('/user/login');
+                  this.router.navigateByUrl('/user/login');
                 } 
                 else if(err.status === 403) {
-                    this.router.navigateByUrl('/error403');
+                  this.router.navigateByUrl('/error403');
                     
                 }else if(err.status == 0){
                   this.router.navigateByUrl('/error500');
                 }
-                console.error(err.status);
+               
                 
-                return throwError("Some thing is wrong");
+                return throwError(err.error);
             }
         )
     );

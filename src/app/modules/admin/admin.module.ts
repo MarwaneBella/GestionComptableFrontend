@@ -7,6 +7,10 @@ import { ListUserComponent } from './list-user/list-user.component';
 import { AddEditUserComponent } from './add-edit-user/add-edit-user.component';
 import { DeleteUserComponent } from './delete-user/delete-user.component';
 import { ProfileComponent } from './profile/profile.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { MaterialModule } from 'src/app/material.module';
 
 
 @NgModule({
@@ -19,7 +23,13 @@ import { ProfileComponent } from './profile/profile.component';
   ],
   imports: [
     CommonModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    HttpClientModule,
+    MaterialModule,
+    FlexLayoutModule,
+    FormsModule,
+    ReactiveFormsModule,
+    
   ]
 })
 export class AdminModule { }

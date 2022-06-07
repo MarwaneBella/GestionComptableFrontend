@@ -3,22 +3,22 @@
     <mat-list>
 
         <!--<h2 matSubheader>Pages</h2>-->
-        <a mat-list-item routerLinkActive="list-item-active" routerLink="/dashboard"><i class="fa fa-tachometer mx-2" aria-hidden="true"></i>Tableau de bord</a>
-        <mat-divider></mat-divider>
-        <a mat-list-item routerLinkActive="list-item-active" routerLink="/client">Client</a>
-        <mat-divider></mat-divider>
-        <a mat-list-item routerLinkActive="list-item-active" routerLink="/fournisseur">Fournisseur</a>
-        <mat-divider></mat-divider>
-        <a mat-list-item routerLinkActive="list-item-active" routerLink="/produit">Produit</a>
-        <a mat-list-item routerLinkActive="list-item-active" routerLink="/produit/categorie">Categorie</a>
-        <mat-divider></mat-divider>
-        <a mat-list-item routerLinkActive="list-item-active" routerLink="/bonAchat">Bon Achat</a>
-        <a mat-list-item routerLinkActive="list-item-active" routerLink="/reglementFournisseur">Reg Fournisseur</a>
-        <mat-divider></mat-divider>
-        <a mat-list-item routerLinkActive="list-item-active" routerLink="/bonHonoraire">Bon Honoraire</a>
-        <a mat-list-item routerLinkActive="list-item-active" routerLink="/reglementClient">Reg Clinet</a>
-        <mat-divider></mat-divider>
-        <a mat-list-item routerLinkActive="list-item-active" routerLink="/facture">Factures</a>
+        <a mat-list-item routerLinkActive="list-item-active" *ngIf="this.userService.permissionMatch(['Dashboard'])" routerLink="/dashboard"><i class="fa fa-tachometer mx-2" aria-hidden="true"></i>Tableau de bord</a>
+        
+        <a mat-list-item routerLinkActive="list-item-active" *ngIf="this.userService.permissionMatch(['Client'])" routerLink="/client">Client</a>
+        
+        <a mat-list-item routerLinkActive="list-item-active" *ngIf="this.userService.permissionMatch(['Fournisseur'])" routerLink="/fournisseur">Fournisseur</a>
+        
+        <a mat-list-item routerLinkActive="list-item-active" *ngIf="this.userService.permissionMatch(['Produit'])" routerLink="/produit">Produit</a>
+        <a mat-list-item routerLinkActive="list-item-active" *ngIf="this.userService.permissionMatch(['Produit'])" routerLink="/produit/categorie">Categorie</a>
+        
+        <a mat-list-item routerLinkActive="list-item-active" *ngIf="this.userService.permissionMatch(['BonAchat'])" routerLink="/bonAchat">Bon Achat</a>
+        <a mat-list-item routerLinkActive="list-item-active" *ngIf="this.userService.permissionMatch(['ReglementFournisseur'])" routerLink="/reglementFournisseur">Reg Fournisseur</a>
+        
+        <a mat-list-item routerLinkActive="list-item-active" *ngIf="this.userService.permissionMatch(['BonHonoraire'])" routerLink="/bonHonoraire">Bon Honoraire</a>
+        <a mat-list-item routerLinkActive="list-item-active" *ngIf="this.userService.permissionMatch(['ReglementClient'])" routerLink="/reglementClient">Reg Clinet</a>
+        
+        <a mat-list-item routerLinkActive="list-item-active" *ngIf="this.userService.permissionMatch(['Facture'])" routerLink="/facture">Factures</a>
 
 
 

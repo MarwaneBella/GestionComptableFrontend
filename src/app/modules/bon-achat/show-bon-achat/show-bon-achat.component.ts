@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { BonAchat } from 'src/app/entities/bon-achat';
-import { Calculate } from 'src/app/Facilities/calculate';
+import { Calculate } from 'src/app/Utils/calculate';
 import { DataList } from '../add-edit-bon-achat/add-edit-bon-achat.component';
 import { BonAchatService } from '../bon-achat.service';
 

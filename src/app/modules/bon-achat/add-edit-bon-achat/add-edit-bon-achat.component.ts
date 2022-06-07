@@ -14,12 +14,12 @@ import { BonAchat } from 'src/app/entities/bon-achat';
 import { Fournisseur } from 'src/app/entities/fournisseur';
 import { LignBA } from 'src/app/entities/lign-ba';
 import { Produit } from 'src/app/entities/produit';
-import { Calculate } from 'src/app/Facilities/calculate';
+import { Calculate } from 'src/app/Utils/calculate';
 import { FournisseurService } from '../../fournisseur/fournisseur.service';
 import { ProduitService } from '../../produit/produit.service';
 import { BonAchatService } from '../bon-achat.service';
 import { MatExpansionPanel } from '@angular/material/expansion';
-import { Stock } from 'src/app/Facilities/stock';
+import { Stock } from 'src/app/Utils/stock';
 
 export interface DataList {
   produit: Produit;

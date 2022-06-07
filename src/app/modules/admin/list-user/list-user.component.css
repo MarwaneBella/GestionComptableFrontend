@@ -1,0 +1,29 @@
+table {
+    width: 100%;
+}
+  
+
+
+.userName{
+  width: 20%;
+}
+.etat{
+  width: 75%;
+}
+.actions{
+  width: 5%;
+  white-space: nowrap;
+}
+span{
+  font-weight: bold;
+}
+
+
+
+.example-container {
+  max-height: 400px;
+  overflow: auto;
+}
+.card-body{
+ padding: 0 5%; 
+}
