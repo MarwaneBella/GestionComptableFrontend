@@ -3,6 +3,8 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 import { Produit } from 'src/app/entities/produit';
 import { DeleteProduitComponent } from '../delete-produit/delete-produit.component';
 
@@ -74,6 +76,59 @@ export class ListProduitComponent implements AfterViewInit {
       this.getAllProduits()
     })
   }
+
+  public openPDF(): void {
+    /*
+       let DATA: any = document.getElementById('htmlData');
+     html2canvas(DATA).then((canvas) => {
+       let fileWidth = 208;
+       let fileHeight = (canvas.height * fileWidth) / canvas.width;
+       const FILEURI = canvas.toDataURL('image/png');
+       let PDF = new jsPDF('p', 'mm', 'A4');
+       let position = 0;
+       PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
+       PDF.save('angular-demo.pdf');
+     });
+      ///
+      let DATA: any = document.getElementById('htmlData');
+ 
+     let pdf = new jsPDF()
+     pdf.html(DATA, {
+       callback: (pdf) => {
+         pdf.save("sample.pdf")
+       },
+     
+     })*/
+    
+     
+     const head = [['Réf', 'Designation', 'Categorie', 'Qté']]
+     let data = []
+     for(let i=0 ;i<this.produits.length ;i++){
+       data.push([this.produits[i].reference, this.produits[i].designation, this.produits[i].categorie.nomCat , this.produits[i].quantitieDisponible])
+     }
+     
+     const doc = new jsPDF()
+     doc.setProperties({
+       title: "LISTE PRODUITS",
+       
+     });
+     doc.setTextColor('#0A043C')
+     let date = new Date();
+     doc.text(date.toLocaleDateString(),175,10)
+     doc.setFontSize(30);
+     doc.text('LISTE PRODUITS',110,30,{align:'center'})
+     
+      autoTable(doc, {
+       theme :'grid',
+       head: head,
+       body: data,
+       tableWidth: 'auto',
+       margin: { top: 40 }   
+     })
+     
+     //doc.save('produits.pdf')
+     window.open(URL.createObjectURL(doc.output("blob")))
+   }
 
 }
 

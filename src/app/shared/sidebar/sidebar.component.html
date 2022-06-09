@@ -1,9 +1,7 @@
-<mat-nav-list>
-    
-    <mat-list>
 
-        <!--<h2 matSubheader>Pages</h2>-->
-        <a mat-list-item routerLinkActive="list-item-active" *ngIf="this.userService.permissionMatch(['Dashboard'])" routerLink="/dashboard"><i class="fa fa-tachometer mx-2" aria-hidden="true"></i>Tableau de bord</a>
+<mat-nav-list>
+    <mat-list>
+        <a mat-list-item routerLinkActive="list-item-active" *ngIf="this.userService.permissionMatch(['Dashboard'])" routerLink="/dashboard"><i class='bx bxs-dashboard bx-spin' ></i>Tableau de bord</a>
         
         <a mat-list-item routerLinkActive="list-item-active" *ngIf="this.userService.permissionMatch(['Client'])" routerLink="/client">Client</a>
         
@@ -19,17 +17,173 @@
         <a mat-list-item routerLinkActive="list-item-active" *ngIf="this.userService.permissionMatch(['ReglementClient'])" routerLink="/reglementClient">Reg Clinet</a>
         
         <a mat-list-item routerLinkActive="list-item-active" *ngIf="this.userService.permissionMatch(['Facture'])" routerLink="/facture">Factures</a>
-
-
-
-        <!--
-        <a mat-list-item routerLinkActive="list-item-active" routerLink="/formulaire">Formulaire</a>
-        <a mat-list-item routerLinkActive="list-item-active" routerLink="/formulaire/attestationStage">Attestation Stage</a>
-        <a mat-list-item routerLinkActive="list-item-active" routerLink="/formulaire/attestationTravail">Attestation Travail</a>
-        <a mat-list-item routerLinkActive="list-item-active" routerLink="/formulaire/lettreMission">Lettre Mission</a>
-        -->
-        
-
     </mat-list>
-
 </mat-nav-list>
+ 
+ 
+   <!--
+    <ul class="list-unstyled ps-0" style="margin-top: 20px; width: 90%;">
+
+        <li class="mb-3" style="background-color:red;">
+            <a class="link-dark  module-link" mat-list-item routerLinkActive="list-item-active" *ngIf="this.userService.permissionMatch(['Dashboard'])" routerLink="/dashboard"><i class="fa fa-tachometer ms-2" aria-hidden="true"></i>Tableau de bord</a>
+        </li>
+
+        <li class="mb-2">
+            <div class="row" >
+                <div class="col-10 ">
+            <a class="link-dark rounded module-link" mat-list-item routerLinkActive="list-item-active" *ngIf="this.userService.permissionMatch(['Client'])" routerLink="/client"><i class="fa fa-users me-2" aria-hidden="true"></i>Clients</a>
+                </div>
+                <div class="col-2">
+            <button class=" btn-toggle align-items-center rounded collapsed"   data-bs-toggle="collapse" data-bs-target="#client" aria-expanded="false"></button>
+                </div>
+            </div>
+            <div class="collapse show" id="client">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                <li>   
+                    <a class="link-dark rounded " mat-list-item routerLinkActive="list-item-active" *ngIf="this.userService.permissionMatch(['Client'])" routerLink="/client"><i class="fa fa-list-ul me-2" aria-hidden="true"></i>List Clients</a>
+                </li>
+                <li>
+                    <a class="link-dark rounded " mat-list-item routerLinkActive="list-item-active" *ngIf="this.userService.permissionMatch(['Client'])" routerLink="/client/addClient"><i class="fa fa-user-plus me-2" aria-hidden="true"></i>Ajouter Client</a>
+                </li>
+            </ul>
+            </div>
+        </li>
+
+        <li class="mb-3">
+            <div class="row">
+                <div class="col-10">
+                   <a class="link-dark rounded module-link" mat-list-item routerLinkActive="list-item-active" *ngIf="this.userService.permissionMatch(['Fournisseur'])" routerLink="/fournisseur"><i class="fa fa-users me-2" aria-hidden="true"></i>Fournisseurs</a>
+                </div>
+                <div class="col-2">
+            <button class=" btn-toggle align-items-center rounded collapsed"   data-bs-toggle="collapse" data-bs-target="#fournisseur" aria-expanded="false"></button>
+                </div>
+            </div>
+            <div class="collapse show" id="fournisseur">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                <li>   
+                    <a class="link-dark rounded " mat-list-item routerLinkActive="list-item-active" *ngIf="this.userService.permissionMatch(['Fournisseur'])" routerLink="/fournisseur"><i class="fa fa-list-ul me-2" aria-hidden="true"></i>List Fournisseurs</a>
+                </li>
+                <li>
+                    <a class="link-dark rounded " mat-list-item routerLinkActive="list-item-active" *ngIf="this.userService.permissionMatch(['Fournisseur'])" routerLink="/fournisseur/addFournisseur"><i class="fa fa-user-plus me-2" aria-hidden="true"></i>Ajouter Fournisseur</a>
+                </li>
+            </ul>
+            </div>
+        </li>
+
+        <li class="mb-3">
+            <div class="row">
+                <div class="col-10 ">
+                    <a class="link-dark rounded module-link" mat-list-item routerLinkActive="list-item-active" *ngIf="this.userService.permissionMatch(['Produit'])" routerLink="/produit"><i class="fa fa-cubes f-left" aria-hidden="true"></i> Produits</a>
+                </div>
+                <div class="col-2">
+            <button class=" btn-toggle align-items-center rounded collapsed"   data-bs-toggle="collapse" data-bs-target="#produit" aria-expanded="false"></button>
+                </div>
+            </div>
+            <div class="collapse show" id="produit">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                <li>   
+                    <a class="link-dark rounded " mat-list-item routerLinkActive="list-item-active" *ngIf="this.userService.permissionMatch(['Produit'])" routerLink="/produit/categorie"><i class='bx bx-category me-2'></i>Catégories</a>
+                </li>
+                <li>
+                    <a class="link-dark rounded " mat-list-item routerLinkActive="list-item-active" *ngIf="this.userService.permissionMatch(['Produit'])" routerLink="/produit"><i class="fa fa-list-ul me-2" aria-hidden="true"></i>Lists Produits</a>
+                </li>
+                <li>
+                    <a class="link-dark rounded " mat-list-item routerLinkActive="list-item-active" *ngIf="this.userService.permissionMatch(['Produit'])" routerLink="/produit/addProduit"><i class="fa fa-plus me-2" aria-hidden="true"></i>Ajouter Produit</a>
+                </li>
+            </ul>
+            </div>
+        </li>
+
+        <li class="mb-3">
+            <div class="row">
+                <div class="col-10 ">
+                    <a class="link-dark rounded module-link" mat-list-item routerLinkActive="list-item-active" *ngIf="this.userService.permissionMatch(['BonAchat'])" routerLink="/bonAchat"><i class="fa fa-cart-arrow-down f-left me-2" aria-hidden="true"></i> Bons Achat</a>
+                </div>
+                <div class="col-2">
+            <button class=" btn-toggle align-items-center rounded collapsed"   data-bs-toggle="collapse" data-bs-target="#bonAchat" aria-expanded="false"></button>
+                </div>
+            </div>
+            <div class="collapse show" id="bonAchat">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                <li>   
+                    <a class="link-dark rounded " mat-list-item routerLinkActive="list-item-active" *ngIf="this.userService.permissionMatch(['BonAchat'])" routerLink="/bonAchat"><i class="fa fa-list-ul me-2" aria-hidden="true"></i>List Bons Achat</a>
+                </li>
+                <li>
+                    <a class="link-dark rounded " mat-list-item routerLinkActive="list-item-active" *ngIf="this.userService.permissionMatch(['BonAchat'])" routerLink="/bonAchat/addBonAchat"><i class="fa fa-plus me-2" aria-hidden="true"></i>Ajouter Bon Achat</a>
+                </li>
+              
+            </ul>
+            </div>
+        </li>
+
+        <li class="mb-2">
+            <div class="row">
+                <div class="col-10 ">
+                    <a class="link-dark rounded module-link" mat-list-item routerLinkActive="list-item-active" *ngIf="this.userService.permissionMatch(['BonHonoraire'])" routerLink="/bonHonoraire"><i class="fa fa-shopping-cart f-left  " aria-hidden="true"></i> Bons Honoraire</a>
+                </div>
+                <div class="col-2">
+            <button class=" btn-toggle align-items-center rounded collapsed"   data-bs-toggle="collapse" data-bs-target="#bonHonoraire" aria-expanded="false"></button>
+                </div>
+            </div>
+            <div class="collapse show" id="bonHonoraire">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                <li>   
+                    <a class="link-dark rounded " mat-list-item routerLinkActive="list-item-active" *ngIf="this.userService.permissionMatch(['BonHonoraire'])" routerLink="/bonHonoraire"><i class="fa fa-list-ul me-2" aria-hidden="true"></i>List Bons Honoraire</a>
+                </li>
+                <li>
+                    <a class="link-dark rounded " mat-list-item routerLinkActive="list-item-active" *ngIf="this.userService.permissionMatch(['BonHonoraire'])" routerLink="/bonHonoraire/addbonHonoraire"><i class="fa fa-plus me-2" aria-hidden="true"></i>Ajouter Bon Honoraire</a>
+                </li>
+              
+            </ul>
+            </div>
+        </li>
+
+</ul>
+        
+-->
+
+
+        <!----
+
+      <li class="mb-1">
+        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
+          Dashboard
+        </button>
+        <div class="collapse" id="dashboard-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="#" class="link-dark rounded">Overview</a></li>
+            <li><a href="#" class="link-dark rounded">Weekly</a></li>
+            <li><a href="#" class="link-dark rounded">Monthly</a></li>
+            <li><a href="#" class="link-dark rounded">Annually</a></li>
+          </ul>
+        </div>
+      </li>
+      <li class="mb-1">
+        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
+          Orders
+        </button>
+        <div class="collapse" id="orders-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="#" class="link-dark rounded">New</a></li>
+            <li><a href="#" class="link-dark rounded">Processed</a></li>
+            <li><a href="#" class="link-dark rounded">Shipped</a></li>
+            <li><a href="#" class="link-dark rounded">Returned</a></li>
+          </ul>
+        </div>
+      </li>
+      <li class="border-top my-3"></li>
+      <li class="mb-1">
+        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
+          Account
+        </button>
+        <div class="collapse" id="account-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="#" class="link-dark rounded">New...</a></li>
+            <li><a href="#" class="link-dark rounded">Profile</a></li>
+            <li><a href="#" class="link-dark rounded">Settings</a></li>
+            <li><a href="#" class="link-dark rounded">Sign out</a></li>
+          </ul>
+        </div>
+      </li>
+    -->
+    
