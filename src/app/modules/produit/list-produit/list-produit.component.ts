@@ -20,6 +20,8 @@ export class ListProduitComponent implements AfterViewInit {
 
   displayedColumns: string[] =['reference','nom','prixVente','quantitieDisponible','actions']
   produits : Produit[];
+  produitsOrderBy : Produit[];
+
   produit : Produit = new Produit();
 
   dataSource: MatTableDataSource<Produit>;
@@ -30,6 +32,7 @@ export class ListProduitComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.getAllProduits();
+    this.selectProduitsOrderByCategorie()
   }
 
   getAllProduits(){
@@ -41,6 +44,12 @@ export class ListProduitComponent implements AfterViewInit {
     })
 
 
+  }
+
+  selectProduitsOrderByCategorie(){
+    this.produitService.selectProduitsOrderByCategorie().subscribe(data => {
+      this.produitsOrderBy = data;
+    })
   }
   
   getProduitByRef(reference : string){
@@ -101,10 +110,10 @@ export class ListProduitComponent implements AfterViewInit {
      })*/
     
      
-     const head = [['Réf', 'Designation', 'Categorie', 'Qté']]
+     const head = [['Réf', 'Designation','TVA', 'Categorie', 'Qté']]
      let data = []
-     for(let i=0 ;i<this.produits.length ;i++){
-       data.push([this.produits[i].reference, this.produits[i].designation, this.produits[i].categorie.nomCat , this.produits[i].quantitieDisponible])
+     for(let i=0 ;i<this.produitsOrderBy.length ;i++){
+       data.push([this.produitsOrderBy[i].reference, this.produitsOrderBy[i].designation,this.produitsOrderBy[i].tva, this.produitsOrderBy[i].categorie.nomCat , this.produitsOrderBy[i].quantitieDisponible])
      }
      
      const doc = new jsPDF()

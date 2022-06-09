@@ -51,7 +51,7 @@ export class AddEditProduitComponent implements OnInit {
       reference: ['', Validators.required],
       designation: ['', Validators.required],
       tva :['', Validators.required],
-      categorie :null,
+      categorie :['', Validators.required],
       AddCategorie:null,
       marque :null,
       description:null,

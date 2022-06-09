@@ -17,6 +17,11 @@ export class ProduitService {
     return this.httpClient.get<Produit[]>(`${this.baseUrl}`)
   }
 
+
+  selectProduitsOrderByCategorie():Observable<Produit[]>{
+    return this.httpClient.get<Produit[]>(`${this.baseUrl}/OrderBy`)
+  }
+
   getProduitByRef( reference :string ):Observable<any> {
     return this.httpClient.get<any>(`${this.baseUrl}/${reference}`)
   }

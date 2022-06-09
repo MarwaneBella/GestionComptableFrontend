@@ -17,6 +17,7 @@ img{
     height: 150px;
     object-fit: cover;
     border-radius: 50%;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 }
 
 mat-form-field{
@@ -47,7 +48,6 @@ mat-form-field{
 
 input[readonly]{
     pointer-events: none;
-
 }
 
 
