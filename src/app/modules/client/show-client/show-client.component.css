@@ -1,4 +1,12 @@
+.card{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
+}
+.card-header{
+    height: 40px;
+    background-color: 	#6C7B95;
+    color: white;
+}
 
 .mat-dialog-content {
     max-height: initial;
@@ -19,21 +27,29 @@ mat-form-field{
     margin-top:2%;
    
 }
+
+.close{
+    margin-top: -20px;
+    margin-left: 98.7%;
+    margin-bottom: 20px;
+}
+.close button{
+    border: none;
+    border-radius: 50%;
+}
   
-
-.label-phone{
-    margin-left: 40px;
-    padding-right: 5px;
+::ng-deep[readonly]  .mat-form-field-outline{
+    background-color: rgb(249, 249, 249);
+    border-radius: 5px;
+    cursor: pointer;
+    
 }
 
-span[matprefix] {
-    position: absolute;
-    top: -16px;
+input[readonly]{
+    pointer-events: none;
+
 }
 
-.input-phone{
-    padding-left: 40px;
-}
 
-  
+
     

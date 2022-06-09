@@ -3,30 +3,30 @@
     <mat-list>
 
         <!--<h2 matSubheader>Pages</h2>-->
-        <a mat-list-item routerLinkActive="list-item-active" *ngIf="this.userService.permissionMatch(['Dashboard'])" routerLink="/dashboard"><i class="fa fa-tachometer mx-2" aria-hidden="true"></i>Tableau de bord</a>
+        <a  mat-list-item [routerLinkActive]="['is-active']" *ngIf="this.userService.permissionMatch(['Dashboard'])" routerLink="/dashboard"><i  class='bx bxs-dashboard bx-sm me-3  c-primary ' ></i> Tableau de bord</a>
         
-        <a mat-list-item routerLinkActive="list-item-active" *ngIf="this.userService.permissionMatch(['Client'])" routerLink="/client">Client</a>
+        <a mat-list-item [routerLinkActive]="['is-active']" class="test" *ngIf="this.userService.permissionMatch(['Client'])" routerLink="/client"><mat-icon class="c-blue me-3">people_outline</mat-icon> Client</a>
         
-        <a mat-list-item routerLinkActive="list-item-active" *ngIf="this.userService.permissionMatch(['Fournisseur'])" routerLink="/fournisseur">Fournisseur</a>
+        <a mat-list-item [routerLinkActive]="['is-active']" *ngIf="this.userService.permissionMatch(['Fournisseur'])" routerLink="/fournisseur"><mat-icon  class="c-blue me-3" >people_outline</mat-icon> Fournisseur</a>
         
-        <a mat-list-item routerLinkActive="list-item-active" *ngIf="this.userService.permissionMatch(['Produit'])" routerLink="/produit">Produit</a>
-        <a mat-list-item routerLinkActive="list-item-active" *ngIf="this.userService.permissionMatch(['Produit'])" routerLink="/produit/categorie">Categorie</a>
+        <a mat-list-item [routerLinkActiveOptions]="{exact: true}" [routerLinkActive]="['is-active']" *ngIf="this.userService.permissionMatch(['Produit'])" routerLink="/produit"><i  class='fa fa-cubes me-3 fa-lg c-pink '></i>Produit</a>
+        <a mat-list-item  [routerLinkActiveOptions]="{exact: false}" [routerLinkActive]="['is-active']" *ngIf="this.userService.permissionMatch(['Produit'])" routerLink="/produit/categorie"><i class='bx bx-category bx-sm me-3 c-pink '></i> Categorie</a>
         
-        <a mat-list-item routerLinkActive="list-item-active" *ngIf="this.userService.permissionMatch(['BonAchat'])" routerLink="/bonAchat">Bon Achat</a>
-        <a mat-list-item routerLinkActive="list-item-active" *ngIf="this.userService.permissionMatch(['ReglementFournisseur'])" routerLink="/reglementFournisseur">Reg Fournisseur</a>
+        <a mat-list-item [routerLinkActive]="['is-active']" *ngIf="this.userService.permissionMatch(['BonAchat'])" routerLink="/bonAchat"><i class='bx bx-cart-download bx-sm me-3 c-green '></i> Bon Achat</a>
+        <a mat-list-item [routerLinkActive]="['is-active']" *ngIf="this.userService.permissionMatch(['ReglementFournisseur'])" routerLink="/reglementFournisseur"><i class='bx bx-money bx-sm me-3  c-yellow '></i> Reg Fournisseur</a>
         
-        <a mat-list-item routerLinkActive="list-item-active" *ngIf="this.userService.permissionMatch(['BonHonoraire'])" routerLink="/bonHonoraire">Bon Honoraire</a>
-        <a mat-list-item routerLinkActive="list-item-active" *ngIf="this.userService.permissionMatch(['ReglementClient'])" routerLink="/reglementClient">Reg Clinet</a>
+        <a mat-list-item [routerLinkActive]="['is-active']" *ngIf="this.userService.permissionMatch(['BonHonoraire'])" routerLink="/bonHonoraire"><i class='bx bx-cart bx-sm me-3 c-green '></i> Bon Honoraire</a>
+        <a mat-list-item [routerLinkActive]="['is-active']" *ngIf="this.userService.permissionMatch(['ReglementClient'])" routerLink="/reglementClient"><i class='bx bx-money bx-sm me-3 c-yellow '></i> Reg Client</a>
         
-        <a mat-list-item routerLinkActive="list-item-active" *ngIf="this.userService.permissionMatch(['Facture'])" routerLink="/facture">Factures</a>
+        <a mat-list-item [routerLinkActive]="['is-active']" *ngIf="this.userService.permissionMatch(['Facture'])" routerLink="/facture"><i class='fa fa-files-o me-3 fa-lg  c-green '></i> Factures</a>
 
 
 
         <!--
-        <a mat-list-item routerLinkActive="list-item-active" routerLink="/formulaire">Formulaire</a>
-        <a mat-list-item routerLinkActive="list-item-active" routerLink="/formulaire/attestationStage">Attestation Stage</a>
-        <a mat-list-item routerLinkActive="list-item-active" routerLink="/formulaire/attestationTravail">Attestation Travail</a>
-        <a mat-list-item routerLinkActive="list-item-active" routerLink="/formulaire/lettreMission">Lettre Mission</a>
+        <a mat-list-item [routerLinkActive]="['is-active']" routerLink="/formulaire">Formulaire</a>
+        <a mat-list-item [routerLinkActive]="['is-active']" routerLink="/formulaire/attestationStage">Attestation Stage</a>
+        <a mat-list-item [routerLinkActive]="['is-active']" routerLink="/formulaire/attestationTravail">Attestation Travail</a>
+        <a mat-list-item [routerLinkActive]="['is-active']" routerLink="/formulaire/lettreMission">Lettre Mission</a>
         -->
         
 

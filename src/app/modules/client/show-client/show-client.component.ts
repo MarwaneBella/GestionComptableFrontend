@@ -39,7 +39,7 @@ export class ShowClientComponent implements OnInit {
       adresse: null,
       codePostale: null,
       email: null,
-      telePortable: null,
+      telePortable: ' ',
       teleFix: null,
       bilan: null,
       pvBilan: null,

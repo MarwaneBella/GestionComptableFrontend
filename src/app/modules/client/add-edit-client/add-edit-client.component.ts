@@ -8,6 +8,7 @@ import { ClientService } from '../client.service';
 import { NotifierService } from 'angular-notifier';
 import Swal from 'sweetalert2';
 import {ErrorStateMatcher} from '@angular/material/core';
+import { SweetAlert } from 'src/app/Utils/sweet-alert';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -34,7 +35,7 @@ export class AddEditClientComponent implements OnInit {
 
   villes: Array<any> = new Array();
   
-  
+  sweetAlert : SweetAlert = new SweetAlert();
   
   infosGeneralFormGroup: FormGroup;
   adresseFormGroup: FormGroup;
@@ -53,8 +54,7 @@ export class AddEditClientComponent implements OnInit {
 
   constructor(private _formBuilder: FormBuilder, private clientService: ClientService,private router: Router,private route: ActivatedRoute ,private  notifierService: NotifierService){
   }
-//test :
-//  this.notifier.notify( 'error', 'Good evening, you lovely person!');
+
 
   ngOnInit() {
     this.isSelected = false;
@@ -134,14 +134,12 @@ export class AddEditClientComponent implements OnInit {
       this.clientService.getImage().subscribe( data  =>{
         
         this.imageUrl =data;
-        console.log(this.imageUrl);
       });
     }
 
       
     }); 
 
-    console.log(this.imageUrl); 
 
     
       
@@ -226,23 +224,16 @@ export class AddEditClientComponent implements OnInit {
 
     if(this.isAddMode){
       this.createClient();
-      this.notifierService.notify( 'success', `Client ${this.client.nom} a été ajouté ` );
-      setTimeout(() => {
-      this.router.navigateByUrl('client');
-      }, 1000);
+      
     }
     else{
       this.editClient();
-      this.notifierService.notify( 'success', `Client ${this.client.codeC} a été modifiéx ` );
-      setTimeout(() => {
-      this.router.navigateByUrl('client');
-      }, 1000);
+      
     }
 
   }
   
-   createClient()
-   {
+   createClient(){
 
     this.client = {...this.infosGeneralFormGroup.value , ...this.adresseFormGroup.value, ...this.contactsFormGroup.value, ...this.honorairesFormGroup.value};
     
@@ -253,15 +244,18 @@ export class AddEditClientComponent implements OnInit {
         const uploadImageData = new FormData();
         uploadImageData.append('file', this.selectedImage);
         this.clientService.putImage(uploadImageData).subscribe( (data: any)=> {
-
           
         });
         
       }
-      //this.router.navigateByUrl('client');
+      this.sweetAlert.alertSuccessTimer("Le client : " +this.client.nom+" a été ajouté")
+      this.router.navigateByUrl('client');
+      
+    },erro =>{
+
+      this.sweetAlert.alertErrorOk("L'utilisateur  " +this.client.nom+" n'a pas été ajouté")
       
     });
-    //this.notifier.notify('success', 'You are awesome! I mean it!');
   }
 
   
@@ -286,8 +280,11 @@ export class AddEditClientComponent implements OnInit {
         });
       }
 
-    //  this.router.navigateByUrl('client');
-
+      this.sweetAlert.alertSuccessTimer("Le client : " +this.client.nom+" a été modifié")
+      this.router.navigateByUrl('client');
+      
+    },erro =>{
+      this.sweetAlert.alertErrorOk("L'utilisateur  " +this.client.nom+" n'a pas été modifié")
     });
 
 

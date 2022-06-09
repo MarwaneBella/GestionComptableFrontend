@@ -81,7 +81,9 @@
           </div>
 
           <div  class="mt-4" fxLayoutAlign="center end" >
+            
             <button matStepperNext  class="btn btn-outline-primary" >Suivant<i class="fa fa-arrow-right ms-2" aria-hidden="true"></i></button>
+            
           </div>
           
         </div>
@@ -139,7 +141,7 @@
         <ng-template matStepLabel>Contacts</ng-template>
         <div class="container " id="contactsForm">
 
-          <div class="row ">
+          <div class="row mb-3">
             <mat-form-field appearance="outline" class="mx-auto">
               <mat-label>Email</mat-label>
               <input matInput type="email" placeholder="Ex. pat@example.com"  formControlName="email" >
@@ -156,14 +158,14 @@
           <div class="row ">
             <mat-form-field appearance="outline" class="mx-auto">
               <mat-label class="label-phone">Telephone Portable</mat-label>
-              <input  matInput type="tel" class="inputTele" placeholder="66-666-1234" class="input-phone" formControlName="telePortable" >
+              <input  matInput type="tel" class="inputTele" placeholder="066-666-1234" class="input-phone" formControlName="telePortable" >
             </mat-form-field>
           </div>
 
           <div class="row " >
             <mat-form-field appearance="outline" class="mx-auto">
               <mat-label class="label-phone">Telephone Fix</mat-label>
-              <input  matInput type="tel" placeholder="55-555-1234" class="input-phone" formControlName="teleFix" >
+              <input  matInput type="tel" placeholder="055-555-1234" class="input-phone" formControlName="teleFix" >
             </mat-form-field>
           </div> 
 
@@ -201,7 +203,7 @@
             </mat-form-field>
           </div>
         
-          <div class="row " >
+          <div class="row" >
             <mat-form-field appearance="outline" class="mx-auto">
               <mat-label>régime</mat-label>
               <mat-select formControlName="regime" >
@@ -229,13 +231,12 @@
         
           <div class="mt-5" fxLayoutAlign="center end" >
             <button  matStepperPrevious class="btn btn-outline-danger me-3"><i class="fa fa-arrow-left me-2" aria-hidden="true"></i>Précédent</button>
-            <button  (click)="onSubmit()" class="btn btn-outline-success " [disabled]="infosGeneralFormGroup.invalid" ><i class="fa fa-check me-1" aria-hidden="true"></i> {{nameBtn}}</button>
+            <button *ngIf="isAddMode" (click)="onSubmit()" class="btn btn-success " [disabled]="infosGeneralFormGroup.invalid" ><i class="fa fa-check me-1" aria-hidden="true"></i> Ajouter </button>
+            <button *ngIf="!isAddMode" (click)="onSubmit()" class="btn btn-warning " [disabled]="infosGeneralFormGroup.invalid" ><i class="fa fa-pencil me-1" aria-hidden="true"></i> Modifier</button>
           </div>
         </div>
       </form>
-      <div>
-        <notifier-container></notifier-container>
-      </div>
+
     </mat-step>
   </mat-horizontal-stepper>
 

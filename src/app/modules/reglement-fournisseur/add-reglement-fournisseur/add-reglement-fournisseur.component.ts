@@ -259,14 +259,12 @@ export class AddReglementFournisseurComponent implements OnInit {
            currentValue.status = this.status[index]
           }
            currentValue.montantPayer += this.avances[index]
-           console.log(index)
-            this.bonAchatService.updateBonAchatFromReglementFournisseur(currentValue.idBa,currentValue).subscribe(data =>{
-             
-            console.log(this.bonAchats[index].bonANum)
-            this.addReglementFournisseur(this.bonAchats[index],index)
+            this.bonAchatService.updateBonAchatFromReglementFournisseur(currentValue.idBa,currentValue).subscribe( async (data : any) =>{
+            
+            this.bonAchat = await data;
+            this.addReglementFournisseur(this.bonAchat,index);
+
             })
-            
-            
             
             
        }

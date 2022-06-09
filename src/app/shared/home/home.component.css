@@ -15,6 +15,11 @@ mat-drawer-container {
 
 mat-drawer-content {
   padding: 20px;
-  background-color: #F5F7FA;
+  background-color: #f0f4f8;
+}
+
+mat-drawer{
+  background-color: #F2F4F7;
+  color: white;
 }
 
