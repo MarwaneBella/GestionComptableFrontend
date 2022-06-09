@@ -1,9 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Fournisseur } from 'src/app/entities/fournisseur';
 import { FournisseurService } from '../fournisseur.service';
-import { NotifierService } from 'angular-notifier';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { SweetAlert } from 'src/app/Utils/sweet-alert';
+
+/** Error when invalid control is dirty, touched, or submitted. */
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 
 @Component({
   selector: 'app-add-edit-Fournisseur',
@@ -12,60 +21,8 @@ import { NotifierService } from 'angular-notifier';
 })
 export class AddEditFournisseurComponent implements OnInit {
 
-  villes: string[] = [
-    'Alabama',
-    'Alaska',
-    'Arizona',
-    'Arkansas',
-    'California',
-    'Colorado',
-    'Connecticut',
-    'Delaware',
-    'Florida',
-    'Georgia',
-    'Hawaii',
-    'Idaho',
-    'Illinois',
-    'Indiana',
-    'Iowa',
-    'Kansas',
-    'Kentucky',
-    'Louisiana',
-    'Maine',
-    'Maryland',
-    'Massachusetts',
-    'Michigan',
-    'Minnesota',
-    'Mississippi',
-    'Missouri',
-    'Montana',
-    'Nebraska',
-    'Nevada',
-    'New Hampshire',
-    'New Jersey',
-    'New Mexico',
-    'New York',
-    'North Carolina',
-    'North Dakota',
-    'Ohio',
-    'Oklahoma',
-    'Oregon',
-    'Pennsylvania',
-    'Rhode Island',
-    'South Carolina',
-    'South Dakota',
-    'Tennessee',
-    'Texas',
-    'Utah',
-    'Vermont',
-    'Virginia',
-    'Washington',
-    'West Virginia',
-    'Wisconsin',
-    'Wyoming',
-  ];
-  
-  
+  sweetAlert : SweetAlert = new SweetAlert();
+  villes: Array<any> = new Array();
   infosGeneralFormGroup: FormGroup;
   adresseFormGroup: FormGroup;
   contactsFormGroup: FormGroup;
@@ -77,9 +34,10 @@ export class AddEditFournisseurComponent implements OnInit {
   id : number;
   nameBtn:string;
   isSelected : boolean;
+  matcher = new MyErrorStateMatcher();
 
 
-  constructor(private _formBuilder: FormBuilder, private fournisseurService: FournisseurService,private router: Router,private route: ActivatedRoute ,private  notifierService: NotifierService) {}
+  constructor(private _formBuilder: FormBuilder, private fournisseurService: FournisseurService,private router: Router,private route: ActivatedRoute ) {}
 
   ngOnInit() {
     this.isSelected = false;
@@ -87,6 +45,7 @@ export class AddEditFournisseurComponent implements OnInit {
     this.isAddMode = !this.id;
 
     this.declareForms();
+    this.loadVillesJson();
 
     if(this.isAddMode){
       this.nameBtn = "Ajoute"
@@ -116,12 +75,21 @@ export class AddEditFournisseurComponent implements OnInit {
 
     });
     this.contactsFormGroup = this._formBuilder.group({
-      email: null,
+      email: ['', Validators.email],
       telePortable: null,
       teleFix: null
 
     });
 
+  }
+
+  loadVillesJson(){
+
+    fetch('./assets/jsons/villes.json').then(res => res.json())
+    .then(jsonData => {
+      console.log(jsonData)
+      this.villes = jsonData;
+    });
   }
 
 
@@ -212,17 +180,11 @@ export class AddEditFournisseurComponent implements OnInit {
 
     if(this.isAddMode){
       this.createFournisseur();
-      this.notifierService.notify( 'success', `Fournisseur ${this.fournisseur.nom} a été ajouté  ` );
-      setTimeout(() => {
-        this.router.navigateByUrl('fournisseur');
-      }, 1000);
+      
     }
     else{
       this.editFournisseur();
-      this.notifierService.notify( 'success', `Client ${this.fournisseur.codeF} a été modifié ` );
-      setTimeout(() => {
-      this.router.navigateByUrl('client');
-      }, 1000);
+     
     }
 
   }
@@ -243,8 +205,13 @@ export class AddEditFournisseurComponent implements OnInit {
         
       }
 
-    //  this.router.navigateByUrl('fournisseur');
+      this.sweetAlert.alertSuccessTimer("Le fournisseur : " +this.fournisseur.nom+" a été ajouté")
+      this.router.navigateByUrl('fournisseur');
+      
+    },erro =>{
 
+      this.sweetAlert.alertErrorOk("Le fournisseur  " +this.fournisseur.nom+" n'a pas été ajouté")
+      
     });
   }
 
@@ -269,15 +236,16 @@ export class AddEditFournisseurComponent implements OnInit {
         });
       }
 
+      this.sweetAlert.alertSuccessTimer("Le fournisseur : " +this.fournisseur.nom+" a été modifié")
       this.router.navigateByUrl('fournisseur');
-
+      
+    },erro =>{
+      this.sweetAlert.alertErrorOk("Le fournisseur  " +this.fournisseur.nom+" n'a pas été modifié")
     });
 
 
   }
 
-  
-  
 
 }
 

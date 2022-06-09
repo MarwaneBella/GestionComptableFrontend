@@ -8,7 +8,6 @@ import { DeleteFournisseurComponent } from '../delete-fournisseur/delete-fournis
 import { FournisseurService } from '../fournisseur.service';
 import { ShowFournisseurComponent } from '../show-fournisseur/show-fournisseur.component';
 
-import { NotifierService } from 'angular-notifier';
 
 import jsPDF from 'jspdf'
 //import * as autoTable from 'jspdf-autotable';

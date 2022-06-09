@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ClientService } from '../client.service';
 
 import { NotifierService } from 'angular-notifier';
+import { SweetAlert } from 'src/app/Utils/sweet-alert';
 
 @Component({
   selector: 'app-delete-client',
@@ -13,15 +14,11 @@ export class DeleteClientComponent implements OnInit {
 
   namClient : string;
   ID : number;
+  sweetAlert: SweetAlert = new SweetAlert();
 
-  private notifier: NotifierService;
 
-  constructor(private clientService:ClientService,
-    @Inject(MAT_DIALOG_DATA) public editdata :any ,
-   private dialogRef : MatDialogRef<DeleteClientComponent>,
-   notifierService: NotifierService
-  ){
-    this.notifier = notifierService
+  constructor(private clientService:ClientService, @Inject(MAT_DIALOG_DATA) public editdata :any, private dialogRef : MatDialogRef<DeleteClientComponent>,){
+    
   }
 
   ngOnInit(): void {
@@ -34,7 +31,15 @@ export class DeleteClientComponent implements OnInit {
   deleteClientById(){
     this.clientService.deleteClientById(this.ID).subscribe(data => {
       this.dialogRef.close();
-      this.notifier.notify( 'error', `Client ${this.namClient} est Delete en list ` );
+      if(data){
+        this.sweetAlert.alertSuccessTimer("Le client  " +this.namClient+" a été supprimé");
+      }
+      else{
+        this.sweetAlert.alertErrorOkTwo("Imposible Supprimer ce client !!"," Le client déja passer un bon d'honoraire !")
+      }
+      
+    },error =>{
+      this.sweetAlert.alertErrorOk("Le client  " +this.namClient+" n'a pas été supprimé");
     })
   }
 

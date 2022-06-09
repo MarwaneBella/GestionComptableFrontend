@@ -79,9 +79,9 @@ export class AddEditClientComponent implements OnInit {
 
     fetch('./assets/jsons/villes.json').then(res => res.json())
     .then(jsonData => {
+      console.log(jsonData)
       this.villes = jsonData;
     });
-
   }
 
   declareForms(){
@@ -244,7 +244,6 @@ export class AddEditClientComponent implements OnInit {
         const uploadImageData = new FormData();
         uploadImageData.append('file', this.selectedImage);
         this.clientService.putImage(uploadImageData).subscribe( (data: any)=> {
-          
         });
         
       }
@@ -253,7 +252,7 @@ export class AddEditClientComponent implements OnInit {
       
     },erro =>{
 
-      this.sweetAlert.alertErrorOk("L'utilisateur  " +this.client.nom+" n'a pas été ajouté")
+      this.sweetAlert.alertErrorOk("Le client " +this.client.nom+" n'a pas été ajouté")
       
     });
   }
