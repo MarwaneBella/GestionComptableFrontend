@@ -41,7 +41,7 @@ export class AddReglementClientComponent implements OnInit {
 
 
 
-  statusGeneral : string
+  statusGeneral : string =''
   status : Array<boolean> = [] 
 
   Avance : number
@@ -142,8 +142,7 @@ export class AddReglementClientComponent implements OnInit {
       this.dataSource = new MatTableDataSource(this.bonBonHonoraires);
       this.dataList = this.bonBonHonoraires
       this.totale()
-     
-     
+      
       this.avanceGeneral = 0
       this.dataList.forEach((currentValue, index) => {
         this.status[index] = false ;
@@ -167,10 +166,17 @@ export class AddReglementClientComponent implements OnInit {
       this.totaleMontants     += currentValue.montantTotal
       this.totaleMontantPayer += currentValue.montantPayer
       this.totaleRestePayer   += (currentValue.montantTotal -currentValue.montantPayer )
-
-      //this.totaleAvances      += currentValue
-     // this.totaleRestes       += currentValue    
     });
+    this.totaleRestes = this.totaleRestePayer
+    this.formInfosReglement.controls['reste'].setValue(this.totaleRestes)
+  
+    if(this.totaleRestes == 0){
+      this.statusGeneral = 'R'
+     }else{
+      this.statusGeneral = 'NR'
+     }
+     this.formInfosReglement.controls['statusGeneral'].setValue(this.statusGeneral)
+
   }
 
   // calcule des restes :
@@ -227,6 +233,7 @@ export class AddReglementClientComponent implements OnInit {
 
   }
 
+
   //
   calculeReste(restPayer : number ,avance : string ,index : number){
    // this.calculeResteGeneral()
@@ -240,12 +247,28 @@ export class AddReglementClientComponent implements OnInit {
       this.status[index] = false
 
     }
+
       this.totaleRestes =0
       this.dataList.forEach((currentValue, i) => {
         this.totaleRestes+=this.restes[i]
        });
-    this.formInfosReglement.controls['reste'].setValue(this.totaleRestes)
 
+    this.formInfosReglement.controls['reste'].setValue(this.totaleRestes)
+   this.calculeTotaleAvances() ;
+   if(this.totaleRestes >= this.totaleAvances){
+    this.statusGeneral = 'NR'
+   }else{
+    this.statusGeneral = 'R'
+   }
+   this.formInfosReglement.controls['statusGeneral'].setValue(this.statusGeneral)
+  }
+
+  calculeTotaleAvances(){
+    this.totaleAvances =0
+    this.dataList.forEach((currentValue, i) => {
+      this.totaleAvances+=this.avances[i]
+     });
+    this.formInfosReglement.controls['avanceGeneral'].setValue(this.totaleAvances)
   }
 
   

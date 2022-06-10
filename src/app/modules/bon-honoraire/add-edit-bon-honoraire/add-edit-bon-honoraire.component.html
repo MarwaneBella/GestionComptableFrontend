@@ -21,7 +21,7 @@
                   </mat-form-field>
                 </div>
                 <div class="col">
-                    <mat-form-field  appearance="outline">
+                    <mat-form-field  appearance="outline"readonly >
                       <mat-label>Code Client</mat-label>
                       <input matInput formControlName ="codeC"  readonly>
                   </mat-form-field>
@@ -29,7 +29,7 @@
             </div>
             <div class="row">
                 <div class="col me-3">
-                  <mat-form-field  appearance="outline">
+                  <mat-form-field  appearance="outline" readonly>
                     <mat-label>Bon Numero</mat-label>
                     <input matInput formControlName="bonHNum" readonly>
                 </mat-form-field>
@@ -49,12 +49,12 @@
     </div>
     <!-- expansion-panel -->
   <mat-accordion >
-    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"  [expanded]="isAddMode" [disabled]="isAddMode" class="text-center" hideToggle="true" #panel="matExpansionPanel">
-      <mat-expansion-panel-header class="bg-light"  [collapsedHeight]="'40px'" [expandedHeight]="'40px'"  class="d-flex">
-          <mat-panel-title class="d-flex w-100 justify-content-center" >
+    <mat-expansion-panel style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;" (opened)="panelOpenState = true" (closed)="panelOpenState = false"  [expanded]="isAddMode" [disabled]="isAddMode" class="text-center" hideToggle="true" #panel="matExpansionPanel">
+      <mat-expansion-panel-header style="background-color: 	#6C7B95; "  [collapsedHeight]="'40px'" [expandedHeight]="'40px'"  class="d-flex">
+          <mat-panel-title class="d-flex w-100 justify-content-center"  style="color: white;">
           Card Produit
           </mat-panel-title>
-        <div class="p-2 flex-shrink-1 "><mat-panel-description >
+        <div class="p-2 flex-shrink-1 "  style="color: white;"><mat-panel-description >
           <mat-icon *ngIf="!panelOpenState">add</mat-icon>
           <mat-icon *ngIf="panelOpenState">remove</mat-icon>
         </mat-panel-description></div>
@@ -82,16 +82,15 @@
                   </mat-form-field>
               </div>
               <div class="col">
-                <mat-form-field  appearance="outline">
+                <mat-form-field  appearance="outline" readonly>
                     <mat-label>Montant HT</mat-label>
-                    <!--[value]="formLigneBon.controls['montantHt'].value | number: '1.2-2' "   formLigneBon.get('montantHt')?.value -->
                     <input type="text" matInput formControlName ="montantHt"  readonly>
                 </mat-form-field>
               </div>
             </div>
             <div class="row">
               <div class="col ">
-                  <mat-form-field  appearance="outline">
+                  <mat-form-field  appearance="outline" readonly>
                       <mat-label> Taux TVA (%)</mat-label>
                       <input type="number" matInput formControlName ="tva"  readonly>
                   </mat-form-field>
@@ -103,7 +102,7 @@
                 </mat-form-field>
               </div>
               <div class="col">
-                <mat-form-field  appearance="outline">
+                <mat-form-field  appearance="outline" readonly>
                     <mat-label>Montant TVA</mat-label>
                     <input type="text" matInput formControlName ="montantTva"  readonly>
                 </mat-form-field>
@@ -115,7 +114,7 @@
               <div class="col">
               </div>
               <div class="col">
-                <mat-form-field  appearance="outline">
+                <mat-form-field  appearance="outline" readonly>
                     <mat-label>Montant TTC</mat-label>
                     <input type="text" matInput formControlName ="montantTtc" readonly>
                 </mat-form-field>

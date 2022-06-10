@@ -1,4 +1,4 @@
-import {  Component, OnInit, ViewChild } from '@angular/core';
+import {  Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatCalendarCellClassFunction } from '@angular/material/datepicker';
 import {Observable} from 'rxjs';
@@ -34,7 +34,8 @@ export interface DataList {
 @Component({
   selector: 'app-add-edit-bon-achat',
   templateUrl: './add-edit-bon-achat.component.html',
-  styleUrls: ['./add-edit-bon-achat.component.css']
+  styleUrls: ['./add-edit-bon-achat.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AddEditBonAchatComponent implements OnInit {
   

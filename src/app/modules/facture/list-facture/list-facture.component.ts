@@ -3,6 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 import { Facture } from 'src/app/entities/facture';
 import { DeleteFactureComponent } from '../delete-facture/delete-facture.component';
 import { FactureService } from '../facture.service';
@@ -80,6 +82,37 @@ export class ListFactureComponent implements AfterViewInit{
     });
 
   }
+
+  public openPDF(): void {
+     
+     const head = [['N° FA', 'Commande', 'Date', 'Client','Total HT','Total TVA','Total TTC']]
+     let data = []
+     for(let i=0 ;i<this.listFacture.length ;i++){
+       data.push([this.listFacture[i].facNum, this.listFacture[i].bonHonoraire.bonHNum, this.listFacture[i].dateFac.toLocaleString(), this.listFacture[i].bonHonoraire.client.nom,this.listFacture[i].totalHt,this.listFacture[i].totalTva,this.listFacture[i].totalTtc])
+     }
+     
+     const doc = new jsPDF()
+     doc.setProperties({
+       title: "LISTE FACTURES",
+       
+     });
+     doc.setTextColor('#0A043C')
+     doc.setFontSize(15);
+
+     let date = new Date();
+     let firstday = new Date(date.getFullYear(),0,1)
+
+     doc.text(`Les factures : de ${firstday.toLocaleDateString()} à ${date.toLocaleDateString()}`,110,20,{align:'center'})
+     
+      autoTable(doc, {
+       theme :'grid',
+       head: head,
+       body: data,
+       tableWidth: 'auto',
+       margin: { top: 30 }   
+     })
+     window.open(URL.createObjectURL(doc.output("blob")))
+   }
 
 
 
