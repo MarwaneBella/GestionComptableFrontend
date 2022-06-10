@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ReglementClient } from 'src/app/entities/reglement-client';
+import { SweetAlert } from 'src/app/Utils/sweet-alert';
 import { DeleteReglementClientComponent } from '../delete-reglement-client/delete-reglement-client.component';
 import { ReglementClientService } from '../reglement-client.service';
 
@@ -23,6 +24,7 @@ export class ListReglementClientComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   dataSource: MatTableDataSource<ReglementClient>;
+  sweetAlert : SweetAlert = new SweetAlert();
 
   constructor(private reglementClientService : ReglementClientService , public dialog: MatDialog ) { }
 
@@ -36,10 +38,8 @@ export class ListReglementClientComponent implements OnInit {
      
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-      console.log(this.dataSource.paginator ,'   ',this.dataSource.sort)
-    },
-    error => {
-      alert("Error");
+
+    
     });
     
   }
@@ -61,7 +61,6 @@ export class ListReglementClientComponent implements OnInit {
       data:row,
     }).afterClosed().subscribe(val =>{
       this.getAllReglementClient() ;
-
     });
   }
 

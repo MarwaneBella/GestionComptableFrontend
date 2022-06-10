@@ -55,9 +55,7 @@ export class ListClientComponent implements AfterViewInit{
       console.log(this.dataSource)
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-    },
-    error => {
-      alert("Error");
+    
     });
     
   }

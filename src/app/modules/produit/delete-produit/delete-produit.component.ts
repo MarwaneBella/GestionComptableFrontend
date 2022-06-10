@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { NotifierService } from 'angular-notifier';
+import { SweetAlert } from 'src/app/Utils/sweet-alert';
 import { ProduitService } from '../produit.service';
 
 @Component({
@@ -10,13 +10,9 @@ import { ProduitService } from '../produit.service';
 })
 export class DeleteProduitComponent implements OnInit {
 
-  
+  sweetAlert : SweetAlert = new SweetAlert();
   reference : string
-  constructor(private produitService:ProduitService,
-    @Inject(MAT_DIALOG_DATA) public editdata :any ,
-   private dialogRef : MatDialogRef<DeleteProduitComponent>,
-    private  notifierService: NotifierService
-  ){
+  constructor(private produitService:ProduitService, @Inject(MAT_DIALOG_DATA) public editdata :any ,private dialogRef : MatDialogRef<DeleteProduitComponent>){
     
   }
 
@@ -29,8 +25,15 @@ export class DeleteProduitComponent implements OnInit {
   deleteProduitByRef(){
     this.produitService.deleteProduitByRef(this.reference).subscribe(data => {
       this.dialogRef.close();
-    this.notifierService.notify( 'success', `Produit ${this.reference} est Ajoute en list ` );
-
+      if(data){
+        this.sweetAlert.alertSuccessTimer("Le produit  " +this.reference+" a été supprimé");
+      }
+      else{
+        this.sweetAlert.alertErrorOkTwo("Imposible Supprimer ce produit !!","Car déja appartient à un bon d'achat ou un bon d'honoraire  !")
+      }
+      
+    },error =>{
+      this.sweetAlert.alertErrorOk("Le produit  " +this.reference+" n'a pas été supprimé");
     })
   }
 

@@ -20,6 +20,10 @@ export class ReglementClientService {
     return this.httpClient.post(`${this.baseUrl}`,reglementClient)
   }
 
+  addListReglementClient( listReglementClient : ReglementClient[] ):Observable<any> {
+    return this.httpClient.post(`${this.baseUrl+"/addList"}`,listReglementClient)
+  }
+
   getNextCodeRF( date : Date):Observable<any> {
     return this.httpClient.post(`${this.baseUrl+"/next"}`, date,{responseType: 'text'});
   }

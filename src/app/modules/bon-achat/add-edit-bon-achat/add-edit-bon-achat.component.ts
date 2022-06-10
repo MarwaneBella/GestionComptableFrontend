@@ -20,6 +20,7 @@ import { ProduitService } from '../../produit/produit.service';
 import { BonAchatService } from '../bon-achat.service';
 import { MatExpansionPanel } from '@angular/material/expansion';
 import { Stock } from 'src/app/Utils/stock';
+import { SweetAlert } from 'src/app/Utils/sweet-alert';
 
 export interface DataList {
   produit: Produit;
@@ -68,6 +69,8 @@ export class AddEditBonAchatComponent implements OnInit {
   isAddLigneMode: boolean = true;
   currentIndex : number ;
   isValide : boolean = false;
+  sweetAlert : SweetAlert = new SweetAlert();
+
 
   @ViewChild('panel', {static: true, read: MatExpansionPanel}) panel: MatExpansionPanel;
 
@@ -382,9 +385,15 @@ export class AddEditBonAchatComponent implements OnInit {
       this.bonAchat.valide = false;
 
       this.bonAchatService.addBonAchat(this.bonAchat).subscribe(data =>{
+        
+        
+        this.sweetAlert.alertSuccessTimer("Le bon d'achat : " +this.bonAchat.bonANum+" a été ajouté en brouillon")
         this.router.navigateByUrl('bonAchat');
         
+      },erro =>{
+        this.sweetAlert.alertErrorOk("Le bon d'achat : " +this.bonAchat.bonANum+" n'a pas été ajouté en brouillon")
       });
+  
 
     }
     // edit bon achat
@@ -401,9 +410,12 @@ export class AddEditBonAchatComponent implements OnInit {
 
 
       this.bonAchatService.updateBonAchat(this.id,this.bonAchat).subscribe(data =>{
+
+        this.sweetAlert.alertSuccessTimer("Le bon d'achat : " +this.bonAchat.bonANum+" a été modifié en brouillon")
         this.router.navigateByUrl('bonAchat');
-      }, error =>{
-        alert("E")
+        
+      },erro =>{
+        this.sweetAlert.alertErrorOk("Le bon d'achat : " +this.bonAchat.bonANum+" n'a pas été modifié en brouillon")
       });
       
       
@@ -424,9 +436,12 @@ export class AddEditBonAchatComponent implements OnInit {
       this.bonAchatService.addBonAchat(this.bonAchat).subscribe(async data =>{
         //add to stock
         let wait = <boolean> await this.stock.addToStockFromBonAchat(this.bonAchat.listLignBA);
+        this.sweetAlert.alertSuccessTimer("Le bon d'achat : " +this.bonAchat.bonANum+" a été ajouté et validé")
         this.router.navigateByUrl('bonAchat');
+        
+      },erro =>{
+        this.sweetAlert.alertErrorOk("Le bon d'achat : " +this.bonAchat.bonANum+" n'a pas été ajouté et validé")
       });
-
     }
     //edit bon achat
     else{
@@ -453,11 +468,16 @@ export class AddEditBonAchatComponent implements OnInit {
             let wait =<boolean> await this.stock.addToStockFromBonAchat(this.bonAchat.listLignBA);
             
             
+            this.sweetAlert.alertSuccessTimer("Le bon d'achat : " +this.bonAchat.bonANum+" a été modifié et validé")
             this.router.navigateByUrl('bonAchat');
-          }, error =>{
-            alert("V")
+        
+          },erro =>{
+            this.sweetAlert.alertErrorOk("Le bon d'achat : " +this.bonAchat.bonANum+" n'a pas été modifié et validé")
           });
+        
 
+        },erro =>{
+          this.sweetAlert.alertErrorOk("");
         })
         
 
@@ -474,10 +494,13 @@ export class AddEditBonAchatComponent implements OnInit {
         this.bonAchatService.updateBonAchat(this.id,this.bonAchat).subscribe(async data =>{
           //add to stock
           let wait =<boolean> await this.stock.addToStockFromBonAchat(this.bonAchat.listLignBA);
+          this.sweetAlert.alertSuccessTimer("Le bon d'achat : " +this.bonAchat.bonANum+" a été modifié et validé")
           this.router.navigateByUrl('bonAchat');
-        }, error =>{
-          alert("V")
-        });
+          
+          },erro =>{
+            this.sweetAlert.alertErrorOk("Le bon d'achat : " +this.bonAchat.bonANum+" n'a pas été modifié et validé")
+          });
+    
 
       }
       

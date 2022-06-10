@@ -283,7 +283,7 @@ export class AddEditClientComponent implements OnInit {
       this.router.navigateByUrl('client');
       
     },erro =>{
-      this.sweetAlert.alertErrorOk("L'utilisateur  " +this.client.nom+" n'a pas été modifié")
+      this.sweetAlert.alertErrorOk("Le client : " +this.client.nom+" n'a pas été modifié")
     });
 
 

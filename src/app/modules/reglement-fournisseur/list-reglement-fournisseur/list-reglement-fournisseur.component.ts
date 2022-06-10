@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ReglementFournisseur } from 'src/app/entities/reglement-fournisseur';
+import { SweetAlert } from 'src/app/Utils/sweet-alert';
 import { DeleteReglementFournisseurComponent } from '../delete-reglement-fournisseur/delete-reglement-fournisseur.component';
 import { ReglementFournisseurService } from '../reglement-fournisseur.service';
 
@@ -17,7 +18,7 @@ export class ListReglementFournisseurComponent implements OnInit {
   displayedColumns: string[] = ['nomF', 'bonANum', 'codeRF', 'datePayment', 'modePayment', 'avance', 'reste', 'status','actions'];
   listReglementFournisseur: ReglementFournisseur[];
   reglementFournisseur : ReglementFournisseur = new ReglementFournisseur();
-
+  sweetAlert : SweetAlert = new SweetAlert();
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -35,10 +36,6 @@ export class ListReglementFournisseurComponent implements OnInit {
      
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-      console.log(this.dataSource.paginator ,'   ',this.dataSource.sort)
-    },
-    error => {
-      alert("Error");
     });
     
   }

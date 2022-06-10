@@ -16,7 +16,7 @@ export class ListUserComponent implements OnInit {
   dataSource: MatTableDataSource<User>;
   user: User = new User();
   users : User[];
-
+  sweetAlert: SweetAlert = new SweetAlert();
   constructor(private adminService: AdminService, public dialog: MatDialog) { 
 
   }

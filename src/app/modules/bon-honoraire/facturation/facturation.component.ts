@@ -8,6 +8,7 @@ import { Facture } from 'src/app/entities/facture';
 import { LignBH } from 'src/app/entities/lign-bh';
 import { Produit } from 'src/app/entities/produit';
 import { Calculate } from 'src/app/Utils/calculate';
+import { SweetAlert } from 'src/app/Utils/sweet-alert';
 import { FactureService } from '../../facture/facture.service';
 import { BonHonoraireService } from '../bon-honoraire.service';
 
@@ -45,6 +46,7 @@ export class FacturationComponent implements OnInit {
   totaleMontantHt  : number
   totaleTauxTva    : number
   totaleMontantTtc : number
+  sweetAlert : SweetAlert = new SweetAlert();
 
   constructor(private _formBuilder: FormBuilder ,private bonHonoraireService : BonHonoraireService ,private factureService : FactureService ,private router: Router,private route: ActivatedRoute) { }
 
@@ -124,8 +126,12 @@ export class FacturationComponent implements OnInit {
     this.facture.bonHonoraire=this.bonHonoraire
 
     this.factureService.addFacture(this.facture).subscribe(data =>{
-      this.router.navigate(['bonHonoraire'])
-    })
+      this.sweetAlert.alertSuccessTimer("La facture : " +this.facture.facNum+" a été ajouté ")
+      this.router.navigateByUrl('bonHonoraire');
+        
+    },erro =>{
+      this.sweetAlert.alertErrorOk("La facture : " +this.facture.facNum+" n'a pas été ajouté ")
+    });
     
   }
 

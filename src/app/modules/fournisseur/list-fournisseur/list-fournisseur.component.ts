@@ -42,9 +42,7 @@ export class ListFournisseurComponent implements AfterViewInit {
       this.dataSource = new MatTableDataSource(this.fournisseurs);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-    },
-    error => {
-      alert("Error");
+    
     });
   }
 

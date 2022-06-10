@@ -12,6 +12,7 @@ import { LignBH } from 'src/app/entities/lign-bh';
 import { Produit } from 'src/app/entities/produit';
 import { Calculate } from 'src/app/Utils/calculate';
 import { Stock } from 'src/app/Utils/stock';
+import { SweetAlert } from 'src/app/Utils/sweet-alert';
 import { ClientService } from '../../client/client.service';
 import { ProduitService } from '../../produit/produit.service';
 import { BonHonoraireService } from '../bon-honoraire.service';
@@ -63,6 +64,7 @@ export class AddEditBonHonoraireComponent implements OnInit {
   isAddLigneMode: boolean = true;
   currentIndex : number ;
   isValide : boolean = false;
+  sweetAlert : SweetAlert = new SweetAlert();
 
   @ViewChild('panel', {static: true, read: MatExpansionPanel}) panel: MatExpansionPanel;
 
@@ -378,9 +380,13 @@ export class AddEditBonHonoraireComponent implements OnInit {
       this.bonHonoraire.valide = false;
 
       this.bonHonoraireService.addBonHonoraire(this.bonHonoraire).subscribe(data =>{
+        this.sweetAlert.alertSuccessTimer("Le bon d'honoraire : " +this.bonHonoraire.bonHNum+" a été ajouté en brouillon")
         this.router.navigateByUrl('bonHonoraire');
         
+      },erro =>{
+        this.sweetAlert.alertErrorOk("Le bon d'honoraire : " +this.bonHonoraire.bonHNum+" n'a pas été ajouté en brouillon")
       });
+
 
     }
     // edit bon achat
@@ -396,9 +402,11 @@ export class AddEditBonHonoraireComponent implements OnInit {
       this.bonHonoraire.valide = false;
 
       this.bonHonoraireService.updateBonHonoraire(this.id,this.bonHonoraire).subscribe(data =>{
+        this.sweetAlert.alertSuccessTimer("Le bon d'honoraire : " +this.bonHonoraire.bonHNum+" a été modifié en brouillon")
         this.router.navigateByUrl('bonHonoraire');
-      }, error =>{
-        alert("E")
+        
+      },erro =>{
+        this.sweetAlert.alertErrorOk("Le bon d'honoraire : " +this.bonHonoraire.bonHNum+" n'a pas été modifié en brouillon")
       });
       
       
@@ -419,7 +427,11 @@ export class AddEditBonHonoraireComponent implements OnInit {
       this.bonHonoraireService.addBonHonoraire(this.bonHonoraire).subscribe(async data =>{
         //add to stock
         let wait = <boolean> await this.stock.removeFromStockByHonoraire(this.bonHonoraire.listLignBH);
+        this.sweetAlert.alertSuccessTimer("Le bon d'honoraire : " +this.bonHonoraire.bonHNum+" a été ajouté et validé")
         this.router.navigateByUrl('bonHonoraire');
+        
+      },erro =>{
+        this.sweetAlert.alertErrorOk("Le bon d'honoraire : " +this.bonHonoraire.bonHNum+" n'a pas été ajouté et validé")
       });
 
     }
@@ -448,9 +460,11 @@ export class AddEditBonHonoraireComponent implements OnInit {
             let wait =<boolean> await this.stock.removeFromStockByHonoraire(this.bonHonoraire.listLignBH);
             
             
+            this.sweetAlert.alertSuccessTimer("Le bon d'honoraire : " +this.bonHonoraire.bonHNum+" a été modifié et validé")
             this.router.navigateByUrl('bonHonoraire');
-          }, error =>{
-            alert("V")
+            
+          },erro =>{
+            this.sweetAlert.alertErrorOk("Le bon d'honoraire : " +this.bonHonoraire.bonHNum+" n'a pas été modifié et validé")
           });
 
         })
@@ -469,9 +483,11 @@ export class AddEditBonHonoraireComponent implements OnInit {
         this.bonHonoraireService.updateBonHonoraire(this.id,this.bonHonoraire).subscribe(async data =>{
           //add to stock
           let wait =<boolean> await this.stock.removeFromStockByHonoraire(this.bonHonoraire.listLignBH);
+          this.sweetAlert.alertSuccessTimer("Le bon d'honoraire : " +this.bonHonoraire.bonHNum+" a été modifié et validé")
           this.router.navigateByUrl('bonHonoraire');
-        }, error =>{
-          alert("V")
+            
+        },erro =>{
+            this.sweetAlert.alertErrorOk("Le bon d'honoraire : " +this.bonHonoraire.bonHNum+" n'a pas été modifié et validé")
         });
 
       }

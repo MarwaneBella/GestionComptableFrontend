@@ -12,6 +12,7 @@ import { LignBH } from 'src/app/entities/lign-bh';
 import { Produit } from 'src/app/entities/produit';
 import { Calculate } from 'src/app/Utils/calculate';
 import { Stock } from 'src/app/Utils/stock';
+import { SweetAlert } from 'src/app/Utils/sweet-alert';
 import { BonHonoraireService } from '../../bon-honoraire/bon-honoraire.service';
 import { ClientService } from '../../client/client.service';
 import { ProduitService } from '../../produit/produit.service';
@@ -61,12 +62,12 @@ export class AddFactureComponent implements OnInit {
   filteredProduits: Observable<Produit[]>;
   filteredClients: Observable<Client[]>;
   nameBtn: string;
-  isAddMode: boolean;
   id : number;
   isSelected : boolean;
   isAddLigneMode: boolean = true;
   currentIndex : number ;
   isValide : boolean = false;
+  sweetAlert : SweetAlert = new SweetAlert();
 
   @ViewChild('panel', {static: true, read: MatExpansionPanel}) panel: MatExpansionPanel;
 
@@ -76,22 +77,13 @@ export class AddFactureComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.isSelected = false;
-    this.id = this.route.snapshot.params['id'];
-    this.isAddMode = !this.id;
+
     this.declareFormInfosBon();
     this.declareFormLigneBon();
-    if(this.isAddMode){
 
-      this.setNextFactureNum();
-      this.setControllers();
+    this.setNextFactureNum();
+    this.setControllers();
       
-    }
-    else{
-      this.setControllers();
-      this.getBonHonoraire();
-      
-    }
     
   }
 
@@ -180,7 +172,6 @@ export class AddFactureComponent implements OnInit {
       
       this.isValide = this.bonHonoraire.valide;
       this.dataList = (this.bonHonoraire.listLignBH as any) ;
-      console.log( this.dataList )
       // delete from select search produit when produit exist in lignBonHonoraire
       this.dataList.forEach(currentData => {
         
@@ -227,7 +218,6 @@ export class AddFactureComponent implements OnInit {
 
     this.clientService.getClientList().subscribe( data =>{
       this.clients = data;
-      console.log(this.clients)
       this.filterClient();
     });
 
@@ -294,7 +284,6 @@ export class AddFactureComponent implements OnInit {
   addEditLigne(){
     if(this.isAddLigneMode){
       this.dataList.push(this.formLigneBon.value);
-      console.log( this.dataList)
 
       this.produits.forEach((element,index) => {
 
@@ -311,7 +300,6 @@ export class AddFactureComponent implements OnInit {
       
       
       this.dataList[this.currentIndex] = this.formLigneBon.value;
-      console.log( this.dataList)
   
       this.dataSource = new MatTableDataSource(this.dataList);
       this.totale();
@@ -337,9 +325,7 @@ export class AddFactureComponent implements OnInit {
   }
 
   editLigne(index:number){
-    if(!this.isAddMode){
-      this.panel.open();
-    }
+    
     this.isAddLigneMode = false;
     this.currentIndex = index;
     
@@ -377,30 +363,10 @@ export class AddFactureComponent implements OnInit {
 
   onValide(){
     //add bon achat
-    if(this.isAddMode){
+    
      this.bonHonoraire = this.formInfosBon.value;
       this.bonHonoraire.listLignBH  = (this.dataList as [] );
 
-
-      console.log("this dataList  :\n")
-      console.log(this.dataList)
-      console.log("bonHonoraire.listLignBH \n"+this.bonHonoraire.listLignBH)
-      //this.bonHonoraire.listLignBH[0].produit =this.dataList[0].produit
-
-     // console.log("test ::: "+this.bonHonoraire.listLignBH[0].produit)
-
-      console.log("bonHonoraire.listLignBH \n"+JSON.stringify (this.bonHonoraire.listLignBH))
-
-
-
-
-     console.log("type of dataList :: "+typeof (this.dataList))
-     console.log("type of listLignBh :: "+typeof (this.bonHonoraire.listLignBH))
-
-      console.log("==========")
-      this.bonHonoraire.listLignBH.forEach((vv)=>{
-        console.log(vv)
-      })
      
       this.bonHonoraire.montantTotal = this.totaleMontantTtc;
       this.bonHonoraire.valide = true;
@@ -416,81 +382,19 @@ export class AddFactureComponent implements OnInit {
       this.bonHonoraireService.addBonHonoraire(this.bonHonoraire).subscribe(data =>{
         //add to stock
         this.bonHonoraire = data
-        console.log("BonHonoraire data: "+this.bonHonoraire)
         this.stock.removeFromStockByHonoraire(this.bonHonoraire.listLignBH);
         this.facture.bonHonoraire=this.bonHonoraire
         this.factureService.addFacture(this.facture).subscribe(data =>{
       
-        })
-
-        this.router.navigateByUrl('facture');
-
+          this.sweetAlert.alertSuccessTimer("La facture : " +this.facture.facNum+" a été ajouté ")
+          this.router.navigateByUrl('facture');
+            
+        },erro =>{
+          this.sweetAlert.alertErrorOk("La facture : " +this.facture.facNum+" n'a pas été ajouté ")
+        });
+      
       });
 
-      
-
-      console.log("BonHonoraire : "+this.bonHonoraire)
-      console.log("Facture : "+this.facture)
-      // add facture : 
-     
-
-    }
-    //edit bon achat
-    else{
-
-      if(this.bonHonoraire.valide){
-        //remove from stock
-        
-        this.bonHonoraireService.getBonHonoraireById(this.id).subscribe(data =>{
-          this.bonHonoraire =data;
-          
-          this.stock.removeFromStockByHonoraire(this.bonHonoraire.listLignBH);
-
-          //
-          this.bonHonoraire = this.formInfosBon.value;
-          this.bonHonoraire.listLignBH  = (this.dataList as any );
-          this.bonHonoraire.montantTotal = this.totaleMontantTtc;
-          this.bonHonoraire.valide = true;
-
-          this.bonHonoraireService.updateBonHonoraire(this.id,this.bonHonoraire).subscribe(data =>{
-            //add to stock
-            this.bonHonoraire = data;
-            
-            
-            this.stock.removeFromStockByHonoraire(this.bonHonoraire.listLignBH);
-            
-            
-            this.router.navigateByUrl('bonHonoraire');
-          }, error =>{
-            alert("V")
-          });
-
-        })
-        
-
-        
-
-
-      }
-      else{
-        this.bonHonoraire = this.formInfosBon.value;
-        this.bonHonoraire.listLignBH  = (this.dataList as any );
-        this.bonHonoraire.montantTotal = this.totaleMontantTtc;
-        this.bonHonoraire.valide = true;
-
-        this.bonHonoraireService.updateBonHonoraire(this.id,this.bonHonoraire).subscribe(data =>{
-          //add to stock
-          this.stock.removeFromStockByHonoraire(this.bonHonoraire.listLignBH);
-          this.router.navigateByUrl('bonHonoraire');
-        }, error =>{
-          alert("V")
-        });
-
-      }
-      
-
-    }
-    
 
   }
 

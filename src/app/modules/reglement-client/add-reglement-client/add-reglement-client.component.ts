@@ -7,6 +7,7 @@ import { map, Observable, startWith } from 'rxjs';
 import { BonHonoraire } from 'src/app/entities/bon-honoraire';
 import { Client } from 'src/app/entities/client';
 import { ReglementClient } from 'src/app/entities/reglement-client';
+import { SweetAlert } from 'src/app/Utils/sweet-alert';
 import { BonHonoraireService } from '../../bon-honoraire/bon-honoraire.service';
 import { ClientService } from '../../client/client.service';
 import { ReglementClientService } from '../reglement-client.service';
@@ -36,6 +37,7 @@ export class AddReglementClientComponent implements OnInit {
   bonHonoraire : BonHonoraire = new BonHonoraire()
 
   reglementClient : ReglementClient = new ReglementClient()
+  listReglementClient :ReglementClient[] = [];
 
 
 
@@ -53,6 +55,7 @@ export class AddReglementClientComponent implements OnInit {
   totaleRestePayer   : number
   totaleAvances      : number = 0
   totaleRestes       : number
+  sweetAlert : SweetAlert = new SweetAlert();
 
   constructor(private _formBuilder: FormBuilder , private clientService :ClientService ,private bonHonoraireService : BonHonoraireService, private reglementClientService : ReglementClientService,private router: Router,private route: ActivatedRoute ) { }
 
@@ -245,30 +248,28 @@ export class AddReglementClientComponent implements OnInit {
 
   }
 
-  onSubmit(){
-    this.updateAllBonHonoraires();
-    this.router.navigateByUrl('reglementClient')
-  }
+  
 
 
   updateAllBonHonoraires(){
     this.bonBonHonoraires.forEach((currentValue, index) =>{
-       if( this.avances[index] != 0){  
+       if( this.avances[index] != 0 && this.avances[index] != null){  
+
           if( currentValue.status != this.status[index] ){
            currentValue.status = this.status[index]
           }
-           currentValue.montantPayer += this.avances[index]
-            this.bonHonoraireService.updateBonHonoraireFromReglementClient(currentValue.idBh,currentValue).subscribe(data =>{
-             
-            this.addReglementClient(this.bonBonHonoraires[index],index)
-            })
-            
-            
-            
-            
+
+          currentValue.montantPayer += this.avances[index]
+
+          this.bonHonoraireService.updateBonHonoraireFromReglementClient(currentValue.idBh,currentValue).subscribe(data =>{
+               
+          }) 
+
+          this.addReglementClient(currentValue,index);  
        }
-    })
-        
+    });
+
+      
   
 
   //  this.getListBonHonoraireByClient(this.client)
@@ -277,19 +278,34 @@ export class AddReglementClientComponent implements OnInit {
 
   // add reglement client :
   addReglementClient(bonHonoraire : BonHonoraire , index : number){
+    let regC :ReglementClient = new ReglementClient();
+    regC.bonHonoraire = bonHonoraire
+    regC.avance = this.avances[index]
+    regC.reste = this.restes[index]
+    regC.status = this.status[index];
+    regC.datePayment = this.formInfosClient.controls['datePayment'].value
+    regC.modePaymant = this.formInfosReglement.controls['mode_reglement'].value
 
-    console.log("addReglement")
-    this.reglementClient.bonHonoraire = bonHonoraire
-    this.reglementClient.avance = this.avances[index]
-    this.reglementClient.reste = this.restes[index]
-    this.reglementClient.status = this.status[index];
-    this.reglementClient.datePayment = this.formInfosClient.controls['datePayment'].value
-    this.reglementClient.modePaymant = this.formInfosReglement.controls['mode_reglement'].value
+    this.listReglementClient.push(regC);
 
-    this.reglementClientService.addReglementClient(this.reglementClient).subscribe(data =>{
+  }
+
+  addListReglementClient(){
+
+    this.reglementClientService.addListReglementClient(this.listReglementClient).subscribe(data =>{
       
-    })
+      this.sweetAlert.alertSuccessTimer( this.listReglementClient.length+" reglement(s) ont été ajoutés")
+      this.router.navigateByUrl('reglementClient');
+      
+    },erro =>{
+      this.sweetAlert.alertErrorOk("Le(s) reglement(s) n'ont pas été ajoutés")
+    });
 
+  }
+
+  onSubmit(){
+    this.updateAllBonHonoraires();
+    this.addListReglementClient();
   }
  
 

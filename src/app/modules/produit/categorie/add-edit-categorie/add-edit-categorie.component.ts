@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Categorie } from 'src/app/entities/categorie';
+import { SweetAlert } from 'src/app/Utils/sweet-alert';
 import { CategorieService } from '../categorie.service';
 
 @Component({
@@ -15,6 +16,7 @@ export class AddEditCategorieComponent implements OnInit {
   categorie: Categorie = new Categorie();
   isAddMode: boolean;
   content: string;
+  sweetAlert : SweetAlert = new SweetAlert();
   
   constructor(private categorieService: CategorieService ,private _formBuilder: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data :any ,private dialogRef : MatDialogRef<AddEditCategorieComponent>){}
@@ -63,7 +65,13 @@ export class AddEditCategorieComponent implements OnInit {
  
     this.categorieService.addCategorie(this.categorie).subscribe(data =>{
      this.dialogRef.close();
-    });
+
+     this.sweetAlert.alertSuccessTimer("La catégorie : " +this.categorie.nomCat+" a été ajouté")
+     
+   },erro =>{
+     this.sweetAlert.alertErrorOk("La catégorie : " +this.categorie.nomCat+" n'a pas été ajouté")
+   });
+
     
   }
 
@@ -72,7 +80,11 @@ export class AddEditCategorieComponent implements OnInit {
    this.categorie.nomCat = this.categorieForm.controls['nomCat'].value;
    this.categorieService.updateCategorie(this.categorie.idCat, this.categorie).subscribe(data =>{
     this.dialogRef.close();
-   });
+    this.sweetAlert.alertSuccessTimer("La catégorie : " +this.categorie.nomCat+" a été modifié ")
+    
+  },erro =>{
+    this.sweetAlert.alertErrorOk("La catégorie : " +this.categorie.nomCat+" n'a pas été modifié ")
+  });
    
   }
 

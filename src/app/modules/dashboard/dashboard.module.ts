@@ -8,6 +8,7 @@ import { GroupedVerticalBarChartComponent } from './grouped-vertical-bar-chart/g
 import { LineChartComponent } from './line-chart/line-chart.component';
 import { PieChartComponent } from './pie-chart/pie-chart.component';
 import { DoughnutChartComponent } from './doughnut-chart/doughnut-chart.component';
+import { MaterialModule } from 'src/app/material.module';
 
 
 
@@ -22,6 +23,7 @@ import { DoughnutChartComponent } from './doughnut-chart/doughnut-chart.componen
   imports: [
     CommonModule,
     DashboardRoutingModule,
+    MaterialModule,
     NgxChartsModule
   ]
 })

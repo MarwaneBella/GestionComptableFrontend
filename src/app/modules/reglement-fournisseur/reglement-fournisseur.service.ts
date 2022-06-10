@@ -19,6 +19,10 @@ export class ReglementFournisseurService {
     return this.httpClient.post(`${this.baseUrl}`,reglementFournisseur)
   }
 
+  addListReglementFournisseur( listReglementFournisseur : ReglementFournisseur[] ):Observable<any> {
+    return this.httpClient.post(`${this.baseUrl+"/addList"}`,listReglementFournisseur)
+  }
+
   getNextCodeRF( date : Date):Observable<any> {
     return this.httpClient.post(`${this.baseUrl+"/next"}`, date,{responseType: 'text'});
   }

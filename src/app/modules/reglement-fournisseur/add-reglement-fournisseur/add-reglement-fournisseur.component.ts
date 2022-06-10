@@ -7,6 +7,7 @@ import { map, Observable, startWith } from 'rxjs';
 import { BonAchat } from 'src/app/entities/bon-achat';
 import { Fournisseur } from 'src/app/entities/fournisseur';
 import { ReglementFournisseur } from 'src/app/entities/reglement-fournisseur';
+import { SweetAlert } from 'src/app/Utils/sweet-alert';
 import { BonAchatService } from '../../bon-achat/bon-achat.service';
 import { FournisseurService } from '../../fournisseur/fournisseur.service';
 import { ReglementFournisseurService } from '../reglement-fournisseur.service';
@@ -26,6 +27,7 @@ export class AddReglementFournisseurComponent implements OnInit {
   fournisseurs : Fournisseur[] ;
   fournisseur: Fournisseur = new Fournisseur();
   filteredFournisseurs: Observable<Fournisseur[]>;
+  listReglementFournisseur :ReglementFournisseur[] = [];
 
   displayedColumns: string[] = ['BonNum','Date', 'MontantTotal', 'MontantPayer','RestePayer','Avance','Reste','Status'];
 
@@ -55,6 +57,7 @@ export class AddReglementFournisseurComponent implements OnInit {
   totaleRestePayer   : number
   totaleAvances      : number = 0
   totaleRestes       : number
+  sweetAlert: SweetAlert = new SweetAlert();
 
   constructor(private _formBuilder: FormBuilder , private fournisseurService :FournisseurService ,private bonAchatService : BonAchatService, private reglementFournisseurService : ReglementFournisseurService,private router: Router) { }
 
@@ -247,52 +250,58 @@ export class AddReglementFournisseurComponent implements OnInit {
 
   }
 
-  onSubmit(){
-    this.updateAllBonAchats();
-  }
-
+  
 
   updateAllBonAchats(){
     this.bonAchats.forEach((currentValue, index) =>{
-       if( this.avances[index] != 0){  
+       if( this.avances[index] != 0 && this.avances[index] != null ){  
           if( currentValue.status != this.status[index] ){
            currentValue.status = this.status[index]
           }
            currentValue.montantPayer += this.avances[index]
-            this.bonAchatService.updateBonAchatFromReglementFournisseur(currentValue.idBa,currentValue).subscribe( async (data : any) =>{
-            
-            this.bonAchat = await data;
-            this.addReglementFournisseur(this.bonAchat,index);
-
-            })
-            
-            
+          this.bonAchatService.updateBonAchatFromReglementFournisseur(currentValue.idBa,currentValue).subscribe( data  =>{
+                    
+          
+          }) 
+          this.addReglementFournisseur(currentValue,index);
+          
        }
-    })
-
-    //this.router.navigateByUrl('reglementFournisseur');
-
-  //  this.getListBonAchatByFournisseur(this.fournisseur)
+    })    
 
   }
 
   // add reglement fournisseur :
   addReglementFournisseur(bonAchat : BonAchat , index : number){
-
-    console.log("addReglement")
-    this.reglementFournisseur.bonAchat = bonAchat
-    this.reglementFournisseur.avance = this.avances[index]
-    this.reglementFournisseur.reste = this.restes[index]
-    this.reglementFournisseur.status = this.status[index];
-    this.reglementFournisseur.datePayment = this.formInfosFournisseur.controls['datePayment'].value
-    this.reglementFournisseur.modePaymant = this.formInfosReglement.controls['mode_reglement'].value
-
-    this.reglementFournisseurService.addReglementFournisseur(this.reglementFournisseur).subscribe(data =>{
-      
-    })
-
     
+    let regF :ReglementFournisseur = new ReglementFournisseur();
+    regF.bonAchat = bonAchat
+    regF.avance = this.avances[index]
+    regF.reste = this.restes[index]
+    regF.status = this.status[index];
+    regF.datePayment = this.formInfosFournisseur.controls['datePayment'].value
+    regF.modePaymant = this.formInfosReglement.controls['mode_reglement'].value
+    this.listReglementFournisseur.push(regF);
 
   }
+
+  addListReglementFournisseur(){
+
+    this.reglementFournisseurService.addListReglementFournisseur(this.listReglementFournisseur).subscribe(data =>{
+      
+      this.sweetAlert.alertSuccessTimer(this.listReglementFournisseur.length+" reglement(s) ont été ajoutés")
+      this.router.navigateByUrl('reglementFournisseur');
+      
+    },erro =>{
+      this.sweetAlert.alertErrorOk("Le(s) reglement(s) n'ont pas été ajoutés")
+    });
+
+  }
+
+
+  onSubmit(){
+    this.updateAllBonAchats();
+    this.addListReglementFournisseur();
+  }
+
  
 }

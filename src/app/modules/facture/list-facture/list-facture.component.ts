@@ -44,9 +44,7 @@ export class ListFactureComponent implements AfterViewInit{
       this.dataSource = new MatTableDataSource(this.listFacture);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-    },
-    error => {
-      alert("Error");
+    
     });
     
   }
@@ -78,7 +76,7 @@ export class ListFactureComponent implements AfterViewInit{
       width:'30%',
       data:row,
     }).afterClosed().subscribe(val =>{
-      this.getAllFacture() ;
+      this.getAllFacture();
     });
 
   }

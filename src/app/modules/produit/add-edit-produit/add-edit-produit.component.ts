@@ -2,9 +2,9 @@ import { Component, OnInit  } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NotifierService } from 'angular-notifier';
 import { Categorie } from 'src/app/entities/categorie';
 import { Produit } from 'src/app/entities/produit';
+import { SweetAlert } from 'src/app/Utils/sweet-alert';
 import { AddEditCategorieComponent } from '../categorie/add-edit-categorie/add-edit-categorie.component';
 import { CategorieService } from '../categorie/categorie.service';
 import { ProduitService } from '../produit.service';
@@ -14,19 +14,18 @@ import { ProduitService } from '../produit.service';
   styleUrls: ['./add-edit-produit.component.css']
 })
 export class AddEditProduitComponent implements OnInit {
+
   productForm :FormGroup ;
   imageUrl: string ="/assets/imgs/unnamed.png"
   selectedImage: any;
   produit :Produit = new Produit();
   categories :Categorie [] ;
-  
-
-
   isAddMode: boolean;
   ref :string ;
   action: string;
+  sweetAlert : SweetAlert = new SweetAlert();
 
-  constructor(private produitService: ProduitService,private categorieService:  CategorieService , private _formBuilder: FormBuilder ,private route: ActivatedRoute ,private router: Router ,public dialog: MatDialog , private  notifierService: NotifierService) { }
+  constructor(private produitService: ProduitService,private categorieService:  CategorieService , private _formBuilder: FormBuilder ,private route: ActivatedRoute ,private router: Router ,public dialog: MatDialog ) { }
 
   
 
@@ -122,26 +121,17 @@ onSelectFile(event: any){
 onSubmit(){
   if(this.isAddMode){
     this.addProduit() ;
-    this.notifierService.notify( 'success', `Produit ${this.produit.reference} est Ajoute en list ` );
-    setTimeout(() => {
-        this.router.navigateByUrl('produit');
-    }, 1000);
+    
   }
   else{
     this.updateProduit()
-    this.notifierService.notify( 'success', `Edit Produit ${this.produit.reference} ` );
-    setTimeout(() => {
-        this.router.navigateByUrl('produit');
-    }, 1000);
+    
   }
  
 }
 
 addProduit(){
-  console.log(this.productForm.controls['categorie'].value);
-  console.log(this.productForm.controls['categorie'].value.id_cat);
-  
-  console.log(this.productForm.controls['categorie'].value.nomCat);
+
 
   this.produit = this.productForm.value ;
 
@@ -155,8 +145,13 @@ addProduit(){
 
       });
     }
-    this.router.navigateByUrl('produit')
-  })
+    
+    this.sweetAlert.alertSuccessTimer("Le produit : " +this.produit.reference+" a été ajouté")
+    this.router.navigateByUrl('produit');
+
+  },erro =>{
+    this.sweetAlert.alertErrorOk("L'utilisateur  " +this.produit.reference+" n'a pas été ajoué")
+  });
   
 }
 
@@ -169,12 +164,16 @@ updateProduit(){
       uploadImageData.append('file', this.selectedImage);
 
       this.produitService.putImage(uploadImageData).subscribe( (data: any)=> {
-
-        
+       
       });
     }
+    
+    this.sweetAlert.alertSuccessTimer("Le produit : " +this.produit.reference+" a été modifié")
+    this.router.navigateByUrl('produit');
 
-  })
+  },erro =>{
+    this.sweetAlert.alertErrorOk("L'utilisateur  " +this.produit.reference+" n'a pas été modifié")
+  });
 }
 
  // calcule   prixVente or prixRevient :

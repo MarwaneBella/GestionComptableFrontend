@@ -37,9 +37,19 @@
     padding: 15px 25px 10px 25px;
 }
 
-.order-card i {
-    font-size: 26px;
+mat-icon{
+    font-size: 32px;
 }
+
+.fa{
+    font-size: 30px;
+}
+
+.bx{
+    font-size: 35px;
+}
+
+
 
 .container{
     height: 400;
@@ -51,6 +61,7 @@
 
 .f-right {
     float: right;
+    font-size: 25px;
 }
 
 

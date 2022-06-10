@@ -5,6 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Categorie } from 'src/app/entities/categorie';
+import { SweetAlert } from 'src/app/Utils/sweet-alert';
 import { AddEditCategorieComponent } from '../add-edit-categorie/add-edit-categorie.component';
 import { CategorieService } from '../categorie.service';
 import { DeleteCategorieComponent } from '../delete-categorie/delete-categorie.component';
@@ -21,6 +22,8 @@ export class ListCategorieComponent implements AfterViewInit,OnInit {
   categorie : Categorie = new Categorie();
   dataSource: MatTableDataSource<Categorie>;
   categorieForm: FormGroup;
+  sweetAlert : SweetAlert = new SweetAlert();
+
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -71,6 +74,10 @@ export class ListCategorieComponent implements AfterViewInit,OnInit {
     this.categorieService.addCategorie(this.categorie).subscribe( (data: any) =>{
       this.ngAfterViewInit();
 
+      this.sweetAlert.alertSuccessTimer("La catégorie : " +this.categorie.nomCat+" a été ajouté")
+    
+    },erro =>{
+      this.sweetAlert.alertErrorOk("La catégorie : " +this.categorie.nomCat+" n'a pas été ajouté")
     });
 
   }

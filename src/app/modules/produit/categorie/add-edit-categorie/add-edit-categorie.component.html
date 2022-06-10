@@ -9,7 +9,8 @@
 </div>
 <div mat-dialog-actions >
     <div class="ms-auto">
-        <button class="btn btn-danger" mat-dialog-close>Fermer</button>
-        <button class="btn btn-success mx-2" (click)="onSubmit()" [disabled]="categorieForm.invalid">{{content}}</button>
+        <button class="btn btn-primary" mat-dialog-close>Fermer</button>
+        <button *ngIf="isAddMode" class="btn btn-success mx-2" (click)="onSubmit()" [disabled]="categorieForm.invalid"><i class="fa fa-check me-2"></i>Ajouter</button>
+        <button *ngIf="!isAddMode" class="btn btn-warning mx-2" (click)="onSubmit()" [disabled]="categorieForm.invalid"><i class="fa fa-pencil me-2"></i>Modifier</button>
     </div>
 </div>
