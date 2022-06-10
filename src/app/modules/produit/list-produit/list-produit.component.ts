@@ -110,7 +110,7 @@ export class ListProduitComponent implements AfterViewInit {
      })*/
     
      
-     const head = [['Réf', 'Designation','TVA', 'Categorie', 'Qté']]
+     const head = [['Réf', 'Designation','TVA (%)', 'Categorie', 'Qté']]
      let data = []
      for(let i=0 ;i<this.produitsOrderBy.length ;i++){
        data.push([this.produitsOrderBy[i].reference, this.produitsOrderBy[i].designation,this.produitsOrderBy[i].tva, this.produitsOrderBy[i].categorie.nomCat , this.produitsOrderBy[i].quantitieDisponible])
