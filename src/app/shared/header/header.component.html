@@ -10,7 +10,7 @@
            
                     <button mat-button [matMenuTriggerFor]="menu">
                         <i class="fa fa-user-circle me-2" aria-hidden="true"></i>
-                        {{userAuthService.getUserName()}}
+                        {{userAuthService.getUserName() |titlecase }}
                     </button>
                     
                     <mat-menu #menu="matMenu" xPosition="before">

@@ -59,6 +59,16 @@ tr.mat-footer-row {
     background-color: rgb(249, 249, 249);
     border-radius: 5px;
   }
+  ::ng-deep[readonly]  .mat-form-field-outline{
+    background-color: #D8E9F0;
+    border-radius: 5px;
+    cursor: pointer;
+    
+  }
+  
+  input[readonly]{
+    pointer-events: none;
+  }
 
   .mat-header-cell {
     background-color: #eceaea;
