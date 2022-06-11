@@ -48,3 +48,32 @@ input.example-right-align::-webkit-inner-spin-button {
 input.example-right-align {
   -moz-appearance: textfield;
 }
+
+.card{
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+}
+.card-header{
+  height: 40px;
+  background-color: 	#6C7B95;
+  color: white;
+}
+
+::ng-deep .mat-form-field-outline{
+  background-color: rgb(249, 249, 249);
+  border-radius: 5px;
+
+  
+}
+
+::ng-deep[readonly]  .mat-form-field-outline{
+  background-color: #D8E9F0;
+  border-radius: 5px;
+  cursor: pointer;
+  
+}
+
+input[readonly]{
+  pointer-events: none;
+}
+
