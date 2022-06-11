@@ -7,6 +7,7 @@ import { Error403Component } from './shared/error-pages/error403/error403.compon
 import { Error404Component } from './shared/error-pages/error404/error404.component';
 import { Error500Component } from './shared/error-pages/error500/error500.component';
 import { HomeComponent } from './shared/home/home.component';
+import { WelcomePageComponent } from './shared/welcome-page/welcome-page.component';
 
 const routes: Routes = [
 
@@ -31,6 +32,10 @@ const routes: Routes = [
     path:'',
     component: HomeComponent,
     children:[
+      {
+        path:'',
+        component: WelcomePageComponent
+      },
       {
         path:'client',
         loadChildren: () =>import('./modules/client/client.module').then(m => m.ClientModule),

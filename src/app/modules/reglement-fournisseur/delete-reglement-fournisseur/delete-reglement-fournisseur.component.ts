@@ -27,6 +27,7 @@ export class DeleteReglementFournisseurComponent implements OnInit {
     let bonAchat: BonAchat = this.reglementFournisseur.bonAchat;
     bonAchat.montantPayer -= this.reglementFournisseur.avance; 
     bonAchat.status = false;
+    bonAchat.valide = true
     this.bonAchatService.updateBonAchatFromReglementFournisseur(bonAchat.idBa,bonAchat).subscribe( data  =>{         
 
     })

@@ -29,6 +29,7 @@ export class DeleteReglementClientComponent implements OnInit {
     let bonHonoraire: BonHonoraire = this.reglementClient.bonHonoraire;
     bonHonoraire.montantPayer -= this.reglementClient.avance; 
     bonHonoraire.status = false;
+    bonHonoraire.valide = true;
     this.bonHonoraireService.updateBonHonoraireFromReglementClient(bonHonoraire.idBh,bonHonoraire).subscribe( data  =>{         
       
     })
