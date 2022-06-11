@@ -6,7 +6,7 @@
 
 <div id="content1" class="tablewidth">
     <div class="align-center">
-        <div class="card border border-white" style="margin-top:20px;">
+        <div class="card border border-white" >
             <div class="card-body">
                 <div id="contenu1" class="text-black">
                     <div class="row">
@@ -29,43 +29,43 @@
                     </div>
                     <table>
                         <thead>
-                            <tr style="height:10px"></tr>
+                            <tr ></tr>
                             <tr>
                                 <th colspan="7"
-                                    style="text-align:center; background-color:rgb(235, 233, 233); height: 40px;">
+                                    style="text-align:center; background-color:rgb(235, 233, 233); ">
                                     Facture N° : {{facture.facNum}}
                                 </th>
                             </tr>
-                            <tr style="height:10px"></tr>
+                            <tr ></tr>
 
-                            <tr style="height:10px;">
+                            <tr >
                                 
                                 <th colspan="7" style="text-align: end;">
                                    <p>Montants exprimés en Dirham</p> 
                                 </th>
                             </tr>
                             <tr class="headerFacture1">
-                                <th style="width:6%" class="text-center">Réf.</th>
-                                <th style="width:45%" class="text-center">Désignation</th>
-                                <th style="width:5%" class="text-center">Qté</th>
-                                <th style="width:12%" class="text-center">PU. HT</th>
-                                <th style="width:5%" class="text-center">TVA</th>
-                                <th style="width:12%" class="text-center">MT. HT</th>
-                                <th style="width:15%" class="text-center">MT. TTC</th>
+                                <th class="text-center">Réf.</th>
+                                <th  class="text-center">Désignation</th>
+                                <th class="text-center">Qté</th>
+                                <th  class="text-center">PU. HT</th>
+                                <th class="text-center">TVA</th>
+                                <th  class="text-center">MT. HT</th>
+                                <th  class="text-center">MT. TTC</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr  class="bodyFacture1" *ngFor="let lign of listLignBH" >
-                                <td style="width:10%;" class="text-left" > {{lign.produit.reference}}  </td>
-                                <td style="width:45%;" class="text-left" > {{lign.produit.designation}} </td>
-                                <td style="width:5%;" class="text-center"> {{lign.quantite}}  </td>
-                                <td style="width:10%;" style="text-align:right ;">{{lign.prixUnitaire  | number :'1.2-2'}}</td>
-                                <td style="width:5%;" class="text-center">{{lign.produit.tva}}</td>
-                                <td style="width:10%;" style="text-align:right ;">{{lign.quantite * lign.prixUnitaire  | number :'1.2-2'}}</td>
-                                <td style="width:15%;" style="text-align:right ;">{{lign.montantTtc | number :'1.2-2'}}</td>
+                                <td  class="text-left" > {{lign.produit.reference}}  </td>
+                                <td class="text-left" > {{lign.produit.designation}} </td>
+                                <td  class="text-center"> {{lign.quantite}}  </td>
+                                <td  >{{lign.prixUnitaire  | number :'1.2-2'}}</td>
+                                <td  class="text-center">{{lign.produit.tva}}</td>
+                                <td  >{{lign.quantite * lign.prixUnitaire  | number :'1.2-2'}}</td>
+                                <td  >{{lign.montantTtc | number :'1.2-2'}}</td>
                             </tr>
 
-                            <tr class="tbody_ligne1" style="height: 719px;">
+                            <tr class="tbody_ligne1" style="height: 400px;">
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -89,29 +89,9 @@
                                 <th colspan="2" class="text-left">Total TTC </th>
                                 <th colspan="1" style="text-align:right ;"> {{totaleMontantTtc | number :'1.2-2'}} </th>
                             </tr>
-                            <tr>
-                                <th></th>
-                                <th colspan="6">
-                                    Arrêté la présente facture à la somme :
-                                </th>
-                            </tr>
-                            <tr>
-                                <th></th>
-                                <th colspan="6">
-
-                                    CINQUANTE-TROIS MILLE CINQ CENTS DIRHAMS ET QUATRE-VINGTS CENTIMES
-                                </th>
-                            </tr>
+                           
                         </tbody>
-                        <tfoot>
-                            <tr style="height:30px"></tr>
-                            <tr style="height: 10px">
-                                <td colspan="7" class="text-center"
-                                    style="text-align:center; background-color:rgb(235, 233, 233)">
-                                    Siège social : nom_societé<br>
-                                </td>
-                            </tr>
-                        </tfoot>
+                    
                     </table>
                 </div>
             </div>

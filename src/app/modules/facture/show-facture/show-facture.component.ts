@@ -31,7 +31,7 @@ export class ShowFactureComponent implements OnInit {
 
   /** imprimer facture : **/
   openPDF(){
-    const doc = new jsPDF('p', 'pt', 'a2');
+    const doc = new jsPDF('p', 'pt', 'a4');
     const pages = doc.internal.pageSize;
     doc.setProperties({
       title: `Facture N° : ${this.facture.facNum}`,
@@ -40,7 +40,7 @@ export class ShowFactureComponent implements OnInit {
     let shand = document.getElementsByClassName('tablewidth') as HTMLCollectionOf<HTMLElement>;
 
         if (shand.length != 0) {
-          shand[0].style.width = "80%";
+          shand[0].style.width = "600px";
         }
         
     let DATA: any = document.getElementById('content1')
@@ -60,15 +60,15 @@ export class ShowFactureComponent implements OnInit {
        callback: (pdf) => {
       //  doc.save('test.pdf'); // save / download
       //  doc.output('dataurlnewwindow'); // just open it
+
       window.open(URL.createObjectURL(pdf.output("blob")))
      
-      shand[0].style.width = "100%";
       },
    /*  callback:()=>{
       doc.save('test.pdf'); // save / download
       doc.output('dataurlnewwindow'); // just open it
      }, */
-      x:5,
+      x:1,
       y: 10
     })
 
