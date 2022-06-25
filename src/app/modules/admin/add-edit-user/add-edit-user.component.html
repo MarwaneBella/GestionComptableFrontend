@@ -110,8 +110,8 @@
 
         <div class="text-center mt-5">
             <button class="btn btn-secondary" routerLink="/admin/gestionComptes"   ><i class="fa fa-arrow-left me-1" aria-hidden="true"></i> Retour</button>
-            <button class="btn btn-success ms-3" *ngIf="isChangePasswordMode"  (click)="onValide()" [disabled]=" formUser.invalid " ><i class="fa fa-check me-1" aria-hidden="true" ></i> Valider</button>
-            <button class="btn btn-warning ms-3" *ngIf="!isChangePasswordMode" (click)="onValide()" [disabled]=" this.formUser.controls['userName'].invalid && this.formUser.controls['etat'].invalid" ><i class="fa fa-pencil me-1" aria-hidden="true" ></i> Modifier</button>
+            <button class="btn btn-success ms-3" *ngIf="isAddMode"  (click)="onValide()" [disabled]=" formUser.invalid " ><i class="fa fa-check me-1" aria-hidden="true" ></i> Valider</button>
+            <button class="btn btn-warning ms-3" *ngIf="!isAddMode" (click)="onValide()" [disabled]=" this.formUser.controls['userName'].invalid && this.formUser.controls['etat'].invalid" ><i class="fa fa-pencil me-1" aria-hidden="true" ></i> Modifier</button>
         </div>
         
     </div>

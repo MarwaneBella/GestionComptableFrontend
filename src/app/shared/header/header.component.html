@@ -13,7 +13,7 @@
                         {{userAuthService.getUserName() |titlecase }}
                     </button>
                     
-                    <mat-menu #menu="matMenu" xPosition="before">
+                    <mat-menu color="primary" class="custom-class" #menu="matMenu" xPosition="before">
                             <div *ngIf="userService.roleMatch(['Admin'])">
                                 <li routerLink="/admin/profile" mat-menu-item >
                                     <i class="fa fa-user me-2" aria-hidden="true"></i>

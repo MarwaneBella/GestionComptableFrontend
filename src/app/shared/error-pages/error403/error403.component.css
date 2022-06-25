@@ -13,9 +13,10 @@ h1 {
   }
   div {
     height: 100vh;
+    
     display: flex;
     flex-direction: column;
-    background-color: white;
+    background-color: #f0f4f8;
     align-items: center;
     justify-content: center;
     overflow: hidden;

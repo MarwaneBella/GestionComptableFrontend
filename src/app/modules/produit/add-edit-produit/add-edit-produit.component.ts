@@ -138,18 +138,26 @@ addProduit(){
   
   this.produitService.addProduit(this.produit).subscribe((data : any) => {
     
-    if(this.selectedImage !== undefined){
-        const uploadImageData = new FormData();
-      uploadImageData.append('file', this.selectedImage);
-      this.produitService.putImage(uploadImageData).subscribe((data : any) => {
-
-      });
+    if(data == false){
+      this.sweetAlert.alertErrorOkTwo("Cette référence : "+this.produit.reference+" existe déjà","Choisir un autre référence")
     }
+    else{
+      if(this.selectedImage !== undefined){
+        const uploadImageData = new FormData();
+        uploadImageData.append('file', this.selectedImage);
+        this.produitService.putImage(uploadImageData).subscribe((data : any) => {
+        });
+      }
     
-    this.sweetAlert.alertSuccessTimer("Le produit : " +this.produit.reference+" a été ajouté")
-    this.router.navigateByUrl('produit');
+    
+      this.sweetAlert.alertSuccessTimer("Le produit : " +this.produit.reference+" a été ajouté")
+      this.router.navigateByUrl('produit');
+    }
+
+    
 
   },erro =>{
+    console.log(erro)
     this.sweetAlert.alertErrorOk("L'utilisateur  " +this.produit.reference+" n'a pas été ajoué")
   });
   
