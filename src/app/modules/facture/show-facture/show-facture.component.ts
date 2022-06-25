@@ -39,12 +39,16 @@ export class ShowFactureComponent implements OnInit {
     });
     let shand = document.getElementsByClassName('tablewidth') as HTMLCollectionOf<HTMLElement>;
 
+
         if (shand.length != 0) {
           shand[0].style.width = "600px";
         }
         
     let DATA: any = document.getElementById('content1')
+    let Class_tbody_ligne1 = document.getElementsByClassName('tbody_ligne1') as HTMLCollectionOf<HTMLElement>;
    
+    
+    let tbody_ligne1 : any = document.getElementById('tbody_ligne1')
     /*var pageHeight = doc.internal.pageSize.height || doc.internal.pageSize.getHeight();
     var pageWidth = doc.internal.pageSize.width || doc.internal.pageSize.getWidth();
     var widthcontenu : any  = document.getElementById('contenu')?.offsetWidth;
@@ -53,6 +57,13 @@ export class ShowFactureComponent implements OnInit {
     console.log(pageHeight)
     console.log("pageWidth "+pageWidth)*/
 
+    var Height_tbody_ligne1 : any  = document.getElementById('tbody_ligne1')?.offsetHeight;
+    var newHeight_tbody_ligne1 = Height_tbody_ligne1 - (this.listLignBH.length * 22)
+
+    console.log("new  =  "+newHeight_tbody_ligne1)
+    console.log("Height_tbody_ligne1  =  "+Height_tbody_ligne1)
+
+      Class_tbody_ligne1[0].style.height = `${newHeight_tbody_ligne1}px`;
 
   
     doc.html(DATA, {
@@ -71,6 +82,9 @@ export class ShowFactureComponent implements OnInit {
       x:1,
       y: 10
     })
+    setTimeout(() => {
+      shand[0].style.width = "100%";
+    }, 1);
 
   }
 

@@ -24,6 +24,8 @@ export class ListFactureComponent implements AfterViewInit{
   
   listFacture: Facture[];
   facture : Facture = new Facture();
+
+  heightFoterAutotable : number
   
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -109,8 +111,11 @@ export class ListFactureComponent implements AfterViewInit{
        head: head,
        body: data,
        tableWidth: 'auto',
-       margin: { top: 30 }   
+       margin: { top: 30 },
+       didDrawPage: (d) => console.log(d.cursor?.y),
      })
+     
+     console.log()
      window.open(URL.createObjectURL(doc.output("blob")))
    }
 

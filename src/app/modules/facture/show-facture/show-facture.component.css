@@ -46,9 +46,7 @@ table{
 
 /* *************************** */
 
-#contenu{
-    width: 530px;
-}
+
 #contenu table{
     border-color: black;
 }
@@ -96,4 +94,7 @@ table{
     border-right : 1pt solid black;
 }
 
+.tbody_ligne1{
+    height: 452px;
+}
 /* ************************************* */
