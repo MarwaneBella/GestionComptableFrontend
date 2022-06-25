@@ -4,14 +4,14 @@
         Imprimer</button>
 </div>
 
-<div id="content1" class="tablewidth">
+<div id="content1" class="tablewidth my-4 ">
     <div class="align-center">
         <div class="card border border-white" >
             <div class="card-body">
                 <div id="contenu1" class="text-black">
                     <div class="row">
                         <div class="col-6">
-                            <div id="divLogo1_1" style="text-align: center;margin-top: 47.5px;">
+                            <div id="divLogo1_1" style="text-align: center;margin-top: 35px;">
                                 <img src="assets/imgs/LOGO-SITE-COLOR.png" alt="logo"
                                     style="width:180px;height:80px" class="img-fluid">
                             </div>
@@ -32,7 +32,7 @@
                             <tr ></tr>
                             <tr>
                                 <th colspan="7"
-                                    style="text-align:center; background-color:rgb(235, 233, 233); ">
+                                    style="text-align:center; background-color:rgb(235, 233, 233); height: 35px;">
                                     Facture N° : {{facture.facNum}}
                                 </th>
                             </tr>
@@ -59,13 +59,13 @@
                                 <td  class="text-left" > {{lign.produit.reference}}  </td>
                                 <td class="text-left" > {{lign.produit.designation}} </td>
                                 <td  class="text-center"> {{lign.quantite}}  </td>
-                                <td  >{{lign.prixUnitaire  | number :'1.2-2'}}</td>
+                                <td   style="text-align:right ;">{{lign.prixUnitaire  | number :'1.2-2'}}</td>
                                 <td  class="text-center">{{lign.produit.tva}}</td>
-                                <td  >{{lign.quantite * lign.prixUnitaire  | number :'1.2-2'}}</td>
-                                <td  >{{lign.montantTtc | number :'1.2-2'}}</td>
+                                <td   style="text-align:right ;">{{lign.quantite * lign.prixUnitaire  | number :'1.2-2'}}</td>
+                                <td  style="text-align:right ;" >{{lign.montantTtc | number :'1.2-2'}}</td>
                             </tr>
 
-                            <tr class="tbody_ligne1" style="height: 350px;">
+                            <tr class="tbody_ligne1" id="tbody_ligne1"  >
                                 <td></td>
                                 <td></td>
                                 <td></td>

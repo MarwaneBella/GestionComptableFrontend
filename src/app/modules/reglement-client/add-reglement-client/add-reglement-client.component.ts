@@ -176,7 +176,6 @@ export class AddReglementClientComponent implements OnInit {
       this.statusGeneral = 'NR'
      }
      this.formInfosReglement.controls['statusGeneral'].setValue(this.statusGeneral)
-
   }
 
   // calcule des restes :

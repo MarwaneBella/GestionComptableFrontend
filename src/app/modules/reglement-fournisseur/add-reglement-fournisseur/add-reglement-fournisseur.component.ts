@@ -151,7 +151,7 @@ export class AddReglementFournisseurComponent implements OnInit {
         this.status[index] = false ;
         this.avances[index] = 0
         this.restes[index]=(currentValue.montantTotal - currentValue.montantPayer )
-      });
+    });
    //   this.calculeResteGeneral()
      
     })
@@ -168,11 +168,17 @@ export class AddReglementFournisseurComponent implements OnInit {
 
       this.totaleMontants     += currentValue.montantTotal
       this.totaleMontantPayer += currentValue.montantPayer
-      this.totaleRestePayer   += (currentValue.montantTotal -currentValue.montantPayer )
-
-      //this.totaleAvances      += currentValue
-     // this.totaleRestes       += currentValue    
+      this.totaleRestePayer   += (currentValue.montantTotal -currentValue.montantPayer )   
     });
+    this.totaleRestes = this.totaleRestePayer
+    this.formInfosReglement.controls['reste'].setValue(this.totaleRestes)
+  
+    if(this.totaleRestes == 0){
+      this.statusGeneral = 'R'
+     }else{
+      this.statusGeneral = 'NR'
+     }
+     this.formInfosReglement.controls['statusGeneral'].setValue(this.statusGeneral)
   }
 
   // calcule des restes :
@@ -247,7 +253,22 @@ export class AddReglementFournisseurComponent implements OnInit {
         this.totaleRestes+=this.restes[i]
        });
     this.formInfosReglement.controls['reste'].setValue(this.totaleRestes)
+    this.calculeTotaleAvances() ;
+    if(this.totaleRestes >= this.totaleAvances){
+      this.statusGeneral = 'NR'
+     }else{
+      this.statusGeneral = 'R'
+     }
+     this.formInfosReglement.controls['statusGeneral'].setValue(this.statusGeneral)
 
+  }
+
+  calculeTotaleAvances(){
+    this.totaleAvances =0
+    this.dataList.forEach((currentValue, i) => {
+      this.totaleAvances+=this.avances[i]
+     });
+    this.formInfosReglement.controls['avanceGeneral'].setValue(this.totaleAvances)
   }
 
   
