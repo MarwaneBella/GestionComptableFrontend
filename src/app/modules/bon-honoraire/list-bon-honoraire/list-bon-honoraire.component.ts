@@ -39,11 +39,13 @@ export class ListBonHonoraireComponent implements AfterViewInit {
 
   getAllBonHonoraire(){
     this.bonHonoraireService.getBonHonoraireList().subscribe(data =>{
+      
       this.listBonHonoraire = data;
       this.dataSource = new MatTableDataSource(this.listBonHonoraire);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-    
+      console.log(data)
+      console.log(this.listBonHonoraire)
     });
     
   }

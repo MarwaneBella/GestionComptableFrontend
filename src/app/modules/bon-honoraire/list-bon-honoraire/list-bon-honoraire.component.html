@@ -70,7 +70,7 @@
           <div class="actions">
             <button (click)="openDialogShow(row.idBh)"  class="btn btn-outline-primary"><i class="fa fa-eye" aria-hidden="true"></i></button>
             <button class="btn btn-outline-warning mx-1" routerLink="facturation/{{row.idBh}}" [disabled]="row.facture!=null"><i  aria-hidden="true" class="fa fa-files-o "></i></button>
-            <button  aria-label="Name"  type="button" class="btn btn-outline-success mx-1" routerLink="editBonHonoraire/{{row.idBh}}" [disabled]="row.facture!=null"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+            <button  aria-label="Name"  type="button" class="btn btn-outline-success mx-1" routerLink="editBonHonoraire/{{row.idBh}}" [disabled]="row.facture!=null || row.listReglementClient.length > 0"><i class="fa fa-pencil" aria-hidden="true"></i></button>
             <button (click)="openDialogDelete(row)"  class="btn btn-outline-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
           
           </div>
